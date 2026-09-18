@@ -1,0 +1,11 @@
+{
+  "name": "999 Genesis Protocol Level 6",
+  "short_name": "Genesis L6",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#03070c",
+  "theme_color": "#03070c",
+  "description": "999 Genesis Protocol cyber operations command center.",
+  "orientation": "landscape-primary",
+  "prefer_related_applications": false
+}

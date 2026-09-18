@@ -1,0 +1,11 @@
+{
+  "name": "999 XXX Level 6",
+  "short_name": "Genesis L6",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#03070c",
+  "theme_color": "#03070c",
+  "description": "999 XXX cyber operations command center.",
+  "orientation": "landscape-primary",
+  "prefer_related_applications": false
+}
