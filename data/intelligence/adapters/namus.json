@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "source_id": "namus",
+  "source_name": "NamUs",
+  "official_site": "https://namus.nij.ojp.gov",
+  "connection_method": "verified_public_data",
+  "next_step": "Identify permitted public export or API",
+  "status": "pending_verification",
+  "enabled": false,
+  "records_loaded": 0,
+  "last_sync": null,
+  "external_transmission_enabled": false,
+  "case_sharing_enabled": false,
+  "created_at": "2026-10-09T21:37:15.751420+00:00"
+}

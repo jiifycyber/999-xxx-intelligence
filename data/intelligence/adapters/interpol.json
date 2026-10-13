@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "source_id": "interpol",
+  "source_name": "INTERPOL Public Notices",
+  "official_site": "https://www.interpol.int",
+  "connection_method": "verified_public_notices",
+  "next_step": "Verify permitted notices access",
+  "status": "pending_verification",
+  "enabled": false,
+  "records_loaded": 0,
+  "last_sync": null,
+  "external_transmission_enabled": false,
+  "case_sharing_enabled": false,
+  "created_at": "2026-10-09T21:37:15.759317+00:00"
+}

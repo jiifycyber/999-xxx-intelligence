@@ -1,0 +1,100 @@
+{
+  "generated_at": "2026-10-09T21:39:26.047257+00:00",
+  "sources_checked": 9,
+  "ready_count": 0,
+  "pending_count": 9,
+  "fbi_connection_unchanged": true,
+  "external_case_data_transmitted": false,
+  "results": [
+    {
+      "source_id": "ncmec",
+      "name": "NCMEC Missing Children",
+      "configuration_present": true,
+      "official_site": "https://www.missingkids.org",
+      "verified_endpoint": null,
+      "access_verified": false,
+      "integration_ready": false,
+      "next_step": "Verify NCMEC data-sharing access"
+    },
+    {
+      "source_id": "namus",
+      "name": "NamUs",
+      "configuration_present": true,
+      "official_site": "https://namus.nij.ojp.gov",
+      "verified_endpoint": null,
+      "access_verified": false,
+      "integration_ready": false,
+      "next_step": "Identify permitted public export or API"
+    },
+    {
+      "source_id": "amber",
+      "name": "AMBER Alerts",
+      "configuration_present": true,
+      "official_site": "https://www.missingkids.org",
+      "verified_endpoint": null,
+      "access_verified": false,
+      "integration_ready": false,
+      "next_step": "Identify official alert distribution feed"
+    },
+    {
+      "source_id": "state_police",
+      "name": "State Police Bulletins",
+      "configuration_present": true,
+      "official_site": "",
+      "verified_endpoint": null,
+      "access_verified": false,
+      "integration_ready": false,
+      "next_step": "Configure individual state agencies"
+    },
+    {
+      "source_id": "local_police",
+      "name": "Local Police Bulletins",
+      "configuration_present": true,
+      "official_site": "",
+      "verified_endpoint": null,
+      "access_verified": false,
+      "integration_ready": false,
+      "next_step": "Configure individual local agencies"
+    },
+    {
+      "source_id": "us_marshals",
+      "name": "U.S. Marshals Service",
+      "configuration_present": true,
+      "official_site": "https://www.usmarshals.gov",
+      "verified_endpoint": null,
+      "access_verified": false,
+      "integration_ready": false,
+      "next_step": "Verify official public data access"
+    },
+    {
+      "source_id": "dhs",
+      "name": "DHS Public Intelligence",
+      "configuration_present": true,
+      "official_site": "https://www.dhs.gov",
+      "verified_endpoint": null,
+      "access_verified": false,
+      "integration_ready": false,
+      "next_step": "Identify relevant public datasets"
+    },
+    {
+      "source_id": "interpol",
+      "name": "INTERPOL Public Notices",
+      "configuration_present": true,
+      "official_site": "https://www.interpol.int",
+      "verified_endpoint": null,
+      "access_verified": false,
+      "integration_ready": false,
+      "next_step": "Verify permitted notices access"
+    },
+    {
+      "source_id": "community",
+      "name": "Community Tips",
+      "configuration_present": true,
+      "official_site": "",
+      "verified_endpoint": null,
+      "access_verified": false,
+      "integration_ready": false,
+      "next_step": "Build protected tip intake and review"
+    }
+  ]
+}

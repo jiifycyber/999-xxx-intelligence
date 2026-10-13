@@ -1,0 +1,334 @@
+from pathlib import Path
+from datetime import datetime, timezone
+from html.parser import HTMLParser
+from urllib.request import Request, urlopen
+from urllib.parse import urljoin, urlparse
+from xml.etree import ElementTree as ET
+import csv
+import json
+import hashlib
+import re
+
+ROOT = Path("data/intelligence")
+IMPORTS = ROOT / "imports"
+STAGING = ROOT / "staging"
+REGISTRY = ROOT / "source_registry.json"
+
+NOW = datetime.now(timezone.utc).isoformat()
+
+class Links(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.links = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag.lower() != "a":
+            return
+        a = dict(attrs)
+        if a.get("href"):
+            self.links.append(a)
+
+def save(name, data):
+    path = STAGING / name
+    temp = path.with_suffix(path.suffix + ".tmp")
+    temp.write_text(
+        json.dumps(data, indent=2, ensure_ascii=False),
+        encoding="utf-8"
+    )
+    temp.replace(path)
+    return path
+
+def get(url):
+    req = Request(
+        url,
+        headers={
+            "User-Agent": "IC391DEA-PublicSourceResearch/1.0",
+            "Accept": "application/rss+xml, application/xml, text/xml, text/html"
+        }
+    )
+    with urlopen(req, timeout=20) as response:
+        if response.geturl().startswith("https://") is False:
+            raise ValueError("Non-HTTPS redirect")
+        return response.read(3000000)
+
+def fingerprint(value):
+    return hashlib.sha256(
+        value.encode("utf-8")
+    ).hexdigest()[:20]
+
+def normalize(source, identifier, title, url, details):
+    return {
+        "global_id": source + ":" + identifier,
+        "source_id": source,
+        "source_record_id": identifier,
+        "title": title,
+        "source_url": url,
+        "details": details,
+        "imported_at": NOW,
+        "verification": "source_record_unreviewed",
+        "cross_source_match": "not_evaluated",
+        "review_required": True
+    }
+
+def clean(value):
+    return str(value or "").strip()
+
+def field(row, *names):
+    lookup = {
+        re.sub(r"[^a-z0-9]", "", k.lower()): v
+        for k, v in row.items() if k
+    }
+    for name in names:
+        key = re.sub(r"[^a-z0-9]", "", name.lower())
+        if key in lookup and lookup[key]:
+            return clean(lookup[key])
+    return ""
+
+print("=== IC391DEA THREE-SOURCE INTEGRATION ===")
+
+# 1. NCMEC official RSS discovery
+print("\n[1] NCMEC RSS")
+
+ncmec_page = "https://www.missingkids.org/gethelpnow/search/rss"
+feed_links = []
+ncmec_records = []
+
+try:
+    parser = Links()
+    parser.feed(get(ncmec_page).decode("utf-8", "replace"))
+
+    for link in parser.links:
+        href = urljoin(ncmec_page, link["href"])
+        parsed = urlparse(href)
+
+        if parsed.scheme != "https":
+            continue
+
+        if not (
+            parsed.hostname == "missingkids.org"
+            or parsed.hostname.endswith(".missingkids.org")
+        ):
+            continue
+
+        hint = (
+            href + " " + link.get("type", "")
+        ).lower()
+
+        if not any(x in hint for x in [
+            "rss", ".xml", "feed"
+        ]):
+            continue
+
+        if href not in feed_links:
+            feed_links.append(href)
+
+    print("RSS CANDIDATES:", len(feed_links))
+
+    for url in feed_links[:60]:
+        try:
+            root = ET.fromstring(get(url))
+
+            items = root.findall(".//item")
+            if not items:
+                continue
+
+            for item in items:
+                title = clean(item.findtext("title"))
+                link = clean(item.findtext("link"))
+                guid = clean(item.findtext("guid"))
+                description = clean(
+                    item.findtext("description")
+                )
+
+                identity = guid or link
+                if not identity:
+                    continue
+
+                ncmec_records.append(
+                    normalize(
+                        "ncmec",
+                        fingerprint(identity),
+                        title,
+                        link,
+                        {
+                            "description": description,
+                            "feed_url": url,
+                            "published": clean(
+                                item.findtext("pubDate")
+                            )
+                        }
+                    )
+                )
+
+        except Exception as e:
+            print("FEED SKIPPED:", type(e).__name__)
+
+except Exception as e:
+    print("RSS DISCOVERY:", type(e).__name__)
+
+unique = {
+    r["global_id"]: r for r in ncmec_records
+}
+ncmec_records = list(unique.values())
+
+save("ncmec_records.json", {
+    "generated_at": NOW,
+    "records": ncmec_records
+})
+
+save("ncmec_feed_discovery.json", {
+    "generated_at": NOW,
+    "candidate_urls": feed_links,
+    "note": "Candidates are not verified feeds unless parsed successfully."
+})
+
+print("NCMEC RECORDS STAGED:", len(ncmec_records))
+
+# 2. NamUs public CSV imports
+print("\n[2] NAMUS CSV")
+
+namus_records = []
+
+for path in sorted(IMPORTS.glob("namus*.csv")):
+    try:
+        with path.open(
+            encoding="utf-8-sig", newline=""
+        ) as f:
+            for row in csv.DictReader(f):
+                identifier = field(
+                    row,
+                    "NamUs Number",
+                    "NamUs ID",
+                    "Case Number",
+                    "MP Number"
+                )
+
+                if not identifier:
+                    continue
+
+                title = field(
+                    row, "Name", "Full Name"
+                ) or "NamUs public case"
+
+                namus_records.append(
+                    normalize(
+                        "namus",
+                        identifier,
+                        title,
+                        field(row, "URL", "Case URL"),
+                        {
+                            "import_file": path.name,
+                            "public_csv_fields": row
+                        }
+                    )
+                )
+
+    except Exception as e:
+        print("CSV ERROR:", path.name, str(e))
+
+namus_records = list({
+    r["global_id"]: r for r in namus_records
+}.values())
+
+save("namus_records.json", {
+    "generated_at": NOW,
+    "records": namus_records
+})
+
+print("NAMUS RECORDS STAGED:", len(namus_records))
+
+# 3. INTERPOL public Yellow Notice CSV imports
+print("\n[3] INTERPOL YELLOW NOTICES")
+
+interpol_records = []
+
+for path in sorted(IMPORTS.glob("interpol*.csv")):
+    try:
+        with path.open(
+            encoding="utf-8-sig", newline=""
+        ) as f:
+            for row in csv.DictReader(f):
+                identifier = field(
+                    row,
+                    "Notice ID",
+                    "Entity ID",
+                    "Notice Number"
+                )
+
+                if not identifier:
+                    continue
+
+                title = field(
+                    row, "Name", "Full Name"
+                ) or "INTERPOL public notice"
+
+                interpol_records.append(
+                    normalize(
+                        "interpol",
+                        identifier,
+                        title,
+                        field(row, "URL", "Notice URL"),
+                        {
+                            "notice_type": "yellow",
+                            "import_file": path.name,
+                            "public_csv_fields": row
+                        }
+                    )
+                )
+
+    except Exception as e:
+        print("CSV ERROR:", path.name, str(e))
+
+interpol_records = list({
+    r["global_id"]: r for r in interpol_records
+}.values())
+
+save("interpol_records.json", {
+    "generated_at": NOW,
+    "records": interpol_records
+})
+
+print("INTERPOL RECORDS STAGED:", len(interpol_records))
+
+# 4. Unified staging
+all_records = (
+    ncmec_records
+    + namus_records
+    + interpol_records
+)
+
+all_records = list({
+    r["global_id"]: r for r in all_records
+}.values())
+
+save("three_source_unified.json", {
+    "schema_version": 1,
+    "generated_at": NOW,
+    "records": all_records,
+    "existing_fbi_database_modified": False,
+    "automatic_case_sharing": False,
+    "cross_source_matches_verified": 0
+})
+
+summary = {
+    "generated_at": NOW,
+    "ncmec_rss_candidates": len(feed_links),
+    "ncmec_records": len(ncmec_records),
+    "namus_records": len(namus_records),
+    "interpol_records": len(interpol_records),
+    "total_staged": len(all_records),
+    "fbi_preserved": True,
+    "production_database_modified": False
+}
+
+save("three_source_summary.json", summary)
+
+print("\n=== PHASE 7 SUMMARY ===")
+print("NCMEC:", len(ncmec_records))
+print("NAMUS:", len(namus_records))
+print("INTERPOL:", len(interpol_records))
+print("TOTAL STAGED:", len(all_records))
+print("FBI DATABASE: PRESERVED")
+print("AUTOMATIC SHARING: DISABLED")
+print("PRODUCTION DATABASE: UNCHANGED")
+print("PHASE 7 BUILD COMPLETE")

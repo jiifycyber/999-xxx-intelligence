@@ -1,0 +1,679 @@
+import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
+
+import '../core/genesis_theme.dart';
+
+class DukeIntelligenceCore extends StatelessWidget {
+  const DukeIntelligenceCore({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 88,
+      height: 88,
+      child: CustomPaint(
+        painter: const _DukeCorePainter(),
+        child: const Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.change_history_rounded,
+                color: GenesisColors.cyan,
+                size: 31,
+              ),
+              Text(
+                'DUKE',
+                style: TextStyle(
+                  color: GenesisColors.text,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 1.4,
+                ),
+              ),
+              Text(
+                'ONLINE',
+                style: TextStyle(
+                  color: GenesisColors.emerald,
+                  fontSize: 6,
+                  letterSpacing: 1.2,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _DukeCorePainter extends CustomPainter {
+  const _DukeCorePainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = size.center(Offset.zero);
+    final radius = math.min(size.width, size.height) / 2;
+
+    canvas.drawCircle(
+      center,
+      radius - 2,
+      Paint()
+        ..shader = const RadialGradient(
+          colors: [
+            Color(0x5527C8F7),
+            Color(0x22103F54),
+            Color(0xFF030A11),
+          ],
+          stops: [0, .55, 1],
+        ).createShader(Offset.zero & size),
+    );
+
+    for (final ring in [radius - 3, radius - 10, radius - 18]) {
+      canvas.drawCircle(
+        center,
+        ring,
+        Paint()
+          ..color = GenesisColors.cyan.withValues(alpha: .55)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = ring == radius - 3 ? 1.6 : .65,
+      );
+    }
+
+    final tickPaint = Paint()
+      ..color = GenesisColors.cyan.withValues(alpha: .75)
+      ..strokeWidth = 1;
+
+    for (var i = 0; i < 24; i++) {
+      final angle = i * math.pi * 2 / 24;
+      final outer = Offset(
+        center.dx + math.cos(angle) * (radius - 5),
+        center.dy + math.sin(angle) * (radius - 5),
+      );
+      final innerRadius = i.isEven ? radius - 11 : radius - 8;
+      final inner = Offset(
+        center.dx + math.cos(angle) * innerRadius,
+        center.dy + math.sin(angle) * innerRadius,
+      );
+      canvas.drawLine(inner, outer, tickPaint);
+    }
+
+    final orbitPaint = Paint()
+      ..color = GenesisColors.emerald.withValues(alpha: .8)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
+
+    canvas.save();
+    canvas.translate(center.dx, center.dy);
+    canvas.rotate(-.45);
+    canvas.drawOval(
+      Rect.fromCenter(
+        center: Offset.zero,
+        width: radius * 1.5,
+        height: radius * .72,
+      ),
+      orbitPaint,
+    );
+    canvas.restore();
+
+    canvas.drawCircle(
+      Offset(center.dx + radius * .54, center.dy - radius * .25),
+      2.8,
+      Paint()..color = GenesisColors.emerald,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+class BiometricWireframe extends StatelessWidget {
+  const BiometricWireframe({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(
+      width: 120,
+      height: 128,
+      child: CustomPaint(painter: _BiometricPainter()),
+    );
+  }
+}
+
+class _BiometricPainter extends CustomPainter {
+  const _BiometricPainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final cyan = Paint()
+      ..color = GenesisColors.cyan.withValues(alpha: .98)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.25;
+
+    final bright = Paint()
+      ..color = const Color(0xFF7EF9FF)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.7;
+
+    final mesh = Paint()
+      ..color = GenesisColors.cyan.withValues(alpha: .42)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = .65;
+
+    final faint = Paint()
+      ..color = GenesisColors.cyan.withValues(alpha: .18)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = .5;
+
+    final glow = Paint()
+      ..color = GenesisColors.cyan.withValues(alpha: .10)
+      ..style = PaintingStyle.fill;
+
+    final scanGlow = Paint()
+      ..color = GenesisColors.emerald.withValues(alpha: .16)
+      ..style = PaintingStyle.fill;
+
+    final scan = Paint()
+      ..color = GenesisColors.emerald.withValues(alpha: .98)
+      ..strokeWidth = 1.8;
+
+    final centerX = size.width * .5;
+
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTWH(2, 2, size.width - 4, size.height - 4),
+        const Radius.circular(5),
+      ),
+      faint,
+    );
+
+    for (double x = 10; x < size.width; x += 12) {
+      canvas.drawLine(
+        Offset(x, 5),
+        Offset(x, size.height - 5),
+        Paint()
+          ..color = GenesisColors.cyan.withValues(alpha: .055)
+          ..strokeWidth = .4,
+      );
+    }
+
+    for (double y = 8; y < size.height; y += 10) {
+      canvas.drawLine(
+        Offset(5, y),
+        Offset(size.width - 5, y),
+        Paint()
+          ..color = GenesisColors.cyan.withValues(alpha: .055)
+          ..strokeWidth = .4,
+      );
+    }
+
+    canvas.drawOval(
+      Rect.fromCenter(
+        center: Offset(centerX, size.height * .43),
+        width: size.width * .68,
+        height: size.height * .76,
+      ),
+      glow,
+    );
+
+    final head = Path()
+      ..moveTo(size.width * .31, size.height * .18)
+      ..quadraticBezierTo(
+        size.width * .50,
+        size.height * .025,
+        size.width * .69,
+        size.height * .18,
+      )
+      ..quadraticBezierTo(
+        size.width * .76,
+        size.height * .34,
+        size.width * .70,
+        size.height * .58,
+      )
+      ..quadraticBezierTo(
+        size.width * .65,
+        size.height * .76,
+        size.width * .50,
+        size.height * .82,
+      )
+      ..quadraticBezierTo(
+        size.width * .35,
+        size.height * .76,
+        size.width * .30,
+        size.height * .58,
+      )
+      ..quadraticBezierTo(
+        size.width * .24,
+        size.height * .34,
+        size.width * .31,
+        size.height * .18,
+      )
+      ..close();
+
+    canvas.drawPath(head, bright);
+
+    final leftEar = Path()
+      ..moveTo(size.width * .29, size.height * .34)
+      ..quadraticBezierTo(
+        size.width * .19,
+        size.height * .36,
+        size.width * .27,
+        size.height * .54,
+      );
+
+    final rightEar = Path()
+      ..moveTo(size.width * .71, size.height * .34)
+      ..quadraticBezierTo(
+        size.width * .81,
+        size.height * .36,
+        size.width * .73,
+        size.height * .54,
+      );
+
+    canvas.drawPath(leftEar, cyan);
+    canvas.drawPath(rightEar, cyan);
+
+    final neckAndShoulders = Path()
+      ..moveTo(size.width * .40, size.height * .76)
+      ..lineTo(size.width * .39, size.height * .88)
+      ..quadraticBezierTo(
+        size.width * .17,
+        size.height * .91,
+        size.width * .10,
+        size.height,
+      )
+      ..moveTo(size.width * .60, size.height * .76)
+      ..lineTo(size.width * .61, size.height * .88)
+      ..quadraticBezierTo(
+        size.width * .83,
+        size.height * .91,
+        size.width * .90,
+        size.height,
+      );
+
+    canvas.drawPath(neckAndShoulders, cyan);
+
+    for (final y in [.25, .33, .42, .51, .60, .68]) {
+      final halfWidth = y < .33
+          ? size.width * .12
+          : y < .60
+              ? size.width * .20
+              : size.width * .15;
+
+      canvas.drawLine(
+        Offset(centerX - halfWidth, size.height * y),
+        Offset(centerX + halfWidth, size.height * y),
+        mesh,
+      );
+    }
+
+    final leftMesh = Path()
+      ..moveTo(centerX, size.height * .08)
+      ..quadraticBezierTo(
+        size.width * .35,
+        size.height * .33,
+        size.width * .33,
+        size.height * .58,
+      )
+      ..quadraticBezierTo(
+        size.width * .37,
+        size.height * .73,
+        centerX,
+        size.height * .81,
+      );
+
+    final rightMesh = Path()
+      ..moveTo(centerX, size.height * .08)
+      ..quadraticBezierTo(
+        size.width * .65,
+        size.height * .33,
+        size.width * .67,
+        size.height * .58,
+      )
+      ..quadraticBezierTo(
+        size.width * .63,
+        size.height * .73,
+        centerX,
+        size.height * .81,
+      );
+
+    canvas.drawPath(leftMesh, mesh);
+    canvas.drawPath(rightMesh, mesh);
+
+    canvas.drawLine(
+      Offset(centerX, size.height * .08),
+      Offset(centerX, size.height * .79),
+      mesh,
+    );
+
+    final leftEye = Path()
+      ..moveTo(size.width * .35, size.height * .39)
+      ..quadraticBezierTo(
+        size.width * .41,
+        size.height * .35,
+        size.width * .47,
+        size.height * .40,
+      )
+      ..quadraticBezierTo(
+        size.width * .41,
+        size.height * .44,
+        size.width * .35,
+        size.height * .39,
+      );
+
+    final rightEye = Path()
+      ..moveTo(size.width * .53, size.height * .40)
+      ..quadraticBezierTo(
+        size.width * .59,
+        size.height * .35,
+        size.width * .65,
+        size.height * .39,
+      )
+      ..quadraticBezierTo(
+        size.width * .59,
+        size.height * .44,
+        size.width * .53,
+        size.height * .40,
+      );
+
+    canvas.drawPath(leftEye, bright);
+    canvas.drawPath(rightEye, bright);
+
+    canvas.drawCircle(
+      Offset(size.width * .41, size.height * .395),
+      2.5,
+      Paint()..color = GenesisColors.emerald,
+    );
+
+    canvas.drawCircle(
+      Offset(size.width * .59, size.height * .395),
+      2.5,
+      Paint()..color = GenesisColors.emerald,
+    );
+
+    final nose = Path()
+      ..moveTo(centerX, size.height * .42)
+      ..lineTo(size.width * .46, size.height * .58)
+      ..quadraticBezierTo(
+        centerX,
+        size.height * .61,
+        size.width * .54,
+        size.height * .58,
+      );
+
+    canvas.drawPath(nose, bright);
+
+    final mouth = Path()
+      ..moveTo(size.width * .39, size.height * .67)
+      ..quadraticBezierTo(
+        centerX,
+        size.height * .63,
+        size.width * .61,
+        size.height * .67,
+      )
+      ..quadraticBezierTo(
+        centerX,
+        size.height * .73,
+        size.width * .39,
+        size.height * .67,
+      );
+
+    canvas.drawPath(mouth, bright);
+
+    final landmarks = <Offset>[
+      Offset(.31 * size.width, .18 * size.height),
+      Offset(.69 * size.width, .18 * size.height),
+      Offset(.35 * size.width, .39 * size.height),
+      Offset(.47 * size.width, .40 * size.height),
+      Offset(.53 * size.width, .40 * size.height),
+      Offset(.65 * size.width, .39 * size.height),
+      Offset(.50 * size.width, .48 * size.height),
+      Offset(.46 * size.width, .58 * size.height),
+      Offset(.54 * size.width, .58 * size.height),
+      Offset(.39 * size.width, .67 * size.height),
+      Offset(.50 * size.width, .70 * size.height),
+      Offset(.61 * size.width, .67 * size.height),
+      Offset(.35 * size.width, .72 * size.height),
+      Offset(.65 * size.width, .72 * size.height),
+      Offset(.50 * size.width, .81 * size.height),
+    ];
+
+    for (final point in landmarks) {
+      canvas.drawCircle(
+        point,
+        1.55,
+        Paint()..color = const Color(0xFF8FFFFF),
+      );
+    }
+
+    canvas.drawRect(
+      Rect.fromLTWH(
+        size.width * .16,
+        size.height * .475,
+        size.width * .68,
+        size.height * .055,
+      ),
+      scanGlow,
+    );
+
+    canvas.drawLine(
+      Offset(size.width * .14, size.height * .505),
+      Offset(size.width * .86, size.height * .505),
+      scan,
+    );
+
+    final brackets = Path()
+      ..moveTo(size.width * .12, size.height * .20)
+      ..lineTo(size.width * .12, size.height * .11)
+      ..lineTo(size.width * .23, size.height * .11)
+      ..moveTo(size.width * .77, size.height * .11)
+      ..lineTo(size.width * .88, size.height * .11)
+      ..lineTo(size.width * .88, size.height * .20)
+      ..moveTo(size.width * .12, size.height * .78)
+      ..lineTo(size.width * .12, size.height * .87)
+      ..lineTo(size.width * .23, size.height * .87)
+      ..moveTo(size.width * .77, size.height * .87)
+      ..lineTo(size.width * .88, size.height * .87)
+      ..lineTo(size.width * .88, size.height * .78);
+
+    canvas.drawPath(brackets, bright);
+
+    canvas.drawCircle(
+      Offset(size.width * .12, size.height * .49),
+      2.4,
+      Paint()..color = GenesisColors.emerald,
+    );
+
+    canvas.drawCircle(
+      Offset(size.width * .88, size.height * .49),
+      2.4,
+      Paint()..color = GenesisColors.emerald,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+class SecurityCameraFeed extends StatelessWidget {
+  const SecurityCameraFeed({
+    required this.name,
+    required this.index,
+    super.key,
+  });
+
+  final String name;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(right: 5),
+      decoration: BoxDecoration(
+        color: const Color(0xFF07131D),
+        border: Border.all(color: GenesisColors.border),
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: CustomPaint(
+              painter: _SecurityFeedPainter(index),
+              child: const SizedBox.expand(),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+            color: const Color(0xDD06111B),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: GenesisColors.text,
+                    fontSize: 5.5,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const Text(
+                  '● ONLINE',
+                  style: TextStyle(
+                    color: GenesisColors.emerald,
+                    fontSize: 5.5,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SecurityFeedPainter extends CustomPainter {
+  const _SecurityFeedPainter(this.index);
+
+  final int index;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.drawRect(
+      Offset.zero & size,
+      Paint()
+        ..shader = const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0xFF21384A),
+            Color(0xFF0B1924),
+            Color(0xFF02070B),
+          ],
+        ).createShader(Offset.zero & size),
+    );
+
+    final structure = Paint()
+      ..color = const Color(0xFF638091).withValues(alpha: .46)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = .8;
+
+    final floorY = size.height * .76;
+    canvas.drawLine(Offset(0, floorY), Offset(size.width, floorY), structure);
+
+    if (index == 0) {
+      canvas.drawRect(
+        Rect.fromLTWH(
+          size.width * .28,
+          size.height * .18,
+          size.width * .45,
+          size.height * .58,
+        ),
+        structure,
+      );
+      canvas.drawLine(
+        Offset(size.width * .50, size.height * .18),
+        Offset(size.width * .50, floorY),
+        structure,
+      );
+    } else if (index == 1) {
+      for (var x = .12; x < .9; x += .25) {
+        canvas.drawRect(
+          Rect.fromLTWH(
+            size.width * x,
+            size.height * .16,
+            size.width * .17,
+            size.height * .60,
+          ),
+          structure,
+        );
+      }
+    } else if (index == 2) {
+      canvas.drawLine(
+        Offset(size.width * .08, floorY),
+        Offset(size.width * .42, size.height * .28),
+        structure,
+      );
+      canvas.drawLine(
+        Offset(size.width * .92, floorY),
+        Offset(size.width * .58, size.height * .28),
+        structure,
+      );
+      canvas.drawLine(
+        Offset(size.width * .42, size.height * .28),
+        Offset(size.width * .58, size.height * .28),
+        structure,
+      );
+    } else {
+      canvas.drawLine(
+        Offset(size.width * .12, floorY),
+        Offset(size.width * .12, size.height * .20),
+        structure,
+      );
+      canvas.drawLine(
+        Offset(size.width * .12, size.height * .20),
+        Offset(size.width * .86, size.height * .20),
+        structure,
+      );
+      canvas.drawLine(
+        Offset(size.width * .86, size.height * .20),
+        Offset(size.width * .86, floorY),
+        structure,
+      );
+    }
+
+    final scan = Paint()
+      ..color = GenesisColors.cyan.withValues(alpha: .12)
+      ..strokeWidth = .5;
+
+    for (double y = 3; y < size.height; y += 4) {
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), scan);
+    }
+
+    canvas.drawCircle(
+      const Offset(7, 7),
+      2.2,
+      Paint()..color = GenesisColors.danger,
+    );
+
+    final timestamp = TextPainter(
+      text: TextSpan(
+        text: 'CAM 0${index + 1}',
+        style: const TextStyle(
+          color: Color(0xFFB7D5E5),
+          fontSize: 5,
+        ),
+      ),
+      textDirection: TextDirection.ltr,
+    )..layout();
+
+    timestamp.paint(canvas, Offset(size.width - timestamp.width - 4, 4));
+  }
+
+  @override
+  bool shouldRepaint(covariant _SecurityFeedPainter oldDelegate) =>
+      oldDelegate.index != index;
+}

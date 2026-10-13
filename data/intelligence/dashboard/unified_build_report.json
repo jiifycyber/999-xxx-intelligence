@@ -1,0 +1,13 @@
+{
+  "generated_at": "2026-10-09T22:00:47.623161+00:00",
+  "total_source_records": 4017,
+  "source_counts": {
+    "fbi": 1262,
+    "ncmec": 2755
+  },
+  "skipped": 0,
+  "verified_unique_missing_children": null,
+  "cross_source_deduplication": "pending",
+  "production_fbi_database_modified": false,
+  "automatic_sharing": false
+}

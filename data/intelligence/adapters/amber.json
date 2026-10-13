@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "source_id": "amber",
+  "source_name": "AMBER Alerts",
+  "official_site": "https://www.missingkids.org",
+  "connection_method": "verified_alert_feed",
+  "next_step": "Identify official alert distribution feed",
+  "status": "pending_verification",
+  "enabled": false,
+  "records_loaded": 0,
+  "last_sync": null,
+  "external_transmission_enabled": false,
+  "case_sharing_enabled": false,
+  "created_at": "2026-10-09T21:37:15.752754+00:00"
+}

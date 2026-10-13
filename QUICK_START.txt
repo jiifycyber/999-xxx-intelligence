@@ -1,0 +1,14 @@
+999 GENESIS PROTOCOL LEVEL 6 - QUICK START
+
+1. Extract the ZIP in Downloads.
+2. Open Terminal.
+3. Run:
+
+cd "$HOME/Downloads/999_genesis_protocol_level_6" || exit 1
+chmod +x bootstrap_genesis.sh
+./bootstrap_genesis.sh
+flutter run -d chrome
+
+The package is isolated from the older Levels 1-5 suite.
+The first release operates in SAFE DEMONSTRATION MODE and does not execute
+real containment, biometric, camera, or device-management actions.

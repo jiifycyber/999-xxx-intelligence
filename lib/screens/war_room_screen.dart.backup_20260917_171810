@@ -1,0 +1,1932 @@
+import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
+
+import '../core/genesis_theme.dart';
+import '../widgets/detailed_world_map.dart';
+import '../widgets/premium_intelligence_visuals.dart';
+import '../widgets/live_endpoint_fleet.dart';
+
+class WarRoomScreen extends StatefulWidget {
+  const WarRoomScreen({super.key});
+
+  @override
+  State<WarRoomScreen> createState() => _WarRoomScreenState();
+}
+
+class _WarRoomScreenState extends State<WarRoomScreen>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _pulse;
+  int _selected = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pulse = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 4),
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _pulse.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: GenesisColors.voidBlack,
+      body: LayoutBuilder(
+        builder: (context, viewport) {
+          // Closer, more readable Genesis command-center viewport.
+          // The former 1840 x 1035 canvas made the entire interface appear distant.
+          final canvasWidth = math.max(1480.0, viewport.maxWidth);
+          final canvasHeight = math.max(832.0, viewport.maxHeight);
+
+          return SizedBox.expand(
+            child: ColoredBox(
+              color: GenesisColors.voidBlack,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.center,
+                child: SizedBox(
+                  width: canvasWidth,
+                  height: canvasHeight,
+                  child: Column(
+                    children: [
+                      const _CommandHeader(),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            _NavigationRail(
+                              selected: _selected,
+                              onSelected: (value) =>
+                                  setState(() => _selected = value),
+                            ),
+                            Expanded(
+                              child: _selected == 0
+                                  ? _CommandCenter(pulse: _pulse)
+                                  : _SectionScreen(
+                                      index: _selected, pulse: _pulse),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const _OperationConsole(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _CommandHeader extends StatelessWidget {
+  const _CommandHeader();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 68,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      decoration: const BoxDecoration(
+        color: Color(0xFF050B1A),
+        border: Border(bottom: BorderSide(color: GenesisColors.border)),
+      ),
+      child: Row(
+        children: [
+          const Text('999',
+              style: TextStyle(
+                  color: GenesisColors.gold,
+                  fontSize: 34,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 1)),
+          const SizedBox(width: 12),
+          Container(width: 1, height: 42, color: GenesisColors.goldSoft),
+          const SizedBox(width: 12),
+          const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('GENESIS PROTOCOL',
+                  style: TextStyle(
+                      color: GenesisColors.text,
+                      fontSize: 19,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1.1)),
+              Text('LEVEL 6 — CYBER OPERATIONS COMMAND',
+                  style: TextStyle(
+                      color: GenesisColors.muted,
+                      fontSize: 8,
+                      letterSpacing: 1.6)),
+            ],
+          ),
+          const Spacer(),
+          const Text(
+            'SAFE DEMONSTRATION MODE  •  TELEMETRY SIMULATED  •  AUTHORIZED SYSTEMS ONLY',
+            style: TextStyle(
+                color: GenesisColors.warning,
+                fontSize: 8,
+                fontWeight: FontWeight.w800,
+                letterSpacing: 1),
+          ),
+          const Spacer(),
+          const _ReadinessHeader(),
+          const SizedBox(width: 22),
+          const _HeaderStatus(),
+          const SizedBox(width: 22),
+          const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text('THU, SEP 17, 2026',
+                  style: TextStyle(color: GenesisColors.muted, fontSize: 8)),
+              Text('05:23:35 UTC',
+                  style: TextStyle(
+                      color: GenesisColors.text,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w800)),
+              Text('WORLDWIDE SECURE',
+                  style: TextStyle(color: GenesisColors.cyan, fontSize: 7)),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ReadinessHeader extends StatelessWidget {
+  const _ReadinessHeader();
+
+  @override
+  Widget build(BuildContext context) => SizedBox(
+        width: 180,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Row(children: [
+              Text('GLOBAL READINESS',
+                  style: TextStyle(color: GenesisColors.muted, fontSize: 8)),
+              Spacer(),
+              Text('97%',
+                  style: TextStyle(
+                      color: GenesisColors.emerald,
+                      fontWeight: FontWeight.w900)),
+            ]),
+            const SizedBox(height: 6),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: const LinearProgressIndicator(
+                value: .97,
+                minHeight: 6,
+                backgroundColor: GenesisColors.panelRaised,
+                color: GenesisColors.emerald,
+              ),
+            ),
+          ],
+        ),
+      );
+}
+
+class _HeaderStatus extends StatelessWidget {
+  const _HeaderStatus();
+
+  @override
+  Widget build(BuildContext context) => const Row(children: [
+        Icon(Icons.verified_user_rounded,
+            color: GenesisColors.emerald, size: 28),
+        SizedBox(width: 8),
+        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text('ZERO TRUST ACTIVE',
+              style: TextStyle(
+                  color: GenesisColors.emerald,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w900)),
+          Text('ALL SYSTEMS OPERATIONAL',
+              style: TextStyle(color: GenesisColors.emerald, fontSize: 7)),
+        ]),
+      ]);
+}
+
+class _NavigationRail extends StatelessWidget {
+  const _NavigationRail({required this.selected, required this.onSelected});
+
+  final int selected;
+  final ValueChanged<int> onSelected;
+
+  static const _items = [
+    ('COMMAND CENTER', Icons.home_rounded),
+    ('GLOBAL THREAT MAP', Icons.public_rounded),
+    ('AGENT DUKE AI', Icons.hub_rounded),
+    ('INCIDENT FUSION', Icons.account_tree_rounded),
+    ('THREAT INTELLIGENCE', Icons.radar_rounded),
+    ('ENDPOINT FLEET', Icons.desktop_windows_rounded),
+    ('IDENTITY & BIOMETRICS', Icons.fingerprint_rounded),
+    ('CAMERAS & ALARMS', Icons.videocam_rounded),
+    ('NETWORK ANALYTICS', Icons.schema_rounded),
+    ('EVIDENCE VAULT', Icons.inventory_2_rounded),
+    ('RECOVERY OPERATIONS', Icons.settings_backup_restore_rounded),
+    ('AI AGENT GOVERNANCE', Icons.psychology_alt_rounded),
+    ('SYSTEM ADMIN', Icons.settings_rounded),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 190,
+      padding: const EdgeInsets.fromLTRB(7, 8, 7, 7),
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0xFF07152C),
+            Color(0xFF050B1A),
+            Color(0xFF13092F),
+          ],
+        ),
+        border: const Border(
+          right: BorderSide(color: GenesisColors.border),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: GenesisColors.cyan.withValues(alpha: .08),
+            blurRadius: 18,
+            offset: const Offset(5, 0),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              itemCount: _items.length,
+              itemBuilder: (context, index) {
+                final active = selected == index;
+
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(11),
+                      onTap: () => onSelected(index),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 220),
+                        curve: Curves.easeOutCubic,
+                        height: 47,
+                        padding: const EdgeInsets.symmetric(horizontal: 7),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: active
+                                ? [
+                                    GenesisColors.gold.withValues(alpha: .24),
+                                    GenesisColors.purple.withValues(alpha: .18),
+                                    GenesisColors.panelRaised,
+                                  ]
+                                : [
+                                    GenesisColors.panelRaised
+                                        .withValues(alpha: .92),
+                                    GenesisColors.glassPurple
+                                        .withValues(alpha: .82),
+                                  ],
+                          ),
+                          borderRadius: BorderRadius.circular(11),
+                          border: Border.all(
+                            color: active
+                                ? GenesisColors.gold
+                                : GenesisColors.purpleBright
+                                    .withValues(alpha: .46),
+                            width: active ? 1.35 : .75,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: (active
+                                      ? GenesisColors.gold
+                                      : GenesisColors.purple)
+                                  .withValues(alpha: active ? .24 : .10),
+                              blurRadius: active ? 10 : 6,
+                              spreadRadius: active ? .4 : 0,
+                            ),
+                            BoxShadow(
+                              color: GenesisColors.cyan.withValues(alpha: .05),
+                              blurRadius: 8,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Row(
+                          children: [
+                            AnimatedContainer(
+                              duration: const Duration(milliseconds: 220),
+                              width: 31,
+                              height: 31,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: active
+                                      ? [
+                                          GenesisColors.gold
+                                              .withValues(alpha: .30),
+                                          GenesisColors.purple
+                                              .withValues(alpha: .22),
+                                        ]
+                                      : [
+                                          GenesisColors.cyan
+                                              .withValues(alpha: .12),
+                                          GenesisColors.purple
+                                              .withValues(alpha: .12),
+                                        ],
+                                ),
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: active
+                                      ? GenesisColors.gold
+                                      : GenesisColors.cyan
+                                          .withValues(alpha: .38),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: (active
+                                            ? GenesisColors.gold
+                                            : GenesisColors.cyan)
+                                        .withValues(alpha: .18),
+                                    blurRadius: 7,
+                                  ),
+                                ],
+                              ),
+                              child: Icon(
+                                _items[index].$2,
+                                color: active
+                                    ? GenesisColors.gold
+                                    : GenesisColors.cyan,
+                                size: 17,
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: Text(
+                                _items[index].$1,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: active
+                                      ? GenesisColors.text
+                                      : const Color(0xFFC6D8E7),
+                                  fontSize: 8.2,
+                                  height: 1.08,
+                                  letterSpacing: .25,
+                                  fontWeight: active
+                                      ? FontWeight.w900
+                                      : FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                            AnimatedContainer(
+                              duration: const Duration(milliseconds: 220),
+                              width: 3,
+                              height: active ? 25 : 12,
+                              decoration: BoxDecoration(
+                                color: active
+                                    ? GenesisColors.gold
+                                    : GenesisColors.cyan.withValues(alpha: .35),
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: active
+                                    ? [
+                                        BoxShadow(
+                                          color: GenesisColors.gold
+                                              .withValues(alpha: .60),
+                                          blurRadius: 7,
+                                        ),
+                                      ]
+                                    : null,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(11),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  GenesisColors.panelRaised.withValues(alpha: .95),
+                  GenesisColors.glassPurple.withValues(alpha: .88),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: GenesisColors.purpleBright.withValues(alpha: .52),
+              ),
+              boxShadow: [
+                BoxShadow(
+                  color: GenesisColors.purple.withValues(alpha: .16),
+                  blurRadius: 10,
+                ),
+              ],
+            ),
+            child: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      '999',
+                      style: TextStyle(
+                        color: GenesisColors.gold,
+                        fontSize: 23,
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                    Spacer(),
+                    Icon(
+                      Icons.shield_rounded,
+                      color: GenesisColors.emerald,
+                      size: 17,
+                    ),
+                  ],
+                ),
+                Text(
+                  'GENESIS PROTOCOL',
+                  style: TextStyle(
+                    color: GenesisColors.text,
+                    fontSize: 7,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  'PEOPLE  •  TECHNOLOGY\nRESILIENCE  •  A SAFER TOMORROW',
+                  style: TextStyle(
+                    color: GenesisColors.muted,
+                    fontSize: 5.7,
+                    height: 1.45,
+                    letterSpacing: .35,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CommandCenter extends StatelessWidget {
+  const _CommandCenter({required this.pulse});
+
+  final Animation<double> pulse;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: RadialGradient(
+          center: Alignment.topCenter,
+          radius: 1.2,
+          colors: [
+            Color(0xFF071D42),
+            GenesisColors.voidBlack,
+            Color(0xFF13092F),
+          ],
+        ),
+      ),
+      padding: const EdgeInsets.all(8),
+      child: Column(children: [
+        const SizedBox(height: 76, child: _KpiStrip()),
+        const SizedBox(height: 8),
+        Expanded(
+          flex: 52,
+          child: Row(children: [
+            Expanded(child: _ThreatMatrix(pulse: pulse)),
+            const SizedBox(width: 8),
+            const SizedBox(width: 315, child: _IntelligenceStream()),
+          ]),
+        ),
+        const SizedBox(height: 8),
+        const Expanded(
+          flex: 25,
+          child: Row(children: [
+            Expanded(flex: 3, child: _AgentDukePanel()),
+            SizedBox(width: 8),
+            Expanded(flex: 3, child: _PrincePanel()),
+            SizedBox(width: 8),
+            Expanded(flex: 3, child: _BiometricPanel()),
+            SizedBox(width: 8),
+            Expanded(flex: 3, child: LiveEndpointFleet()),
+          ]),
+        ),
+        const SizedBox(height: 8),
+        const Expanded(
+          flex: 18,
+          child: Row(children: [
+            Expanded(flex: 4, child: _TrafficPanel()),
+            SizedBox(width: 8),
+            Expanded(flex: 3, child: _CameraPanel()),
+            SizedBox(width: 8),
+            Expanded(flex: 3, child: _RecoveryPanel()),
+            SizedBox(width: 8),
+            Expanded(flex: 3, child: _EvidencePanel()),
+          ]),
+        ),
+      ]),
+    );
+  }
+}
+
+class _KpiStrip extends StatelessWidget {
+  const _KpiStrip();
+
+  @override
+  Widget build(BuildContext context) {
+    const data = [
+      (
+        '97',
+        'GLOBAL RISK INDEX',
+        '+2.4',
+        GenesisColors.emerald,
+        Icons.shield_outlined
+      ),
+      (
+        '12',
+        'ACTIVE THREATS',
+        '+4',
+        GenesisColors.danger,
+        Icons.warning_amber_rounded
+      ),
+      (
+        '2',
+        'CRITICAL INCIDENTS',
+        'ACTIVE',
+        GenesisColors.danger,
+        Icons.crisis_alert_rounded
+      ),
+      (
+        '31',
+        'CONTAINED TODAY',
+        'SECURED',
+        GenesisColors.cyan,
+        Icons.bar_chart_rounded
+      ),
+      (
+        '195',
+        'COUNTRIES MONITORED',
+        'GLOBAL',
+        GenesisColors.cyan,
+        Icons.public_rounded
+      ),
+      (
+        '420K',
+        'ENDPOINTS PROTECTED',
+        '99.2%',
+        GenesisColors.text,
+        Icons.storage_rounded
+      ),
+    ];
+    return Row(
+      children: [
+        for (var i = 0; i < data.length; i++) ...[
+          Expanded(
+            child: _Panel(
+              padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 9),
+              child: Row(children: [
+                Icon(data[i].$5, color: data[i].$4, size: 24),
+                const SizedBox(width: 10),
+                Text(data[i].$1,
+                    style: TextStyle(
+                        color: data[i].$4,
+                        fontSize: 27,
+                        fontWeight: FontWeight.w900)),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(data[i].$2,
+                          maxLines: 2,
+                          style: const TextStyle(
+                              color: GenesisColors.text,
+                              fontSize: 8,
+                              fontWeight: FontWeight.w700)),
+                      const SizedBox(height: 3),
+                      Text(data[i].$3,
+                          style: TextStyle(color: data[i].$4, fontSize: 8)),
+                    ],
+                  ),
+                ),
+              ]),
+            ),
+          ),
+          if (i != data.length - 1) const SizedBox(width: 8),
+        ],
+      ],
+    );
+  }
+}
+
+class _ThreatMatrix extends StatelessWidget {
+  const _ThreatMatrix({required this.pulse});
+  final Animation<double> pulse;
+
+  @override
+  Widget build(BuildContext context) {
+    return _Panel(
+      child: Column(children: [
+        const _PanelHeader(
+          icon: Icons.gps_fixed_rounded,
+          title: 'GLOBAL THREAT MATRIX',
+          subtitle: 'VERIFIED TELEMETRY - NO SIMULATED THREATS',
+          trailing: _LiveControls(),
+        ),
+        const SizedBox(height: 6),
+        Expanded(
+          child: Row(children: [
+            const SizedBox(width: 80, child: _ThreatLegend()),
+            Expanded(
+              child: DetailedWorldMap(pulse: pulse),
+            ),
+            const SizedBox(width: 120, child: _AttackStats()),
+          ]),
+        ),
+      ]),
+    );
+  }
+}
+
+class _LiveControls extends StatelessWidget {
+  const _LiveControls();
+  @override
+  Widget build(BuildContext context) => const Row(children: [
+        _MiniPill('AWAITING DATA', GenesisColors.warning),
+        SizedBox(width: 5),
+        _MiniPill('24H', GenesisColors.cyan),
+        SizedBox(width: 5),
+        _MiniPill('7D', GenesisColors.muted),
+        SizedBox(width: 5),
+        _MiniPill('THREAT LAYERS', GenesisColors.muted),
+      ]);
+}
+
+class _ThreatLegend extends StatelessWidget {
+  const _ThreatLegend();
+  @override
+  Widget build(BuildContext context) => const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _Legend('CRITICAL', GenesisColors.danger),
+          _Legend('HIGH', Color(0xFFFF8B38)),
+          _Legend('MEDIUM', GenesisColors.warning),
+          _Legend('LOW', GenesisColors.emerald),
+          _Legend('INFO', GenesisColors.cyan),
+          Spacer(),
+          Text(
+              'NO VERIFIED ROUTES\n2 AUTHORIZED ENDPOINTS\nLOCAL TELEMETRY LIVE',
+              style: TextStyle(
+                  color: GenesisColors.muted, fontSize: 6, height: 1.6)),
+        ],
+      );
+}
+
+class _Legend extends StatelessWidget {
+  const _Legend(this.label, this.color);
+  final String label;
+  final Color color;
+  @override
+  Widget build(BuildContext context) => Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: Row(children: [
+          Icon(Icons.circle, color: color, size: 8),
+          const SizedBox(width: 6),
+          Text(label,
+              style: const TextStyle(color: GenesisColors.text, fontSize: 7)),
+        ]),
+      );
+}
+
+class _AttackStats extends StatelessWidget {
+  const _AttackStats();
+  @override
+  Widget build(BuildContext context) {
+    const data = [
+      ('LIVE ATTACKS', '0'),
+      ('MALWARE', '0'),
+      ('DDOS', '0'),
+      ('EXFIL', '0'),
+      ('RANSOMWARE', '0'),
+      ('APT ACTIVITY', '0')
+    ];
+    return Column(
+      children: [
+        for (final item in data)
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 5),
+              decoration: const BoxDecoration(
+                border: Border(bottom: BorderSide(color: GenesisColors.border)),
+              ),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(item.$1,
+                        style: const TextStyle(
+                            color: GenesisColors.muted, fontSize: 6)),
+                    Text(item.$2,
+                        style: const TextStyle(
+                            color: GenesisColors.text,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w800)),
+                  ]),
+            ),
+          ),
+      ],
+    );
+  }
+}
+
+class _RegionLabel extends StatelessWidget {
+  const _RegionLabel(this.title, this.detail);
+  final String title;
+  final String detail;
+  @override
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(title,
+              style: const TextStyle(
+                  color: GenesisColors.text,
+                  fontSize: 9,
+                  fontWeight: FontWeight.w900)),
+          Text(detail,
+              style: const TextStyle(color: GenesisColors.muted, fontSize: 7)),
+        ],
+      );
+}
+
+class _IntelligenceStream extends StatelessWidget {
+  const _IntelligenceStream();
+  static const _events = [
+    (
+      '22:14:32',
+      'Suspicious outbound traffic',
+      'Moscow, RU → Unknown',
+      'CRITICAL',
+      GenesisColors.danger
+    ),
+    (
+      '22:14:19',
+      'New malware variant detected',
+      'Singapore, SG',
+      'HIGH',
+      Color(0xFFFF8B38)
+    ),
+    (
+      '22:13:50',
+      'Unusual admin privilege escalation',
+      'São Paulo, BR',
+      'HIGH',
+      Color(0xFFFF8B38)
+    ),
+    (
+      '22:13:28',
+      'Multiple failed MFA attempts',
+      'Berlin, DE',
+      'MEDIUM',
+      GenesisColors.warning
+    ),
+    (
+      '22:12:47',
+      'Data exfiltration pattern identified',
+      'Seoul, KR',
+      'HIGH',
+      GenesisColors.danger
+    ),
+    (
+      '22:12:16',
+      'C2 server infrastructure mapped',
+      'Lagos, NG',
+      'MEDIUM',
+      GenesisColors.warning
+    ),
+    (
+      '22:11:03',
+      'Ransomware beacon detected',
+      'New York, US',
+      'CRITICAL',
+      GenesisColors.danger
+    ),
+    (
+      '22:10:34',
+      'Lateral movement blocked',
+      'Sydney, AU',
+      'LOW',
+      GenesisColors.emerald
+    ),
+    (
+      '22:10:12',
+      'New IOC matched (APT group)',
+      'Tehran, IR',
+      'HIGH',
+      GenesisColors.danger
+    ),
+    (
+      '22:09:41',
+      'Endpoint contained automatically',
+      'London, UK',
+      'LOW',
+      GenesisColors.emerald
+    ),
+  ];
+  @override
+  Widget build(BuildContext context) => _Panel(
+        child: Column(children: [
+          const _PanelHeader(
+              icon: Icons.stream_rounded,
+              title: 'LIVE INTELLIGENCE STREAM',
+              subtitle: 'ALL  •  SIGINT  •  CYBER  •  GEOINT  •  HUMINT'),
+          const SizedBox(height: 5),
+          Expanded(
+            child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: _events.length,
+              itemBuilder: (context, i) {
+                final e = _events[i];
+                return Container(
+                  height: 42,
+                  padding: const EdgeInsets.symmetric(vertical: 4),
+                  decoration: const BoxDecoration(
+                    border:
+                        Border(bottom: BorderSide(color: Color(0x331E4058))),
+                  ),
+                  child: Row(children: [
+                    SizedBox(
+                        width: 49,
+                        child: Text(e.$1,
+                            style: const TextStyle(
+                                color: GenesisColors.muted, fontSize: 7))),
+                    Container(width: 2, color: e.$5),
+                    const SizedBox(width: 8),
+                    Icon(Icons.circle, color: e.$5, size: 8),
+                    const SizedBox(width: 7),
+                    Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                          Text(e.$2,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  color: GenesisColors.text, fontSize: 7.5)),
+                          Text(e.$3,
+                              style: const TextStyle(
+                                  color: GenesisColors.muted, fontSize: 6.5)),
+                        ])),
+                    Text(e.$4,
+                        style: TextStyle(
+                            color: e.$5,
+                            fontSize: 6.5,
+                            fontWeight: FontWeight.w800)),
+                  ]),
+                );
+              },
+            ),
+          ),
+        ]),
+      );
+}
+
+class _AgentDukePanel extends StatelessWidget {
+  const _AgentDukePanel();
+
+  @override
+  Widget build(BuildContext context) => _Panel(
+        child: Column(
+          children: [
+            const _PanelHeader(
+              icon: Icons.hub_rounded,
+              title: 'AGENT DUKE AI',
+              subtitle: 'AI COMMAND CORE • AUTONOMOUS THREAT HUNTING',
+            ),
+            const Expanded(
+              child: Row(
+                children: [
+                  DukeIntelligenceCore(),
+                  SizedBox(width: 7),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _CheckLine('THREAT DETECTION', 'ACTIVE'),
+                        _CheckLine('ANOMALY ANALYSIS', 'ACTIVE'),
+                        _CheckLine('AUTONOMOUS CONTAINMENT', 'ACTIVE'),
+                        _CheckLine('PREDICTIVE INTELLIGENCE', 'ACTIVE'),
+                        _CheckLine('PLAYBOOK EXECUTION', 'READY'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              height: 23,
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                color: GenesisColors.cyan.withValues(alpha: .025),
+                border: Border.all(color: GenesisColors.border),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: const Row(
+                children: [
+                  Text(
+                    'Ask Agent Duke...',
+                    style: TextStyle(
+                      color: GenesisColors.muted,
+                      fontSize: 8,
+                    ),
+                  ),
+                  Spacer(),
+                  Icon(
+                    Icons.graphic_eq_rounded,
+                    color: GenesisColors.cyan,
+                    size: 16,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+}
+
+class _PrincePanel extends StatelessWidget {
+  const _PrincePanel();
+  @override
+  Widget build(BuildContext context) => _Panel(
+        borderColor: GenesisColors.goldSoft,
+        child: Column(children: [
+          const _PanelHeader(
+              icon: Icons.workspace_premium_rounded,
+              title: 'PRINCE X',
+              subtitle: 'FOUNDER COMMAND AUTHORITY',
+              iconColor: GenesisColors.gold),
+          const Expanded(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                _CheckLine('FACE ID BIOMETRIC', 'VERIFIED'),
+                _CheckLine('HARDWARE KEY', 'VERIFIED'),
+                _CheckLine('COMMAND SIGNING', 'ENABLED'),
+                _CheckLine('SESSION ENCRYPTED', 'AES-512'),
+                _CheckLine('AUTHORITY LEVEL', 'FOUNDER (LEVEL 6)'),
+              ])),
+          SizedBox(
+              width: double.infinity,
+              height: 25,
+              child: FilledButton(
+                  onPressed: () {},
+                  style: FilledButton.styleFrom(
+                      backgroundColor:
+                          GenesisColors.gold.withValues(alpha: .14),
+                      foregroundColor: GenesisColors.gold,
+                      side: const BorderSide(color: GenesisColors.gold)),
+                  child: const Text('AUTHORIZE OPERATION',
+                      style: TextStyle(
+                          fontSize: 9, fontWeight: FontWeight.w900)))),
+        ]),
+      );
+}
+
+class _BiometricPanel extends StatelessWidget {
+  const _BiometricPanel();
+
+  @override
+  Widget build(BuildContext context) => const _Panel(
+        child: Column(
+          children: [
+            _PanelHeader(
+              icon: Icons.fingerprint_rounded,
+              title: 'IDENTITY & BIOMETRIC ASSURANCE',
+              subtitle: 'CONTINUOUS AUTHENTICATION',
+            ),
+            Expanded(
+              child: Row(
+                children: [
+                  BiometricWireframe(),
+                  SizedBox(width: 6),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _CheckLine('FACIAL RECOGNITION', 'VERIFIED'),
+                        _CheckLine('VOICE AUTHENTICATION', 'VERIFIED'),
+                        _CheckLine('BEHAVIORAL ANALYSIS', 'VERIFIED'),
+                        _CheckLine('DEVICE TRUST', 'VERIFIED'),
+                        _CheckLine('SESSION RISK', 'LOW'),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+}
+
+class _EndpointPanel extends StatelessWidget {
+  const _EndpointPanel();
+  @override
+  Widget build(BuildContext context) => _Panel(
+        child: Column(children: [
+          const _PanelHeader(
+              icon: Icons.dns_rounded,
+              title: 'ENDPOINT FLEET',
+              subtitle: 'PROTECTED ASSET HEALTH'),
+          Expanded(
+              child: Row(children: [
+            const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('420,317',
+                      style: TextStyle(
+                          color: GenesisColors.text,
+                          fontSize: 25,
+                          fontWeight: FontWeight.w900)),
+                  Text('ENDPOINTS',
+                      style:
+                          TextStyle(color: GenesisColors.muted, fontSize: 8)),
+                ]),
+            const Spacer(),
+            Container(
+                width: 70,
+                height: 70,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: GenesisColors.emerald, width: 7)),
+                child: const Center(
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                      Text('99.2%',
+                          style: TextStyle(
+                              color: GenesisColors.text,
+                              fontWeight: FontWeight.w900)),
+                      Text('HEALTHY',
+                          style: TextStyle(
+                              color: GenesisColors.muted, fontSize: 6))
+                    ]))),
+            const Spacer(),
+            const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _DotValue('398,421', 'HEALTHY', GenesisColors.emerald),
+                  _DotValue('11,083', 'DEGRADED', GenesisColors.warning),
+                  _DotValue('843', 'ISOLATED', GenesisColors.danger),
+                ]),
+          ])),
+          const _BarChart(color: GenesisColors.cyan),
+        ]),
+      );
+}
+
+class _TrafficPanel extends StatelessWidget {
+  const _TrafficPanel();
+  @override
+  Widget build(BuildContext context) => const _Panel(
+          child: Column(children: [
+        _PanelHeader(
+            icon: Icons.timeline_rounded,
+            title: 'NETWORK TRAFFIC ANALYTICS',
+            subtitle: 'REAL-TIME FLOW ANALYSIS • 1.2 TBPS'),
+        Expanded(
+            child: CustomPaint(
+                painter: _TrafficPainter(), child: SizedBox.expand())),
+      ]));
+}
+
+class _CameraPanel extends StatelessWidget {
+  const _CameraPanel();
+
+  static const _feeds = [
+    ('HQ ENTRY', 0),
+    ('SERVER ROOM', 1),
+    ('OPS FLOOR', 2),
+    ('PERIMETER', 3),
+  ];
+
+  @override
+  Widget build(BuildContext context) => _Panel(
+        child: Column(
+          children: [
+            const _PanelHeader(
+              icon: Icons.videocam_rounded,
+              title: 'CAMERAS & ALARMS',
+              subtitle: 'PHYSICAL SECURITY INTEGRATION',
+            ),
+            const SizedBox(height: 6),
+            Expanded(
+              child: Row(
+                children: [
+                  for (final feed in _feeds)
+                    Expanded(
+                      child: SecurityCameraFeed(
+                        name: feed.$1,
+                        index: feed.$2,
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+}
+
+class _RecoveryPanel extends StatelessWidget {
+  const _RecoveryPanel();
+  @override
+  Widget build(BuildContext context) => const _Panel(
+          child: Column(children: [
+        _PanelHeader(
+            icon: Icons.settings_backup_restore_rounded,
+            title: 'RECOVERY READINESS',
+            subtitle: 'BUSINESS CONTINUITY & RESILIENCE'),
+        Expanded(
+            child: Row(children: [
+          SizedBox(width: 92, child: Center(child: _PercentRing())),
+          Expanded(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                _CheckLine('BACKUPS VERIFIED', ''),
+                _CheckLine('DR DRILLS COMPLETE', ''),
+                _CheckLine('INFRASTRUCTURE READY', ''),
+                _CheckLine('PLAYBOOKS UPDATED', ''),
+                _CheckLine('RTO / RPO WITHIN TARGET', ''),
+              ])),
+        ])),
+      ]));
+}
+
+class _EvidencePanel extends StatelessWidget {
+  const _EvidencePanel();
+  @override
+  Widget build(BuildContext context) => const _Panel(
+          child: Column(children: [
+        _PanelHeader(
+            icon: Icons.inventory_2_rounded,
+            title: 'EVIDENCE VAULT',
+            subtitle: 'FORENSIC DATA & CHAIN OF CUSTODY'),
+        Expanded(
+            child: Row(children: [
+          Expanded(child: _BarChart(color: GenesisColors.cyan)),
+          SizedBox(width: 12),
+          Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _ValueLine('FILES', '12.8M'),
+                _ValueLine('ARTIFACTS', '3.1M'),
+                _ValueLine('CASES', '6,492'),
+                _ValueLine('RETAIN (DAYS)', '730'),
+              ]),
+        ])),
+      ]));
+}
+
+class _OperationConsole extends StatelessWidget {
+  const _OperationConsole();
+  @override
+  Widget build(BuildContext context) {
+    const actions = [
+      ('CONTAIN THREAT', Icons.gps_fixed_rounded, GenesisColors.danger),
+      ('ISOLATE ENDPOINT', Icons.lock_outline_rounded, GenesisColors.warning),
+      ('DEPLOY COUNTERMEASURE', Icons.shield_outlined, GenesisColors.cyan),
+      ('RUN INVESTIGATION', Icons.search_rounded, Color(0xFF9BC9E5)),
+      ('GENERATE REPORT', Icons.article_outlined, Color(0xFFB4CAD8)),
+      (
+        'ALL SYSTEMS SECURE',
+        Icons.verified_user_rounded,
+        GenesisColors.emerald
+      ),
+    ];
+    return Container(
+      height: 52,
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+      decoration: const BoxDecoration(
+          color: Color(0xFF050B1A),
+          border: Border(top: BorderSide(color: GenesisColors.border))),
+      child: Row(children: [
+        const Icon(Icons.chevron_right_rounded, color: GenesisColors.emerald),
+        const Text('OPERATION CONSOLE',
+            style: TextStyle(color: GenesisColors.cyan, fontSize: 9)),
+        const SizedBox(width: 22),
+        for (final a in actions) ...[
+          Expanded(
+              child: OutlinedButton.icon(
+                  onPressed: () {},
+                  icon: Icon(a.$2, size: 15),
+                  label: Text(a.$1,
+                      style: const TextStyle(
+                          fontSize: 8, fontWeight: FontWeight.w800)),
+                  style: OutlinedButton.styleFrom(
+                      foregroundColor: a.$3,
+                      side: BorderSide(color: a.$3),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4))))),
+          const SizedBox(width: 8),
+        ],
+        const Text('999 GENESIS PROTOCOL',
+            style: TextStyle(color: GenesisColors.muted, fontSize: 7)),
+      ]),
+    );
+  }
+}
+
+class _SectionScreen extends StatelessWidget {
+  const _SectionScreen({
+    required this.index,
+    required this.pulse,
+  });
+
+  final int index;
+  final Animation<double> pulse;
+
+  @override
+  Widget build(BuildContext context) {
+    if (index == 1) {
+      return Container(
+        color: GenesisColors.voidBlack,
+        padding: const EdgeInsets.all(12),
+        child: _Panel(
+          child: Column(
+            children: [
+              const _PanelHeader(
+                icon: Icons.public_rounded,
+                title: 'GLOBAL THREAT MAP',
+                subtitle: 'AUTHORIZED TELEMETRY ONLY',
+                trailing: _MiniPill(
+                  'AWAITING TELEMETRY',
+                  GenesisColors.warning,
+                ),
+              ),
+              const SizedBox(height: 10),
+              Expanded(
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                      child: DetailedWorldMap(pulse: pulse),
+                    ),
+                    const Center(
+                      child: _MapZeroState(),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return switch (index) {
+      2 => const _ConnectedModule(
+          title: 'AGENT DUKE AI',
+          subtitle: 'AI COMMAND CORE • AUTONOMOUS THREAT HUNTING',
+          icon: Icons.hub_rounded,
+          child: _AgentDukePanel(),
+        ),
+      3 => _ConnectedModule(
+          title: 'INCIDENT FUSION',
+          subtitle: 'CORRELATED EVENTS • INVESTIGATION COMMAND',
+          icon: Icons.account_tree_rounded,
+          child: Row(
+            children: [
+              Expanded(child: _ThreatMatrix(pulse: pulse)),
+              const SizedBox(width: 10),
+              const SizedBox(width: 390, child: _IntelligenceStream()),
+            ],
+          ),
+        ),
+      4 => _ConnectedModule(
+          title: 'THREAT INTELLIGENCE',
+          subtitle: 'GLOBAL INDICATORS • LIVE INTELLIGENCE ANALYSIS',
+          icon: Icons.radar_rounded,
+          child: Row(
+            children: [
+              Expanded(child: _ThreatMatrix(pulse: pulse)),
+              const SizedBox(width: 10),
+              const SizedBox(width: 390, child: _IntelligenceStream()),
+            ],
+          ),
+        ),
+      5 => const _ConnectedModule(
+          title: 'ENDPOINT FLEET',
+          subtitle: 'PROTECTED ASSETS • DEVICE HEALTH • RESPONSE',
+          icon: Icons.desktop_windows_rounded,
+          child: LiveEndpointFleet(),
+        ),
+      6 => const _ConnectedModule(
+          title: 'IDENTITY & BIOMETRICS',
+          subtitle: 'CONTINUOUS AUTHENTICATION • IDENTITY ASSURANCE',
+          icon: Icons.fingerprint_rounded,
+          child: _BiometricPanel(),
+        ),
+      7 => const _ConnectedModule(
+          title: 'CAMERAS & ALARMS',
+          subtitle: 'PHYSICAL SECURITY • VIDEO AND SENSOR COMMAND',
+          icon: Icons.videocam_rounded,
+          child: _CameraPanel(),
+        ),
+      8 => const _ConnectedModule(
+          title: 'NETWORK ANALYTICS',
+          subtitle: 'TRAFFIC INTELLIGENCE • ANOMALY MONITORING',
+          icon: Icons.schema_rounded,
+          child: _TrafficPanel(),
+        ),
+      9 => const _ConnectedModule(
+          title: 'EVIDENCE VAULT',
+          subtitle: 'FORENSIC DATA • INTEGRITY • CHAIN OF CUSTODY',
+          icon: Icons.inventory_2_rounded,
+          child: _EvidencePanel(),
+        ),
+      10 => const _ConnectedModule(
+          title: 'RECOVERY OPERATIONS',
+          subtitle: 'RESILIENCE • BACKUP • RESTORATION COMMAND',
+          icon: Icons.settings_backup_restore_rounded,
+          child: _RecoveryPanel(),
+        ),
+      11 => const _ConnectedModule(
+          title: 'AI AGENT GOVERNANCE',
+          subtitle: 'AI AUTHORITY • POLICY • HUMAN OVERSIGHT',
+          icon: Icons.psychology_alt_rounded,
+          child: Row(
+            children: [
+              Expanded(child: _AgentDukePanel()),
+              SizedBox(width: 10),
+              Expanded(child: _PrincePanel()),
+            ],
+          ),
+        ),
+      12 => const _ConnectedModule(
+          title: 'SYSTEM ADMIN',
+          subtitle: 'GENESIS CONFIGURATION • READINESS • CONTROL',
+          icon: Icons.settings_rounded,
+          child: Column(
+            children: [
+              SizedBox(height: 105, child: _KpiStrip()),
+              SizedBox(height: 10),
+              Expanded(
+                child: Row(
+                  children: [
+                    Expanded(child: LiveEndpointFleet()),
+                    SizedBox(width: 10),
+                    Expanded(child: _RecoveryPanel()),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      _ => const _ConnectedModule(
+          title: 'GENESIS MODULE',
+          subtitle: 'SECURE MODULE CONNECTION',
+          icon: Icons.shield_rounded,
+          child: Center(
+            child: Text(
+              'MODULE READY',
+              style: TextStyle(
+                color: GenesisColors.emerald,
+                fontSize: 24,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ),
+        ),
+    };
+  }
+}
+
+class _ConnectedModule extends StatelessWidget {
+  const _ConnectedModule({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.child,
+  });
+
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: RadialGradient(
+          center: Alignment.topCenter,
+          radius: 1.2,
+          colors: [
+            Color(0xFF071D42),
+            GenesisColors.voidBlack,
+            Color(0xFF13092F),
+          ],
+        ),
+      ),
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 66,
+            child: _Panel(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 14,
+                vertical: 9,
+              ),
+              child: _PanelHeader(
+                icon: icon,
+                title: title,
+                subtitle: subtitle,
+                trailing: const _MiniPill(
+                  'CONNECTED',
+                  GenesisColors.emerald,
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Expanded(child: child),
+        ],
+      ),
+    );
+  }
+}
+
+class _MapZeroState extends StatelessWidget {
+  const _MapZeroState();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 13),
+      decoration: BoxDecoration(
+        color: const Color(0xE607142B),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: GenesisColors.warning),
+      ),
+      child: const Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            Icons.sensors_off_rounded,
+            color: GenesisColors.warning,
+            size: 28,
+          ),
+          SizedBox(height: 7),
+          Text(
+            'AWAITING VERIFIED TELEMETRY',
+            style: TextStyle(
+              color: GenesisColors.text,
+              fontSize: 13,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          SizedBox(height: 3),
+          Text(
+            '0 ACTIVE THREATS - NO DATA SOURCE CONNECTED',
+            style: TextStyle(
+              color: GenesisColors.muted,
+              fontSize: 8,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _Panel extends StatelessWidget {
+  const _Panel({
+    required this.child,
+    this.padding = const EdgeInsets.all(10),
+    this.borderColor,
+  });
+
+  final Widget child;
+  final EdgeInsets padding;
+  final Color? borderColor;
+
+  @override
+  Widget build(BuildContext context) {
+    final authorityColor = borderColor;
+
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: authorityColor == null
+            ? const LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xFF25EDFF),
+                  Color(0xFF6858FF),
+                  Color(0xFFA23CFF),
+                  Color(0xFFFF4D87),
+                ],
+              )
+            : LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  authorityColor,
+                  GenesisColors.gold,
+                  authorityColor.withValues(alpha: .72),
+                ],
+              ),
+        borderRadius: BorderRadius.circular(17),
+        boxShadow: [
+          BoxShadow(
+            color:
+                (authorityColor ?? GenesisColors.cyan).withValues(alpha: .22),
+            blurRadius: 16,
+            spreadRadius: .4,
+          ),
+          BoxShadow(
+            color:
+                (authorityColor ?? GenesisColors.purple).withValues(alpha: .18),
+            blurRadius: 24,
+            spreadRadius: .2,
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(1.25),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xFA0A2A61),
+                Color(0xFA071D42),
+                Color(0xFA0B1835),
+                Color(0xFA160D35),
+              ],
+              stops: [0, .36, .70, 1],
+            ),
+            borderRadius: BorderRadius.circular(15.75),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x2219DFFF),
+                blurRadius: 10,
+              ),
+              BoxShadow(
+                color: Color(0x22A23CFF),
+                blurRadius: 14,
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15.75),
+            child: Stack(
+              fit: StackFit.passthrough,
+              children: [
+                Positioned(
+                  left: 0,
+                  top: 0,
+                  right: 0,
+                  height: 2,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.white.withValues(alpha: .16),
+                          GenesisColors.cyan.withValues(alpha: .25),
+                          GenesisColors.purple.withValues(alpha: .22),
+                          Colors.transparent,
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: padding,
+                  child: child,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _PanelHeader extends StatelessWidget {
+  const _PanelHeader(
+      {required this.icon,
+      required this.title,
+      required this.subtitle,
+      this.trailing,
+      this.iconColor = GenesisColors.cyan});
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Widget? trailing;
+  final Color iconColor;
+  @override
+  Widget build(BuildContext context) => Row(children: [
+        Icon(icon, color: iconColor, size: 16),
+        const SizedBox(width: 7),
+        Expanded(
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(title,
+              maxLines: 1,
+              style: const TextStyle(
+                  color: GenesisColors.text,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: .5)),
+          Text(subtitle,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                  color: GenesisColors.muted,
+                  fontSize: 6.5,
+                  letterSpacing: .5)),
+        ])),
+        if (trailing != null) trailing!,
+      ]);
+}
+
+class _MiniPill extends StatelessWidget {
+  const _MiniPill(this.label, this.color);
+  final String label;
+  final Color color;
+  @override
+  Widget build(BuildContext context) => Container(
+      padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 4),
+      decoration: BoxDecoration(
+          color: color.withValues(alpha: .08),
+          border: Border.all(color: color.withValues(alpha: .5)),
+          borderRadius: BorderRadius.circular(3)),
+      child: Text(label,
+          style: TextStyle(
+              color: color, fontSize: 6.5, fontWeight: FontWeight.w800)));
+}
+
+class _CheckLine extends StatelessWidget {
+  const _CheckLine(this.label, this.value);
+  final String label;
+  final String value;
+  @override
+  Widget build(BuildContext context) => Padding(
+      padding: const EdgeInsets.symmetric(vertical: 1.5),
+      child: Row(children: [
+        const Icon(Icons.check_rounded, color: GenesisColors.emerald, size: 12),
+        const SizedBox(width: 6),
+        Expanded(
+            child: Text(label,
+                style: const TextStyle(
+                    color: GenesisColors.muted, fontSize: 6.5))),
+        Text(value,
+            style: const TextStyle(
+                color: GenesisColors.emerald,
+                fontSize: 6.5,
+                fontWeight: FontWeight.w700)),
+      ]));
+}
+
+class _DotValue extends StatelessWidget {
+  const _DotValue(this.value, this.label, this.color);
+  final String value;
+  final String label;
+  final Color color;
+  @override
+  Widget build(BuildContext context) => Padding(
+      padding: const EdgeInsets.symmetric(vertical: 2),
+      child: Row(children: [
+        Icon(Icons.circle, color: color, size: 7),
+        const SizedBox(width: 5),
+        Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(value,
+              style: TextStyle(
+                  color: color, fontSize: 7, fontWeight: FontWeight.w800)),
+          Text(label,
+              style: const TextStyle(color: GenesisColors.muted, fontSize: 5.5))
+        ])
+      ]));
+}
+
+class _ValueLine extends StatelessWidget {
+  const _ValueLine(this.label, this.value);
+  final String label;
+  final String value;
+  @override
+  Widget build(BuildContext context) => Padding(
+      padding: const EdgeInsets.symmetric(vertical: 3),
+      child: Row(children: [
+        SizedBox(
+            width: 62,
+            child: Text(label,
+                style:
+                    const TextStyle(color: GenesisColors.muted, fontSize: 6))),
+        Text(value,
+            style: const TextStyle(
+                color: GenesisColors.text,
+                fontSize: 7,
+                fontWeight: FontWeight.w800))
+      ]));
+}
+
+class _PercentRing extends StatelessWidget {
+  const _PercentRing();
+  @override
+  Widget build(BuildContext context) => Container(
+      width: 62,
+      height: 62,
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: GenesisColors.emerald, width: 5),
+          boxShadow: [
+            BoxShadow(
+                color: GenesisColors.emerald.withValues(alpha: .25),
+                blurRadius: 12)
+          ]),
+      child: const Center(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Text('100%',
+            style: TextStyle(
+                color: GenesisColors.text,
+                fontSize: 12,
+                fontWeight: FontWeight.w900)),
+        Text('READY', style: TextStyle(color: GenesisColors.muted, fontSize: 6))
+      ])));
+}
+
+class _BarChart extends StatelessWidget {
+  const _BarChart({required this.color});
+  final Color color;
+  @override
+  Widget build(BuildContext context) => SizedBox(
+      height: 42,
+      child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
+        for (final h in [22.0, 36.0, 18.0, 31.0, 25.0, 39.0, 21.0, 34.0])
+          Expanded(
+              child: Container(
+                  height: h,
+                  margin: const EdgeInsets.symmetric(horizontal: 2),
+                  color: color.withValues(alpha: .75)))
+      ]));
+}
+
+class _WorldThreatPainter extends CustomPainter {
+  const _WorldThreatPainter(this.phase);
+  final double phase;
+  @override
+  void paint(Canvas canvas, Size size) {
+    final grid = Paint()
+      ..color = GenesisColors.border.withValues(alpha: .18)
+      ..strokeWidth = .5;
+    for (double x = 0; x < size.width; x += 24)
+      canvas.drawLine(Offset(x, 0), Offset(x, size.height), grid);
+    for (double y = 0; y < size.height; y += 24)
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), grid);
+
+    final land = Paint()
+      ..color = const Color(0xFF16415B)
+      ..style = PaintingStyle.fill;
+    final coast = Paint()
+      ..color = GenesisColors.cyan.withValues(alpha: .55)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
+    final continents = <List<double>>[
+      [.08, .25, .16, .15, .27, .18, .33, .29, .27, .39, .19, .42, .12, .35],
+      [.27, .45, .35, .50, .33, .68, .28, .84, .24, .66],
+      [.42, .25, .49, .18, .58, .23, .55, .34, .48, .38],
+      [.49, .40, .58, .41, .62, .66, .54, .78, .47, .57],
+      [.57, .24, .72, .18, .88, .28, .91, .43, .78, .49, .68, .39],
+      [.78, .62, .90, .65, .92, .77, .82, .80, .75, .70],
+    ];
+    for (final raw in continents) {
+      final path = Path()..moveTo(raw[0] * size.width, raw[1] * size.height);
+      for (var i = 2; i < raw.length; i += 2)
+        path.lineTo(raw[i] * size.width, raw[i + 1] * size.height);
+      path.close();
+      canvas.drawPath(path, land);
+      canvas.drawPath(path, coast);
+    }
+    final nodes = [
+      const Offset(.17, .32),
+      const Offset(.28, .50),
+      const Offset(.48, .29),
+      const Offset(.56, .48),
+      const Offset(.72, .30),
+      const Offset(.84, .39),
+      const Offset(.85, .70),
+      const Offset(.33, .67)
+    ];
+    final colors = [
+      GenesisColors.danger,
+      GenesisColors.warning,
+      GenesisColors.danger,
+      GenesisColors.cyan,
+      GenesisColors.danger,
+      GenesisColors.warning,
+      GenesisColors.danger,
+      GenesisColors.emerald
+    ];
+    for (var i = 0; i < nodes.length; i++) {
+      final p = Offset(nodes[i].dx * size.width, nodes[i].dy * size.height);
+      final glow = Paint()
+        ..color = colors[i].withValues(alpha: .16)
+        ..style = PaintingStyle.fill;
+      canvas.drawCircle(
+          p, 10 + 5 * math.sin((phase + i / 7) * math.pi * 2).abs(), glow);
+      canvas.drawCircle(p, 3.5, Paint()..color = colors[i]);
+    }
+    final routePaint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1.4;
+    for (var i = 0; i < nodes.length - 1; i++) {
+      final a = Offset(nodes[i].dx * size.width, nodes[i].dy * size.height);
+      final b =
+          Offset(nodes[i + 1].dx * size.width, nodes[i + 1].dy * size.height);
+      routePaint.color = colors[i].withValues(alpha: .8);
+      final path = Path()
+        ..moveTo(a.dx, a.dy)
+        ..quadraticBezierTo((a.dx + b.dx) / 2,
+            math.min(a.dy, b.dy) - size.height * .22, b.dx, b.dy);
+      canvas.drawPath(path, routePaint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _WorldThreatPainter oldDelegate) =>
+      oldDelegate.phase != phase;
+}
+
+class _TrafficPainter extends CustomPainter {
+  const _TrafficPainter();
+  @override
+  void paint(Canvas canvas, Size size) {
+    final grid = Paint()
+      ..color = GenesisColors.border.withValues(alpha: .25)
+      ..strokeWidth = .5;
+    for (double y = 8; y < size.height; y += 14)
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), grid);
+    void wave(Color color, double frequency, double shift) {
+      final p = Path();
+      for (double x = 0; x <= size.width; x += 4) {
+        final y = size.height * .52 +
+            math.sin(x / frequency + shift) * size.height * .22 +
+            math.sin(x / 11) * 5;
+        if (x == 0)
+          p.moveTo(x, y);
+        else
+          p.lineTo(x, y);
+      }
+      canvas.drawPath(
+          p,
+          Paint()
+            ..color = color
+            ..strokeWidth = 1.5
+            ..style = PaintingStyle.stroke);
+    }
+
+    wave(GenesisColors.cyan, 22, 0);
+    wave(GenesisColors.danger, 29, 1.8);
+    wave(const Color(0xFF3988FF), 17, 3.4);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}

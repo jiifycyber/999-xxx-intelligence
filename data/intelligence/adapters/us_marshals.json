@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "source_id": "us_marshals",
+  "source_name": "U.S. Marshals Service",
+  "official_site": "https://www.usmarshals.gov",
+  "connection_method": "verified_public_data",
+  "next_step": "Verify official public data access",
+  "status": "pending_verification",
+  "enabled": false,
+  "records_loaded": 0,
+  "last_sync": null,
+  "external_transmission_enabled": false,
+  "case_sharing_enabled": false,
+  "created_at": "2026-10-09T21:37:15.756529+00:00"
+}

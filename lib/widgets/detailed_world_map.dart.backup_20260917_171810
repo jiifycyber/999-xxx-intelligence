@@ -1,0 +1,358 @@
+import 'dart:convert';
+import 'dart:math' as math;
+
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../core/genesis_theme.dart';
+
+class DetailedWorldMap extends StatefulWidget {
+  const DetailedWorldMap({
+    required this.pulse,
+    super.key,
+  });
+
+  final Animation<double> pulse;
+
+  @override
+  State<DetailedWorldMap> createState() => _DetailedWorldMapState();
+}
+
+class _DetailedWorldMapState extends State<DetailedWorldMap> {
+  List<List<Offset>>? _polygons;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadMap();
+  }
+
+  Future<void> _loadMap() async {
+    final source = await rootBundle.loadString('assets/maps/world.geojson');
+    final data = jsonDecode(source) as Map<String, dynamic>;
+    final polygons = <List<Offset>>[];
+
+    for (final feature in data['features'] as List<dynamic>) {
+      final geometry = (feature as Map<String, dynamic>)['geometry']
+          as Map<String, dynamic>?;
+      if (geometry == null) continue;
+
+      final type = geometry['type'] as String?;
+      final coordinates = geometry['coordinates'] as List<dynamic>;
+
+      if (type == 'Polygon') {
+        _addPolygon(coordinates, polygons);
+      } else if (type == 'MultiPolygon') {
+        for (final polygon in coordinates) {
+          _addPolygon(polygon as List<dynamic>, polygons);
+        }
+      }
+    }
+
+    if (mounted) {
+      setState(() => _polygons = polygons);
+    }
+  }
+
+  void _addPolygon(
+    List<dynamic> polygon,
+    List<List<Offset>> output,
+  ) {
+    if (polygon.isEmpty) return;
+
+    final ring = polygon.first as List<dynamic>;
+    final points = <Offset>[];
+
+    for (final coordinate in ring) {
+      final pair = coordinate as List<dynamic>;
+      if (pair.length < 2) continue;
+
+      points.add(
+        Offset(
+          (pair[0] as num).toDouble(),
+          (pair[1] as num).toDouble(),
+        ),
+      );
+    }
+
+    if (points.length >= 3) output.add(points);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final polygons = _polygons;
+
+    if (polygons == null) {
+      return const Center(
+        child: CircularProgressIndicator(
+          color: GenesisColors.cyan,
+          strokeWidth: 2,
+        ),
+      );
+    }
+
+    return AnimatedBuilder(
+      animation: widget.pulse,
+      builder: (context, child) {
+        return CustomPaint(
+          painter: _DetailedMapPainter(
+            polygons: polygons,
+            phase: widget.pulse.value,
+          ),
+          child: const Stack(
+            children: [
+              Positioned(
+                left: 65,
+                top: 42,
+                child: _MapLabel(
+                  'N. AMERICA',
+                  '0 VERIFIED THREATS',
+                ),
+              ),
+              Positioned(
+                left: 185,
+                bottom: 38,
+                child: _MapLabel(
+                  'S. AMERICA',
+                  '0 VERIFIED THREATS',
+                ),
+              ),
+              Positioned(
+                left: 430,
+                top: 26,
+                child: _MapLabel(
+                  'EUROPE',
+                  '0 VERIFIED THREATS',
+                ),
+              ),
+              Positioned(
+                left: 475,
+                bottom: 32,
+                child: _MapLabel(
+                  'AFRICA',
+                  '0 VERIFIED THREATS',
+                ),
+              ),
+              Positioned(
+                right: 115,
+                top: 65,
+                child: _MapLabel(
+                  'ASIA',
+                  '0 VERIFIED THREATS',
+                ),
+              ),
+              Positioned(
+                right: 35,
+                bottom: 38,
+                child: _MapLabel(
+                  'OCEANIA',
+                  '0 VERIFIED THREATS',
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _MapLabel extends StatelessWidget {
+  const _MapLabel(this.title, this.detail);
+
+  final String title;
+  final String detail;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+      color: const Color(0x99030A11),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              color: GenesisColors.text,
+              fontSize: 8,
+              fontWeight: FontWeight.w900,
+            ),
+          ),
+          Text(
+            detail,
+            style: const TextStyle(
+              color: GenesisColors.muted,
+              fontSize: 6,
+              height: 1.25,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DetailedMapPainter extends CustomPainter {
+  const _DetailedMapPainter({
+    required this.polygons,
+    required this.phase,
+  });
+
+  final List<List<Offset>> polygons;
+  final double phase;
+
+  static const nodes = <Offset>[
+    Offset(-122.3, 47.6),
+    Offset(-97.7, 30.2),
+    Offset(-74.0, 40.7),
+    Offset(-46.6, -23.5),
+    Offset(-0.1, 51.5),
+    Offset(13.4, 52.5),
+    Offset(31.2, 30.0),
+    Offset(28.0, -26.2),
+    Offset(55.3, 25.2),
+    Offset(77.2, 28.6),
+    Offset(103.8, 1.3),
+    Offset(116.4, 39.9),
+    Offset(139.7, 35.6),
+    Offset(151.2, -33.8),
+  ];
+
+  static const nodeColors = <Color>[
+    GenesisColors.danger,
+    GenesisColors.warning,
+    GenesisColors.danger,
+    GenesisColors.danger,
+    GenesisColors.warning,
+    GenesisColors.danger,
+    GenesisColors.cyan,
+    GenesisColors.warning,
+    GenesisColors.warning,
+    GenesisColors.danger,
+    GenesisColors.cyan,
+    GenesisColors.danger,
+    GenesisColors.warning,
+    GenesisColors.danger,
+  ];
+
+  Offset _project(Offset coordinate, Size size) {
+    final x = (coordinate.dx + 180) / 360 * size.width;
+    final latitude = coordinate.dy.clamp(-85.0, 85.0);
+    final y = (90 - latitude) / 180 * size.height;
+    return Offset(x, y);
+  }
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final background = Paint()
+      ..shader = const RadialGradient(
+        colors: [
+          Color(0xFF0B2638),
+          Color(0xFF04101A),
+        ],
+      ).createShader(Offset.zero & size);
+
+    canvas.drawRect(Offset.zero & size, background);
+
+    final grid = Paint()
+      ..color = GenesisColors.border.withValues(alpha: .22)
+      ..strokeWidth = .5;
+
+    for (double x = 0; x <= size.width; x += size.width / 18) {
+      canvas.drawLine(Offset(x, 0), Offset(x, size.height), grid);
+    }
+
+    for (double y = 0; y <= size.height; y += size.height / 9) {
+      canvas.drawLine(Offset(0, y), Offset(size.width, y), grid);
+    }
+
+    final fill = Paint()
+      ..color = const Color(0xFF123A54)
+      ..style = PaintingStyle.fill;
+
+    final border = Paint()
+      ..color = GenesisColors.cyan.withValues(alpha: .52)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = .55;
+
+    for (final polygon in polygons) {
+      if (polygon.length < 3) continue;
+
+      final path = Path();
+      final first = _project(polygon.first, size);
+      path.moveTo(first.dx, first.dy);
+
+      for (final point in polygon.skip(1)) {
+        final projected = _project(point, size);
+        path.lineTo(projected.dx, projected.dy);
+      }
+
+      path.close();
+      canvas.drawPath(path, fill);
+      canvas.drawPath(path, border);
+    }
+
+    final routePairs = <(int, int)>[];
+
+    for (var index = 0; index < routePairs.length; index++) {
+      final pair = routePairs[index];
+      final start = _project(nodes[pair.$1], size);
+      final end = _project(nodes[pair.$2], size);
+      final color = nodeColors[pair.$1];
+
+      final route = Path()
+        ..moveTo(start.dx, start.dy)
+        ..quadraticBezierTo(
+          (start.dx + end.dx) / 2,
+          math.min(start.dy, end.dy) - size.height * (.12 + (index % 3) * .035),
+          end.dx,
+          end.dy,
+        );
+
+      canvas.drawPath(
+        route,
+        Paint()
+          ..color = color.withValues(alpha: .75)
+          ..strokeWidth = 1.2
+          ..style = PaintingStyle.stroke,
+      );
+    }
+
+    for (var index = 0; index < 0; index++) {
+      final point = _project(nodes[index], size);
+      final color = nodeColors[index];
+      final pulse =
+          7 + math.sin((phase + index / nodes.length) * math.pi * 2).abs() * 9;
+
+      canvas.drawCircle(
+        point,
+        pulse,
+        Paint()..color = color.withValues(alpha: .10),
+      );
+
+      canvas.drawCircle(
+        point,
+        5,
+        Paint()..color = color.withValues(alpha: .18),
+      );
+
+      canvas.drawCircle(
+        point,
+        2.4,
+        Paint()..color = color,
+      );
+
+      canvas.drawCircle(
+        point,
+        1,
+        Paint()..color = Colors.white,
+      );
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _DetailedMapPainter oldDelegate) {
+    return oldDelegate.phase != phase || oldDelegate.polygons != polygons;
+  }
+}

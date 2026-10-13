@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "created_at": "2026-10-09T21:25:41.524196+00:00",
+  "sources": [
+    {
+      "id": "fbi",
+      "name": "FBI Wanted API",
+      "status": "local_snapshot",
+      "official_site": "https://www.fbi.gov/wanted/api",
+      "records_loaded": 1262,
+      "last_sync": null,
+      "enabled": true
+    },
+    {
+      "id": "ncmec",
+      "name": "NCMEC Missing Children",
+      "status": "authorization_required",
+      "official_site": "https://www.missingkids.org",
+      "records_loaded": 0,
+      "last_sync": null,
+      "enabled": false
+    },
+    {
+      "id": "namus",
+      "name": "NamUs",
+      "status": "feed_verification_required",
+      "official_site": "https://namus.nij.ojp.gov",
+      "records_loaded": 0,
+      "last_sync": null,
+      "enabled": false
+    },
+    {
+      "id": "amber",
+      "name": "AMBER Alerts",
+      "status": "feed_verification_required",
+      "official_site": "https://www.missingkids.org",
+      "records_loaded": 0,
+      "last_sync": null,
+      "enabled": false
+    },
+    {
+      "id": "state_police",
+      "name": "State Police Bulletins",
+      "status": "source_configuration_required",
+      "official_site": "",
+      "records_loaded": 0,
+      "last_sync": null,
+      "enabled": false
+    },
+    {
+      "id": "local_police",
+      "name": "Local Police Bulletins",
+      "status": "source_configuration_required",
+      "official_site": "",
+      "records_loaded": 0,
+      "last_sync": null,
+      "enabled": false
+    },
+    {
+      "id": "us_marshals",
+      "name": "U.S. Marshals Service",
+      "status": "feed_verification_required",
+      "official_site": "https://www.usmarshals.gov",
+      "records_loaded": 0,
+      "last_sync": null,
+      "enabled": false
+    },
+    {
+      "id": "dhs",
+      "name": "DHS Public Intelligence",
+      "status": "feed_verification_required",
+      "official_site": "https://www.dhs.gov",
+      "records_loaded": 0,
+      "last_sync": null,
+      "enabled": false
+    },
+    {
+      "id": "interpol",
+      "name": "INTERPOL Public Notices",
+      "status": "feed_verification_required",
+      "official_site": "https://www.interpol.int",
+      "records_loaded": 0,
+      "last_sync": null,
+      "enabled": false
+    },
+    {
+      "id": "community",
+      "name": "Community Tips",
+      "status": "secure_backend_required",
+      "official_site": "",
+      "records_loaded": 0,
+      "last_sync": null,
+      "enabled": false
+    }
+  ]
+}

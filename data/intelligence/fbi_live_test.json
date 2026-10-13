@@ -1,0 +1,1718 @@
+{
+  "source": "FBI Wanted API",
+  "fetched_at": "2026-10-09T21:34:53.857842+00:00",
+  "reported_total": 1262,
+  "page": 1,
+  "items": [
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/seeking-information-stolen-firefighter-equipment-8-5x11-web.pdf",
+          "name": "English"
+        }
+      ],
+      "age_range": null,
+      "uid": "f6c686d4fbe446a9b4d4af620880073d",
+      "weight": null,
+      "occupations": null,
+      "field_offices": [
+        "billings"
+      ],
+      "locations": null,
+      "reward_text": "The FBI is offering a reward of up to $5,000 for information leading to the identification, arrest, and conviction of those responsible for this theft.",
+      "sex": null,
+      "hair": null,
+      "ncic": null,
+      "dates_of_birth_used": null,
+      "caution": null,
+      "nationality": null,
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Indian Country",
+        "Seeking Information"
+      ],
+      "aliases": null,
+      "race_raw": null,
+      "suspects": null,
+      "publication": "2026-10-07T10:37:00",
+      "title": "STOLEN FIREFIGHTER EQUIPMENT",
+      "coordinates": [],
+      "hair_raw": null,
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": "<p>The FBI's Billings Field Office in Montana is seeking information from the public regarding the theft of firefighting equipment. On August 8, 2026, an unknown individual or a group of unknown individuals broke into the Heart Butte Fire Department on the Blackfeet Indian Reservation in Montana and stole approximately $60,000 of firefighting equipment and supplies.</p>",
+      "status": "na",
+      "legat_names": null,
+      "eyes": null,
+      "person_classification": "Main",
+      "description": "Blackfeet Indian Reservation, Montana\r\nAugust 8, 2026",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/@@images/image/large",
+          "caption": null,
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/@@images/image"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte8.jpg/@@images/image/large",
+          "caption": "",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte8.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte8.jpg"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte7.jpg/@@images/image/large",
+          "caption": "",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte7.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte7.jpg"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte6.jpg/@@images/image/large",
+          "caption": "",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte6.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte6.jpg"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte5.jpg/@@images/image/large",
+          "caption": "",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte5.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte5.jpg"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte4.jpg/@@images/image/large",
+          "caption": "",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte4.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte4.jpg"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte3.jpg/@@images/image/large",
+          "caption": "",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte3.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte3.jpg"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte2.jpg/@@images/image/large",
+          "caption": "",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte2.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte2.jpg"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte1.jpg/@@images/image/large",
+          "caption": "",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte1.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment/heart-butte1.jpg"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": null,
+      "additional_information": null,
+      "remarks": null,
+      "path": "/wanted/seeking-info/stolen-firefighter-equipment",
+      "eyes_raw": null,
+      "weight_max": null,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/seeking-info/stolen-firefighter-equipment",
+      "possible_states": null,
+      "modified": "2026-10-08T15:25:16+00:00",
+      "reward_max": 0,
+      "race": null,
+      "height_max": null,
+      "place_of_birth": null,
+      "height_min": null,
+      "poster_classification": "information",
+      "warning_message": null,
+      "pathId": "https://api.fbi.gov/@wanted-person/f6c686d4fbe446a9b4d4af620880073d"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/topten/satinderjeet-singh/download.pdf",
+          "name": "English"
+        },
+        {
+          "url": "https://www.fbi.gov/wanted/topten/satinderjeet-singh/singhstoptenpunjabi.pdf/@@download/file/SinghSTopTenPunjabi.pdf",
+          "name": "  |"
+        }
+      ],
+      "age_range": null,
+      "uid": "750dfe8158974c2b84a9bef2e64f2843",
+      "weight": "220 pounds",
+      "occupations": null,
+      "field_offices": [
+        "losangeles"
+      ],
+      "locations": null,
+      "reward_text": "The FBI is offering a reward of up to $1,000,000 for information leading to the arrest of Satinderjeet Singh.",
+      "sex": "Male",
+      "hair": "black",
+      "ncic": null,
+      "dates_of_birth_used": [
+        "March 11, 1994",
+        "June 11, 1994",
+        "November 6, 1994"
+      ],
+      "caution": "<p>Satinderjeet Singh is wanted for his alleged involvement in the Lawrence Bishnoi Organized Crime Group which is allegedly engaged in a variety of violent acts in Southern California, and across the United States and Canada.\u00a0 These acts include assassinations of political and religious figures, shootings, murders, kidnappings, extortions, assaults, and the trafficking of narcotics and weapons.\u00a0 Singh is based in the United States and is the alleged leader of the Group in North America.\u00a0 On July 1, 2026, a federal arrest warrant was issued for Singh in the United States District Court, Central District of California, Los Angeles, California, after he was charged with\u00a0Racketeer Influenced and Corrupt Organizations Conspiracy; Conspiracy to Interfere and Attempted Interference with Commerce by Extortion; and Conspiracy to\u00a0Distribute and Possess with Intent to Distribute Controlled Substances.\u00a0</p>",
+      "nationality": null,
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Ten Most Wanted Fugitives"
+      ],
+      "aliases": [
+        "\"Goldy Brar\"",
+        "Satinderjeet Singh Brar",
+        "Satinder Jeet",
+        "Satinder Jit Singh Brar"
+      ],
+      "race_raw": null,
+      "suspects": null,
+      "publication": "2026-07-06T08:18:00",
+      "title": "SATINDERJEET SINGH",
+      "coordinates": [],
+      "hair_raw": "Black",
+      "languages": [
+        "Punjabi",
+        "English"
+      ],
+      "complexion": null,
+      "build": null,
+      "details": null,
+      "status": "na",
+      "legat_names": null,
+      "eyes": "brown",
+      "person_classification": "Main",
+      "description": "Racketeer Influenced and Corrupt Organizations Conspiracy; Conspiracy to Interfere and Attempted Interference with Commerce by Extortion; Conspiracy to Distribute and Possess with Intent to Distribute Controlled Substances",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/topten/satinderjeet-singh/@@images/image/large",
+          "caption": null,
+          "thumb": "https://www.fbi.gov/wanted/topten/satinderjeet-singh/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/topten/satinderjeet-singh/@@images/image"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": 220,
+      "additional_information": null,
+      "remarks": "<p>Singh has ties to Sacramento and Fresno, California; Canada; India; and Mexico.</p>",
+      "path": "/wanted/topten/satinderjeet-singh",
+      "eyes_raw": "Brown",
+      "weight_max": 220,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/topten/satinderjeet-singh",
+      "possible_states": null,
+      "modified": "2026-10-08T14:17:18+00:00",
+      "reward_max": 0,
+      "race": null,
+      "height_max": 69,
+      "place_of_birth": "Punjab, India",
+      "height_min": 69,
+      "poster_classification": "ten",
+      "warning_message": "SHOULD BE CONSIDERED ARMED AND DANGEROUS AND AN ESCAPE RISK",
+      "pathId": "https://api.fbi.gov/@wanted-person/750dfe8158974c2b84a9bef2e64f2843"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/seeking-info/unknown-robbery-suspect---utah/download.pdf",
+          "name": "English"
+        }
+      ],
+      "age_range": null,
+      "uid": "9fe8f12927114cd9a3bfc5b441c6a29c",
+      "weight": null,
+      "occupations": null,
+      "field_offices": [
+        "saltlakecity"
+      ],
+      "locations": null,
+      "reward_text": null,
+      "sex": null,
+      "hair": null,
+      "ncic": null,
+      "dates_of_birth_used": null,
+      "caution": null,
+      "nationality": null,
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Seeking Information",
+        "Indian Country"
+      ],
+      "aliases": null,
+      "race_raw": null,
+      "suspects": null,
+      "publication": "2026-10-05T12:49:00",
+      "title": "UNKNOWN ROBBERY SUSPECT \u2014 UTAH",
+      "coordinates": [],
+      "hair_raw": null,
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": "<p>The FBI's Salt Lake City Field Office is seeking information regarding a\u00a0gas station and convenience store robbery in Montezuma Creek, Utah. On September 18, 2026, an unknown individual, armed with a handgun, robbed the Sinclair gas station and convenience store in Montezuma Creek. The individual was wearing a DGK-brand ski mask depicting a skull and black Air Jordan sneakers.</p>",
+      "status": "na",
+      "legat_names": null,
+      "eyes": null,
+      "person_classification": "Main",
+      "description": "Montezuma Creek, Utah\r\nSeptember 18, 2026",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/unknown-robbery-suspect---utah/@@images/image/large",
+          "caption": null,
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/unknown-robbery-suspect---utah/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/unknown-robbery-suspect---utah/@@images/image"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/unknown-robbery-suspect---utah/sinclair-sub2.jpg/@@images/image/large",
+          "caption": "",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/unknown-robbery-suspect---utah/sinclair-sub2.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/unknown-robbery-suspect---utah/sinclair-sub2.jpg"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/unknown-robbery-suspect---utah/sinclair-sub3.png/@@images/image/large",
+          "caption": "DGK-brand ski mask",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/unknown-robbery-suspect---utah/sinclair-sub3.png/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/unknown-robbery-suspect---utah/sinclair-sub3.png"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/unknown-robbery-suspect---utah/sinclair-sub1.jpg/@@images/image/large",
+          "caption": "Black Air Jordan sneaker",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/unknown-robbery-suspect---utah/sinclair-sub1.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/unknown-robbery-suspect---utah/sinclair-sub1.jpg"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": null,
+      "additional_information": null,
+      "remarks": null,
+      "path": "/wanted/seeking-info/unknown-robbery-suspect---utah",
+      "eyes_raw": null,
+      "weight_max": null,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/seeking-info/unknown-robbery-suspect---utah",
+      "possible_states": null,
+      "modified": "2026-10-07T15:52:07+00:00",
+      "reward_max": 0,
+      "race": null,
+      "height_max": null,
+      "place_of_birth": null,
+      "height_min": null,
+      "poster_classification": "information",
+      "warning_message": null,
+      "pathId": "https://api.fbi.gov/@wanted-person/9fe8f12927114cd9a3bfc5b441c6a29c"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/additional/julious-george-khalid/download.pdf",
+          "name": "English"
+        }
+      ],
+      "age_range": null,
+      "uid": "043a2834e80848099aa61394cc54f9f9",
+      "weight": "180 pounds",
+      "occupations": null,
+      "field_offices": [
+        "atlanta"
+      ],
+      "locations": null,
+      "reward_text": "The FBI is offering a reward of up to $20,000 for information leading to the arrest and conviction of Julious George Khalid.",
+      "sex": "Male",
+      "hair": "black",
+      "ncic": null,
+      "dates_of_birth_used": [
+        "August 1, 1988"
+      ],
+      "caution": "<p>Julious George Khalid is wanted for his alleged connection to the kidnapping of a person in Atlanta, Georgia.\u00a0\u00a0On August 7, 2026, Khalid and unknown co-conspirators allegedly kidnapped a victim at gunpoint on I-20 near Panola Road.\u00a0 The victim was subsequently released after being extorted for a large sum of money.\u00a0On September 18, 2026, a\u00a0federal arrest warrant was issued for Khalid in the United States District Court, Northern District of Georgia, Atlanta, Georgia, after he was charged with Kidnapping.</p>",
+      "nationality": null,
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Additional Violent Crimes"
+      ],
+      "aliases": [
+        "Julious George Robles",
+        "Akeem M. Mitchell"
+      ],
+      "race_raw": "Black",
+      "suspects": null,
+      "publication": "2026-09-23T10:25:00",
+      "title": "JULIOUS GEORGE KHALID",
+      "coordinates": [],
+      "hair_raw": "Black",
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": null,
+      "status": "na",
+      "legat_names": null,
+      "eyes": "brown",
+      "person_classification": "Main",
+      "description": "Kidnapping",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/additional/julious-george-khalid/@@images/image/large",
+          "caption": null,
+          "thumb": "https://www.fbi.gov/wanted/additional/julious-george-khalid/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/additional/julious-george-khalid/@@images/image"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": 180,
+      "additional_information": null,
+      "remarks": null,
+      "path": "/wanted/additional/julious-george-khalid",
+      "eyes_raw": "Brown",
+      "weight_max": 180,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/additional/julious-george-khalid",
+      "possible_states": null,
+      "modified": "2026-10-07T13:46:59+00:00",
+      "reward_max": 0,
+      "race": "black",
+      "height_max": 73,
+      "place_of_birth": null,
+      "height_min": 73,
+      "poster_classification": "default",
+      "warning_message": null,
+      "pathId": "https://api.fbi.gov/@wanted-person/043a2834e80848099aa61394cc54f9f9"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/counterintelligence/ilya-viktorovich-balakaev/download.pdf",
+          "name": "English"
+        },
+        {
+          "url": "https://www.fbi.gov/wanted/counterintelligence/ilya-viktorovich-balakaev/balakaevrussian.pdf/@@download/file/BalakaevRussian.pdf",
+          "name": " "
+        },
+        {
+          "url": "https://www.fbi.gov/wanted/counterintelligence/ilya-viktorovich-balakaev/balakaevkorean.pdf/@@download/file/balakaevKorean.pdf",
+          "name": ""
+        }
+      ],
+      "age_range": null,
+      "uid": "35638a66dc2d4ce89f6a6735e3c2659f",
+      "weight": "Approximately 175 pounds",
+      "occupations": [
+        "Engineer and CEO of Radiotester, LLC"
+      ],
+      "field_offices": [
+        "newyork"
+      ],
+      "locations": null,
+      "reward_text": null,
+      "sex": "Male",
+      "hair": "brown",
+      "ncic": null,
+      "dates_of_birth_used": [
+        "January 26, 1977"
+      ],
+      "caution": "<p>Between 2017 and the present, Ilya Viktorovich Balakaev allegedly entered into multiple contracts through his company, Radiotester LLC, with the FSB\u2014the principal intelligence and security agency of the Russian government\u2014to repair spectrum analyzers and signal generators.\u00a0 These devices were frequently used as part of alleged counterintelligence operations to sweep for surveillance bugs and transmit covert communications.\u00a0 As the devices were not readily available in Russia, Balakaev allegedly created a network of individuals in the United States to assist him in purchasing the equipment which he then used to repair the FSB devices, in violation of United States sanctions.</p>\r\n<p>\u00a0</p>\r\n<p>Balakaev allegedly worked closely with Russian government officials from FSB Center 8\u2019s Military Unit 43753, the agency responsible for Russia\u2019s communication security and cryptology. In furtherance of his scheme, he allegedly entered into at least 10 contracts with FSB Military Unit 43753, purchased approximately 43 devices in the United States, and traveled to the United States approximately 14 times in the span of approximately four years.\u00a0</p>\r\n<p>\u00a0</p>\r\n<p>In addition to his alleged scheme to evade Russian sanctions, Balakaev also allegedly provided American technology to a North Korean government official, in violation of United States sanctions against North Korea.\u00a0 Balakaev allegedly contracted with the First Secretary of the North Korean Embassy to the Russian Federation, based in Moscow, to obtain hazardous gas detectors and software from the United States for the benefit of the North Korean government.</p>\r\n<p>\u00a0</p>\r\n<p>On February 21, 2023, a federal arrest warrant was issued for Balakaev in the United States District Court, Eastern District of New York, Brooklyn, New York, after he was charged with multiple counts of counterintelligence-related crimes.</p>",
+      "nationality": "Russian",
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Counterintelligence"
+      ],
+      "aliases": [
+        "Ilya Balakaev"
+      ],
+      "race_raw": "White",
+      "suspects": null,
+      "publication": "2023-06-08T07:09:00",
+      "title": "ILYA VIKTOROVICH BALAKAEV",
+      "coordinates": [],
+      "hair_raw": "Brown",
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": null,
+      "status": "na",
+      "legat_names": null,
+      "eyes": "brown",
+      "person_classification": "Main",
+      "description": "Conspiracy to Defraud the United States; Conspiracy to Violate the International Emergency Economic Powers Act (IEEPA); Conspiracy to Violate the Export Control Reform Act (ECRA); Smuggling Goods from the United States",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/counterintelligence/ilya-viktorovich-balakaev/@@images/image/large",
+          "caption": null,
+          "thumb": "https://www.fbi.gov/wanted/counterintelligence/ilya-viktorovich-balakaev/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/counterintelligence/ilya-viktorovich-balakaev/@@images/image"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": 175,
+      "additional_information": null,
+      "remarks": "<p>Balakaev has ties to\u00a0Finland, Greece, Turkey, Cyprus, United Arab Emirates, and North Korea. He speaks Russian and English.</p>",
+      "path": "/wanted/counterintelligence/ilya-viktorovich-balakaev",
+      "eyes_raw": "Brown",
+      "weight_max": 175,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/counterintelligence/ilya-viktorovich-balakaev",
+      "possible_states": null,
+      "modified": "2026-10-06T20:50:45+00:00",
+      "reward_max": 0,
+      "race": "white",
+      "height_max": 67,
+      "place_of_birth": "Russia",
+      "height_min": 67,
+      "poster_classification": "default",
+      "warning_message": null,
+      "pathId": "https://api.fbi.gov/@wanted-person/35638a66dc2d4ce89f6a6735e3c2659f"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/download.pdf",
+          "name": "English"
+        },
+        {
+          "url": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/walesweapon.pdf/@@download/file/walesweapon.pdf",
+          "name": "Information on Makarov Pistol"
+        }
+      ],
+      "age_range": null,
+      "uid": "3a3ec6ff4ecd1c5aac9a7f2380eccd47",
+      "weight": null,
+      "occupations": null,
+      "field_offices": [
+        "seattle"
+      ],
+      "locations": null,
+      "reward_text": "The United States Department of Justice is offering a reward of up to $2,000,000 for information leading to the arrest and conviction of the person or persons responsible for the murder of AUSA Thomas Crane Wales.",
+      "sex": null,
+      "hair": null,
+      "ncic": null,
+      "dates_of_birth_used": null,
+      "caution": null,
+      "nationality": null,
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Seeking Information",
+        "Case of the Week"
+      ],
+      "aliases": null,
+      "race_raw": null,
+      "suspects": null,
+      "publication": "2010-09-21T19:40:00",
+      "title": "THOMAS CRANE WALES",
+      "coordinates": [],
+      "hair_raw": null,
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": "<p>On the night of October 11, 2001, at approximately 10:40 p.m., Thomas Crane Wales was killed in his home in Seattle, Washington. Wales worked for the Western District of Washington as an Assistant United States Attorney (AUSA) for over 18 years, prosecuting white collar crime cases on behalf of the United States of America. The shooter stood in the backyard of AUSA Wales' home and shot him several times through a basement window as he sat at his desk typing on his computer. It has been reported that a lone male suspect was seen fleeing the scene. Wales died at a hospital the next day.</p>",
+      "status": "na",
+      "legat_names": null,
+      "eyes": null,
+      "person_classification": "Victim",
+      "description": "Murder Victim\r\nSeattle, Washington\r\nOctober 11, 2001",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/@@images/image/large",
+          "caption": "Photograph courtesy of the Thomas C. Wales Foundation",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/@@images/image"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/wales2.jpg/@@images/image/large",
+          "caption": "Photograph courtesy of the Thomas C. Wales Foundation.",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/wales2.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/wales2.jpg"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/wales3.jpg/@@images/image/large",
+          "caption": "Photograph courtesy of the Thomas C. Wales Foundation.",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/wales3.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/wales3.jpg"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/walessketch.jpg/@@images/image/large",
+          "caption": "Sketch of Person of Interest",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/walessketch.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/walessketch.jpg"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/wales4.jpg/@@images/image/large",
+          "caption": "Photograph courtesy of the Thomas C. Wales Foundation.",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/wales4.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales/wales4.jpg"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": null,
+      "additional_information": "<p>You can contact us anonymously by email at <a href=\"mailto:walestips@fbi.gov\" data-linktype=\"email\" data-urltype=\"/view\" data-val=\"walestips@fbi.gov\">walestips@fbi.gov</a>.</p>",
+      "remarks": "<p>Born in 1952, Thomas Wales grew up in Southborough, Massachusetts. Tom was a graduate of Harvard University ('74) and Hofstra Law School ('79), where he was the Editor-in-Chief of the law review. In 1983, Tom became an Assistant United States Attorney in Seattle, Washington, where he specialized in fraud prosecutions.</p>\r\n<p>In addition to his work as a prosecutor, Tom was very active in civic organizations and public service. Tom served as a member of the Seattle Planning Commission, and was on the Mayor's Citizen Advisory Committee.</p>\r\n<p>Thomas Wales is survived by two adult children.</p>",
+      "path": "/wanted/seeking-info/thomas-crane-wales",
+      "eyes_raw": null,
+      "weight_max": null,
+      "reward_min": 1000000,
+      "url": "https://www.fbi.gov/wanted/seeking-info/thomas-crane-wales",
+      "possible_states": null,
+      "modified": "2026-10-05T16:38:19+00:00",
+      "reward_max": 4999999,
+      "race": null,
+      "height_max": null,
+      "place_of_birth": null,
+      "height_min": null,
+      "poster_classification": "information",
+      "warning_message": null,
+      "pathId": "https://api.fbi.gov/@wanted-person/3a3ec6ff4ecd1c5aac9a7f2380eccd47"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/topten/anibal-alexander-canelon-aguirre/download.pdf",
+          "name": "English"
+        }
+      ],
+      "age_range": null,
+      "uid": "610d8fa337874ea7b7f09b992c4ea0b9",
+      "weight": "190 pounds",
+      "occupations": null,
+      "field_offices": [
+        "omaha"
+      ],
+      "locations": null,
+      "reward_text": "The FBI is offering a reward of up to $1,000,000 for information leading directly to the arrest of Anibal Alexander Canelon Aguirre.",
+      "sex": "Male",
+      "hair": "black",
+      "ncic": null,
+      "dates_of_birth_used": [
+        "May 15, 1976"
+      ],
+      "caution": "<p>Anibal Alexander Canelon Aguirre is wanted for allegedly leading a large international conspiracy that deploys numerous crews to the United States to steal millions of dollars from financial institutions in support of the Tren de Aragua transnational gang, a designated foreign terrorist organization which originated in Venezuela and now operates throughout Latin America and the United States.\u00a0 Since at least January of 2024, Canelon Aguirre and other members of the conspiracy are alleged to have unlawfully enriched themselves by committing ATM jackpotting, a scheme where malware is installed on ATMs to force the unauthorized withdrawal of cash, after which the stolen cash flows through a complex money laundering network.\u00a0 On December 9, 2025,\u00a0a federal arrest warrant was issued for Canelon Aguirre in the United States District Court, District of Nebraska, Omaha, Nebraska, after he was charged with\u00a0Conspiracy to Commit Bank Fraud; Conspiracy to Commit Bank Burglary and Intentionally Damage a Protected Computer System; Conspiracy to Commit Money Laundering; and Conspiracy to Provide Material Support to Terrorists.\u00a0 This case is being investigated as part of Joint Task Force Vulcan in conjunction with the Computer Crime and Intellectual Property Section (CCIPS) of the Department of Justice.</p>",
+      "nationality": "Venezuelan",
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Ten Most Wanted Fugitives"
+      ],
+      "aliases": [
+        "\"Prometheus\"",
+        "\"The Engineer\"",
+        "Anibal Alexander Aguirre",
+        "Anibal A. Canelon-Aguirre",
+        "Anibal Alexander Canelon"
+      ],
+      "race_raw": "White (Hispanic)",
+      "suspects": null,
+      "publication": "2026-02-17T11:44:00",
+      "title": "ANIBAL ALEXANDER CANELON AGUIRRE",
+      "coordinates": [],
+      "hair_raw": "Black and Gray",
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": null,
+      "status": "captured",
+      "legat_names": null,
+      "eyes": "brown",
+      "person_classification": "Main",
+      "description": "Conspiracy to Commit Bank Fraud; Conspiracy to Commit Bank Burglary and Intentionally Damage a Protected Computer System; Conspiracy to Commit Money Laundering; Conspiracy to Provide Material Support to Terrorists",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/topten/anibal-alexander-canelon-aguirre/@@images/image/large",
+          "caption": "Photograph taken in 2023",
+          "thumb": "https://www.fbi.gov/wanted/topten/anibal-alexander-canelon-aguirre/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/topten/anibal-alexander-canelon-aguirre/@@images/image"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/topten/anibal-alexander-canelon-aguirre/aguirre2023b.jpg/@@images/image/large",
+          "caption": "Photograph taken in 2023",
+          "thumb": "https://www.fbi.gov/wanted/topten/anibal-alexander-canelon-aguirre/aguirre2023b.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/topten/anibal-alexander-canelon-aguirre/aguirre2023b.jpg"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/topten/anibal-alexander-canelon-aguirre/aguirre2023c.jpg/@@images/image/large",
+          "caption": "Photograph taken in 2023",
+          "thumb": "https://www.fbi.gov/wanted/topten/anibal-alexander-canelon-aguirre/aguirre2023c.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/topten/anibal-alexander-canelon-aguirre/aguirre2023c.jpg"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": 190,
+      "additional_information": null,
+      "remarks": "<p>Canelon Aguirre has ties to Venezuela and Mexico.\u00a0 He is known to speak Spanish.</p>",
+      "path": "/wanted/topten/anibal-alexander-canelon-aguirre",
+      "eyes_raw": "Brown",
+      "weight_max": 190,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/topten/anibal-alexander-canelon-aguirre",
+      "possible_states": null,
+      "modified": "2026-10-02T20:55:45+00:00",
+      "reward_max": 0,
+      "race": "hispanic",
+      "height_max": 67,
+      "place_of_birth": "Venezuela",
+      "height_min": 65,
+      "poster_classification": "ten",
+      "warning_message": "SHOULD BE CONSIDERED ARMED AND DANGEROUS",
+      "pathId": "https://api.fbi.gov/@wanted-person/610d8fa337874ea7b7f09b992c4ea0b9"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/kidnap/ylva-annika-hagner/download.pdf",
+          "name": "English"
+        }
+      ],
+      "age_range": null,
+      "uid": "7e03eb689c954265ada44259ccbccfd2",
+      "weight": "110 pounds",
+      "occupations": null,
+      "field_offices": [
+        "sanfrancisco"
+      ],
+      "locations": null,
+      "reward_text": null,
+      "sex": "Female",
+      "hair": null,
+      "ncic": null,
+      "dates_of_birth_used": [
+        "August 4, 1954"
+      ],
+      "caution": null,
+      "nationality": null,
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Kidnappings and Missing Persons"
+      ],
+      "aliases": null,
+      "race_raw": "White",
+      "suspects": null,
+      "publication": "2026-09-24T10:03:00",
+      "title": "YLVA ANNIKA HAGNER",
+      "coordinates": [],
+      "hair_raw": "Red",
+      "languages": [
+        "English",
+        "Swedish"
+      ],
+      "complexion": null,
+      "build": null,
+      "details": "<p>The FBI's San Francisco Field Office and the Belmont Police Department in California are seeking information from the public regarding the disappearance of Ylva Annika Hagner.\u00a0 She was last seen at approximately 9:30 p.m., on October 14, 1996, at her place of employment in Belmont, California.\u00a0 At the time of her disappearance, Hagner was living in Palo Alto, California, and attending Stanford University as a Graduate Student.\u00a0 Her vehicle was located abandoned in front of a Days Inn Motel in San Carlos, California, on October 16, 1996. The keys were in the ignition, and her purse was missing.\u00a0\u00a0</p>",
+      "status": "na",
+      "legat_names": null,
+      "eyes": "blue",
+      "person_classification": "Main",
+      "description": "October 14, 1996\r\nBelmont, California",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/kidnap/ylva-annika-hagner/@@images/image/large",
+          "caption": null,
+          "thumb": "https://www.fbi.gov/wanted/kidnap/ylva-annika-hagner/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/kidnap/ylva-annika-hagner/@@images/image"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/kidnap/ylva-annika-hagner/hagner2.jpg/@@images/image/large",
+          "caption": "",
+          "thumb": "https://www.fbi.gov/wanted/kidnap/ylva-annika-hagner/hagner2.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/kidnap/ylva-annika-hagner/hagner2.jpg"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/kidnap/ylva-annika-hagner/hagner3.jpg/@@images/image/large",
+          "caption": "",
+          "thumb": "https://www.fbi.gov/wanted/kidnap/ylva-annika-hagner/hagner3.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/kidnap/ylva-annika-hagner/hagner3.jpg"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/kidnap/ylva-annika-hagner/hagner4.jpg/@@images/image/large",
+          "caption": "",
+          "thumb": "https://www.fbi.gov/wanted/kidnap/ylva-annika-hagner/hagner4.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/kidnap/ylva-annika-hagner/hagner4.jpg"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": 110,
+      "additional_information": null,
+      "remarks": "<p>Hagner speaks with a Swedish accent.\u00a0 She was last seen wearing a lime green sweatshirt and a blue skirt.</p>",
+      "path": "/wanted/kidnap/ylva-annika-hagner",
+      "eyes_raw": "Blue",
+      "weight_max": 110,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/kidnap/ylva-annika-hagner",
+      "possible_states": null,
+      "modified": "2026-10-02T16:35:56+00:00",
+      "reward_max": 0,
+      "race": "white",
+      "height_max": 66,
+      "place_of_birth": "Sweden",
+      "height_min": 65,
+      "poster_classification": "missing",
+      "warning_message": null,
+      "pathId": "https://api.fbi.gov/@wanted-person/7e03eb689c954265ada44259ccbccfd2"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/additional/gordon-montanez/download.pdf",
+          "name": "English"
+        }
+      ],
+      "age_range": null,
+      "uid": "8020a28b1746429a994f4435d1d60259",
+      "weight": "160 pounds",
+      "occupations": null,
+      "field_offices": [
+        "newyork"
+      ],
+      "locations": null,
+      "reward_text": "The FBI is offering a reward of up to $25,000 for information leading to the location and apprehension of Gordon Montanez.",
+      "sex": "Male",
+      "hair": "black",
+      "ncic": null,
+      "dates_of_birth_used": [
+        "December 9, 1999"
+      ],
+      "caution": "<p>Gordon Montanez\u00a0is wanted\u00a0for his alleged involvement in a violent Hobbs Act Robbery that occurred in February of 2026 in New York City, New York.\u00a0On September 23, 2026, a\u00a0federal arrest warrant was issued for Montanez in the United States District Court, Eastern District of New York, Brooklyn, New York, after he was charged with Hobbs Act Robbery and Conspiracy to Commit Hobbs Act Robbery.</p>",
+      "nationality": null,
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Additional Violent Crimes"
+      ],
+      "aliases": [
+        "\"Shooter\"",
+        "\"Loco\""
+      ],
+      "race_raw": "Black",
+      "suspects": null,
+      "publication": "2026-10-02T09:39:00",
+      "title": "GORDON MONTANEZ",
+      "coordinates": [],
+      "hair_raw": "Black",
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": null,
+      "status": "na",
+      "legat_names": null,
+      "eyes": "brown",
+      "person_classification": "Main",
+      "description": "Hobbs Act Robbery; Conspiracy to Commit Hobbs Act Robbery",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/additional/gordon-montanez/@@images/image/large",
+          "caption": null,
+          "thumb": "https://www.fbi.gov/wanted/additional/gordon-montanez/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/additional/gordon-montanez/@@images/image"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/additional/gordon-montanez/montanezg2.jpg/@@images/image/large",
+          "caption": "",
+          "thumb": "https://www.fbi.gov/wanted/additional/gordon-montanez/montanezg2.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/additional/gordon-montanez/montanezg2.jpg"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": 160,
+      "additional_information": null,
+      "remarks": "<p>Montanez has ties to Brooklyn, New York.</p>",
+      "path": "/wanted/additional/gordon-montanez",
+      "eyes_raw": "Brown",
+      "weight_max": 160,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/additional/gordon-montanez",
+      "possible_states": null,
+      "modified": "2026-10-02T14:48:53+00:00",
+      "reward_max": 0,
+      "race": "black",
+      "height_max": 71,
+      "place_of_birth": null,
+      "height_min": 71,
+      "poster_classification": "default",
+      "warning_message": "SHOULD BE CONSIDERED ARMED AND DANGEROUS",
+      "pathId": "https://api.fbi.gov/@wanted-person/8020a28b1746429a994f4435d1d60259"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/law-enforcement-assistance/kemondre-travis-daily/download.pdf",
+          "name": "English"
+        }
+      ],
+      "age_range": null,
+      "uid": "0e58396ec6e647faa18982b3df634b7f",
+      "weight": "200 pounds",
+      "occupations": null,
+      "field_offices": [
+        "richmond"
+      ],
+      "locations": null,
+      "reward_text": "The FBI is offering a reward of up to $15,000 for information leading to the location and arrest of Kemondre Travis Daily.",
+      "sex": "Male",
+      "hair": "black",
+      "ncic": null,
+      "dates_of_birth_used": [
+        "August 30, 1996"
+      ],
+      "caution": "<p>The FBI's Richmond Field Office is assisting the Henrico County Police Division in Virginia with the search for Kemondre Travis Daily.\u00a0 Daily is wanted for his alleged involvement in the murder of a man in the area of Oakland Road and Bentbrook Drive in Richmond, Virginia, on January 8, 2026.\u00a0 The victim was shot to death in his own vehicle.</p>\r\n<p>\u00a0</p>\r\n<p>On January 9, 2026, Daily was charged with Murder (Second Degree) and Use of a Firearm in Commission of a Felony in the Commonwealth of Virginia, Henrico County General District Court, Richmond, Virginia, and a state warrant was issued for his arrest.</p>",
+      "nationality": null,
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Law Enforcement Assistance"
+      ],
+      "aliases": null,
+      "race_raw": "Black",
+      "suspects": null,
+      "publication": "2026-10-01T09:43:00",
+      "title": "KEMONDRE TRAVIS DAILY",
+      "coordinates": [],
+      "hair_raw": "Black",
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": null,
+      "status": "na",
+      "legat_names": null,
+      "eyes": "brown",
+      "person_classification": "Main",
+      "description": "Murder (Second Degree); Use of a Firearm in Commission of a Felony",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/law-enforcement-assistance/kemondre-travis-daily/@@images/image/large",
+          "caption": null,
+          "thumb": "https://www.fbi.gov/wanted/law-enforcement-assistance/kemondre-travis-daily/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/law-enforcement-assistance/kemondre-travis-daily/@@images/image"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": 200,
+      "additional_information": null,
+      "remarks": null,
+      "path": "/wanted/law-enforcement-assistance/kemondre-travis-daily",
+      "eyes_raw": "Brown",
+      "weight_max": 200,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/law-enforcement-assistance/kemondre-travis-daily",
+      "possible_states": null,
+      "modified": "2026-10-01T21:38:18+00:00",
+      "reward_max": 0,
+      "race": "black",
+      "height_max": 74,
+      "place_of_birth": null,
+      "height_min": 74,
+      "poster_classification": "law-enforcement-assistance",
+      "warning_message": "SHOULD BE CONSIDERED ARMED AND DANGEROUS",
+      "pathId": "https://api.fbi.gov/@wanted-person/0e58396ec6e647faa18982b3df634b7f"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/vicap/missing-persons/james-s-ruland---north-fond-du-lac-wisconsin/ruland.pdf",
+          "name": "English"
+        }
+      ],
+      "age_range": "Forty years old",
+      "uid": "b4db60d7ed14449cb73ba39564ef9e19",
+      "weight": "160 pounds",
+      "occupations": null,
+      "field_offices": null,
+      "locations": null,
+      "reward_text": null,
+      "sex": "Male",
+      "hair": "brown",
+      "ncic": null,
+      "dates_of_birth_used": null,
+      "caution": null,
+      "nationality": null,
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "ViCAP Missing Persons"
+      ],
+      "aliases": null,
+      "race_raw": "White",
+      "suspects": null,
+      "publication": "2021-02-23T08:02:00",
+      "title": "JAMES S. RULAND - NORTH FOND du LAC, WISCONSIN",
+      "coordinates": [],
+      "hair_raw": "Brown, collar length",
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": "<p>On Thursday, October 26, 1995, James S. Ruland was last seen hitchhiking in North Fond du Lac, Wisconsin. Nine days later, he was reported missing by his sister. On November 14, 1995, Ruland\u2019s white Dodge Aires station wagon was recovered from the Stretch Truck Stop near North Fond du Lac. The keys were in the ignition and Ruland\u2019s personal possessions were in the cargo area.</p>\r\n<p>Ruland sustained a severe head injury when he was young which required a shunt implant. The initial shunt failed, necessitating a second shunt. The implants required \u201cbilateral burr holes\u201d so the shunts could pass through his skull. Fond du Lac Sheriff\u2019s Office is requesting assistance with locating Ruland.</p>",
+      "status": "na",
+      "legat_names": null,
+      "eyes": "blue",
+      "person_classification": "Main",
+      "description": "October 26, 1995\r\nNorth Fond du Lac, Wisconsin",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/vicap/missing-persons/james-s-ruland---north-fond-du-lac-wisconsin/@@images/image/large",
+          "caption": null,
+          "thumb": "https://www.fbi.gov/wanted/vicap/missing-persons/james-s-ruland---north-fond-du-lac-wisconsin/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/vicap/missing-persons/james-s-ruland---north-fond-du-lac-wisconsin/@@images/image"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": 160,
+      "additional_information": null,
+      "remarks": "<p>Distinguishing Characteristics: Metal plate in head - bilateral burr holes/shunts, mustache</p>\r\n<p>Clothing/Belongings: Green camouflage jacket, silver wire rimmed glasses</p>",
+      "path": "/wanted/vicap/missing-persons/james-s-ruland---north-fond-du-lac-wisconsin",
+      "eyes_raw": "Blue, wears glasses",
+      "weight_max": 160,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/vicap/missing-persons/james-s-ruland---north-fond-du-lac-wisconsin",
+      "possible_states": null,
+      "modified": "2026-10-01T17:49:08+00:00",
+      "reward_max": 0,
+      "race": "white",
+      "height_max": 72,
+      "place_of_birth": null,
+      "height_min": 72,
+      "poster_classification": "missing",
+      "warning_message": null,
+      "pathId": "https://api.fbi.gov/@wanted-person/b4db60d7ed14449cb73ba39564ef9e19"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/vicap/homicides-and-sexual-assaults/mary-virginia-garcia-webb---billings-montana/webb.pdf",
+          "name": "English"
+        }
+      ],
+      "age_range": "19 years old at time of death",
+      "uid": "c034fc96d059474f97acdbeed3dd20c9",
+      "weight": "135 pounds",
+      "occupations": null,
+      "field_offices": null,
+      "locations": null,
+      "reward_text": null,
+      "sex": "Female",
+      "hair": null,
+      "ncic": null,
+      "dates_of_birth_used": null,
+      "caution": null,
+      "nationality": null,
+      "age_min": 19,
+      "age_max": 19,
+      "scars_and_marks": null,
+      "subjects": [
+        "ViCAP Homicides and Sexual Assaults"
+      ],
+      "aliases": null,
+      "race_raw": "White",
+      "suspects": null,
+      "publication": "2026-09-30T09:26:00",
+      "title": "MARY VIRGINIA GARCIA WEBB - BILLINGS, MONTANA",
+      "coordinates": [],
+      "hair_raw": null,
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": "<p>On June 7, 1996, Mary Garcia Webb left her home in Wenatchee, Washington, on her way to visit family in\u00a0Conway, Arkansas. She was traveling with two known individuals when their vehicle broke down in\u00a0Livingston, Montana. Garcia continued by hitchhiking; someone came forward stating they had provided\u00a0a ride from Livingston, Montana to Billings, Montana.\u00a0 Garcia was last seen alive on June 8, 1996 off I-90, five miles south of Billings, Montana, around 4:30 p.m.\u00a0\u00a0On June 25, 1996, her body was found in Northeastern Wyoming, very close to the Montana state border.\u00a0\u00a0The victim had suffered multiple gunshot wounds and blunt force trauma.\u00a0\u00a0</p>\r\n<p><br />The Wyoming Division of Criminal Investigation is seeking information from anyone who may be able\u00a0to assist in this investigation.</p>",
+      "status": "na",
+      "legat_names": null,
+      "eyes": null,
+      "person_classification": "Main",
+      "description": "June 8, 1996\r\nBillings, Montana",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/vicap/homicides-and-sexual-assaults/mary-virginia-garcia-webb---billings-montana/@@images/image/large",
+          "caption": null,
+          "thumb": "https://www.fbi.gov/wanted/vicap/homicides-and-sexual-assaults/mary-virginia-garcia-webb---billings-montana/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/vicap/homicides-and-sexual-assaults/mary-virginia-garcia-webb---billings-montana/@@images/image"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": 135,
+      "additional_information": null,
+      "remarks": null,
+      "path": "/wanted/vicap/homicides-and-sexual-assaults/mary-virginia-garcia-webb---billings-montana",
+      "eyes_raw": null,
+      "weight_max": 135,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/vicap/homicides-and-sexual-assaults/mary-virginia-garcia-webb---billings-montana",
+      "possible_states": null,
+      "modified": "2026-09-30T14:31:12+00:00",
+      "reward_max": 0,
+      "race": "white",
+      "height_max": 70,
+      "place_of_birth": null,
+      "height_min": 70,
+      "poster_classification": "default",
+      "warning_message": null,
+      "pathId": "https://api.fbi.gov/@wanted-person/c034fc96d059474f97acdbeed3dd20c9"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/kidnap/carlotta-maria-sanchez/download.pdf",
+          "name": "English"
+        }
+      ],
+      "age_range": null,
+      "uid": "98df11f3903d4ecab8940693471cbca8",
+      "weight": "112 pounds (at time of disappearance)",
+      "occupations": null,
+      "field_offices": [
+        "seattle"
+      ],
+      "locations": null,
+      "reward_text": "The FBI is offering a reward of up to $25,000 for information leading to the recovery of Carlotta Maria Sanchez and the arrest or conviction of those responsible for her disappearance.",
+      "sex": "Female",
+      "hair": "brown",
+      "ncic": null,
+      "dates_of_birth_used": [
+        "February 10, 1967"
+      ],
+      "caution": null,
+      "nationality": "American",
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Kidnappings and Missing Persons",
+        "Indian Country"
+      ],
+      "aliases": null,
+      "race_raw": null,
+      "suspects": null,
+      "publication": "2023-08-25T07:57:00",
+      "title": "CARLOTTA MARIA SANCHEZ",
+      "coordinates": [],
+      "hair_raw": "Brown",
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": "<p>On August 30, 1979, Carlotta Maria Sanchez, accompanied by her cousin,\u00a0<a data-urltype=\"/view\" data-val=\"https://www.fbi.gov/wanted/kidnap/elsie-eldora-luscier\" href=\"https://www.fbi.gov/wanted/kidnap/elsie-eldora-luscier\" data-linktype=\"external\">Elsie Eldora Luscier</a>, disappeared from Taholah, Washington, which is in the Quinault Nation Indian Reservation.\u00a0 The FBI is seeking information about the disappearance of both girls, and about those responsible for their disappearance.</p>\r\n<p>\u00a0</p>",
+      "status": "na",
+      "legat_names": null,
+      "eyes": "brown",
+      "person_classification": "Main",
+      "description": "August 30, 1979\r\nTaholah, Washington",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/kidnap/carlotta-maria-sanchez/@@images/image/large",
+          "caption": null,
+          "thumb": "https://www.fbi.gov/wanted/kidnap/carlotta-maria-sanchez/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/kidnap/carlotta-maria-sanchez/@@images/image"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/kidnap/carlotta-maria-sanchez/sanchezc2.jpg/@@images/image/large",
+          "caption": "",
+          "thumb": "https://www.fbi.gov/wanted/kidnap/carlotta-maria-sanchez/sanchezc2.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/kidnap/carlotta-maria-sanchez/sanchezc2.jpg"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": 112,
+      "additional_information": null,
+      "remarks": null,
+      "path": "/wanted/kidnap/carlotta-maria-sanchez",
+      "eyes_raw": "Brown",
+      "weight_max": 112,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/kidnap/carlotta-maria-sanchez",
+      "possible_states": null,
+      "modified": "2026-09-30T13:38:53+00:00",
+      "reward_max": 0,
+      "race": null,
+      "height_max": 66,
+      "place_of_birth": "Yuma, Arizona",
+      "height_min": 66,
+      "poster_classification": "missing",
+      "warning_message": null,
+      "pathId": "https://api.fbi.gov/@wanted-person/98df11f3903d4ecab8940693471cbca8"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/kidnap/elsie-eldora-luscier/download.pdf",
+          "name": "English"
+        }
+      ],
+      "age_range": null,
+      "uid": "fca89f1133a74259b4a0f944cd238343",
+      "weight": "110 pounds (at time of disappearance)",
+      "occupations": null,
+      "field_offices": [
+        "seattle"
+      ],
+      "locations": null,
+      "reward_text": "The FBI is offering a reward of up to $25,000 for information leading to the recovery of Elsie Eldora Luscier and the arrest or conviction of those responsible for her disappearance.",
+      "sex": "Female",
+      "hair": "brown",
+      "ncic": null,
+      "dates_of_birth_used": [
+        "January 30, 1966"
+      ],
+      "caution": null,
+      "nationality": null,
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Kidnappings and Missing Persons",
+        "Indian Country"
+      ],
+      "aliases": null,
+      "race_raw": null,
+      "suspects": null,
+      "publication": "2023-08-25T08:05:00",
+      "title": "ELSIE ELDORA LUSCIER",
+      "coordinates": [],
+      "hair_raw": "Brown",
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": "<p>On August 30, 1979, Elsie Eldora Luscier, accompanied by her cousin, <a data-urltype=\"/view\" data-val=\"https://www.fbi.gov/wanted/kidnap/carlotta-maria-sanchez\" href=\"https://www.fbi.gov/wanted/kidnap/carlotta-maria-sanchez\" data-linktype=\"external\">Carlotta Maria Sanchez</a>, disappeared from Taholah, Washington, which is in the Quinault Nation Indian Reservation.\u00a0 The FBI is seeking information about the disappearance of both girls, and about those responsible for their disappearance.</p>\r\n<p>\u00a0</p>",
+      "status": "na",
+      "legat_names": null,
+      "eyes": "brown",
+      "person_classification": "Main",
+      "description": "August 30, 1979\r\nTaholah, Washington",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/kidnap/elsie-eldora-luscier/@@images/image/large",
+          "caption": null,
+          "thumb": "https://www.fbi.gov/wanted/kidnap/elsie-eldora-luscier/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/kidnap/elsie-eldora-luscier/@@images/image"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/kidnap/elsie-eldora-luscier/luscier2.jpg/@@images/image/large",
+          "caption": "Enhanced Image",
+          "thumb": "https://www.fbi.gov/wanted/kidnap/elsie-eldora-luscier/luscier2.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/kidnap/elsie-eldora-luscier/luscier2.jpg"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": 110,
+      "additional_information": null,
+      "remarks": null,
+      "path": "/wanted/kidnap/elsie-eldora-luscier",
+      "eyes_raw": "Brown",
+      "weight_max": 110,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/kidnap/elsie-eldora-luscier",
+      "possible_states": null,
+      "modified": "2026-09-30T13:35:08+00:00",
+      "reward_max": 0,
+      "race": null,
+      "height_max": 61,
+      "place_of_birth": null,
+      "height_min": 61,
+      "poster_classification": "missing",
+      "warning_message": null,
+      "pathId": "https://api.fbi.gov/@wanted-person/fca89f1133a74259b4a0f944cd238343"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/law-enforcement-assistance/sean-e-brown/download.pdf",
+          "name": "English"
+        }
+      ],
+      "age_range": null,
+      "uid": "461a97c6a7214afeb22c8b70d83a5fee",
+      "weight": "210 pounds",
+      "occupations": null,
+      "field_offices": [
+        "chicago"
+      ],
+      "locations": null,
+      "reward_text": "The FBI is offering a reward of up to $5,000 for information leading to the arrest and conviction of Sean E. Brown.",
+      "sex": "Male",
+      "hair": "black",
+      "ncic": null,
+      "dates_of_birth_used": [
+        "March 24, 1988"
+      ],
+      "caution": "<p>The FBI's Chicago Field Office is assisting the Lansing Police Department in Illinois with the search for Sean E. Brown. Brown is wanted for his alleged involvement in the murder of a man during the early morning hours of June 6, 2026, outside of a Culver restaurant located on Torrance Avenue in Lansing, Illinois.</p>\r\n<p>\u00a0</p>\r\n<p>On June 10, 2026, Sean E. Brown was charged with Murder/Intent to Kill/Injure in the Circuit Court of Cook County, Illinois, and a state warrant was issued for his arrest.</p>",
+      "nationality": null,
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Law Enforcement Assistance"
+      ],
+      "aliases": [
+        "\"Shootie\"",
+        "\"Shoot\""
+      ],
+      "race_raw": "Black",
+      "suspects": null,
+      "publication": "2026-09-16T12:02:00",
+      "title": "SEAN E. BROWN",
+      "coordinates": [],
+      "hair_raw": "Black",
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": null,
+      "status": "na",
+      "legat_names": null,
+      "eyes": "brown",
+      "person_classification": "Main",
+      "description": "Murder/Intent to Kill/Injure",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/law-enforcement-assistance/sean-e-brown/@@images/image/large",
+          "caption": "Photograph taken in 2025",
+          "thumb": "https://www.fbi.gov/wanted/law-enforcement-assistance/sean-e-brown/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/law-enforcement-assistance/sean-e-brown/@@images/image"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": 210,
+      "additional_information": null,
+      "remarks": "<p>Brown has ties to the near west side around 18th &amp; Pulaski and 400 W in Lansing, Illinois.</p>",
+      "path": "/wanted/law-enforcement-assistance/sean-e-brown",
+      "eyes_raw": "Brown",
+      "weight_max": 210,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/law-enforcement-assistance/sean-e-brown",
+      "possible_states": null,
+      "modified": "2026-09-29T17:35:21+00:00",
+      "reward_max": 0,
+      "race": "black",
+      "height_max": 72,
+      "place_of_birth": null,
+      "height_min": 72,
+      "poster_classification": "law-enforcement-assistance",
+      "warning_message": "SHOULD BE CONSIDERED ARMED AND DANGEROUS",
+      "pathId": "https://api.fbi.gov/@wanted-person/461a97c6a7214afeb22c8b70d83a5fee"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/cei/tavis-lamar-chenault/download.pdf",
+          "name": "English"
+        }
+      ],
+      "age_range": null,
+      "uid": "e68a2cd0426f44e0965dc7f92ca95a3b",
+      "weight": "200 pounds",
+      "occupations": null,
+      "field_offices": [
+        "louisville"
+      ],
+      "locations": null,
+      "reward_text": "The FBI is offering a reward of up to $20,000 for information leading to the arrest and conviction of Tavis Lamar Chenault.",
+      "sex": "Male",
+      "hair": "black",
+      "ncic": null,
+      "dates_of_birth_used": [
+        "January 21, 2001"
+      ],
+      "caution": "<p>Tavis Lamar Chenault is wanted for his alleged involvement in\u00a0a series of drug transactions investigated by the FBI and Lexington Police (Special Investigations) within the city of Lexington, Kentucky, between August 4, 2026, through August 14, 2026.\u00a0 On August 14, 2026, a federal arrest warrant was issued for Chenault in the United States District Court, Eastern District of Kentucky, Frankfort, Kentucky, after he was charged with Conspiracy to Possess with Intent to Distribute 400 Grams or More of a Mixture or Substance Containing a Detectable Amount of Fentanyl.</p>",
+      "nationality": "American",
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": "Chenault has various tattoos on both of his arms from his hands to his shoulders.",
+      "subjects": [
+        "Criminal Enterprise Investigations"
+      ],
+      "aliases": [
+        "\"T\" ",
+        "\"Lil T\""
+      ],
+      "race_raw": "Black",
+      "suspects": null,
+      "publication": "2026-09-09T08:31:00",
+      "title": "TAVIS LAMAR CHENAULT",
+      "coordinates": [],
+      "hair_raw": "Black",
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": null,
+      "status": "captured",
+      "legat_names": null,
+      "eyes": "brown",
+      "person_classification": "Main",
+      "description": "Conspiracy to Possess with Intent to Distribute 400 Grams or More of a Mixture or Substance Containing a Detectable Amount of Fentanyl",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/cei/tavis-lamar-chenault/@@images/image/large",
+          "caption": "Photograph taken in 2026",
+          "thumb": "https://www.fbi.gov/wanted/cei/tavis-lamar-chenault/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/cei/tavis-lamar-chenault/@@images/image"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": 200,
+      "additional_information": null,
+      "remarks": "<p>Chenault has ties to the Lexington, Kentucky, area.</p>",
+      "path": "/wanted/cei/tavis-lamar-chenault",
+      "eyes_raw": "Brown",
+      "weight_max": 200,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/cei/tavis-lamar-chenault",
+      "possible_states": null,
+      "modified": "2026-09-29T17:11:55+00:00",
+      "reward_max": 0,
+      "race": "black",
+      "height_max": 67,
+      "place_of_birth": "Lexington, Kentucky",
+      "height_min": 67,
+      "poster_classification": "default",
+      "warning_message": "SHOULD BE CONSIDERED ARMED AND DANGEROUS",
+      "pathId": "https://api.fbi.gov/@wanted-person/e68a2cd0426f44e0965dc7f92ca95a3b"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/kidnap/stefanie-damron/download.pdf",
+          "name": "English"
+        }
+      ],
+      "age_range": null,
+      "uid": "b38a849f5f9644a48e03b4153b85df97",
+      "weight": "130 pounds",
+      "occupations": null,
+      "field_offices": [
+        "boston"
+      ],
+      "locations": null,
+      "reward_text": "The FBI is offering a reward of up to $15,000 for information leading to the safe return of Stefanie Damron and/or information leading to the arrest and prosecution of anyone involved in her disappearance.",
+      "sex": "Female",
+      "hair": "brown",
+      "ncic": null,
+      "dates_of_birth_used": [
+        "October 6, 2010"
+      ],
+      "caution": null,
+      "nationality": null,
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Kidnappings and Missing Persons"
+      ],
+      "aliases": null,
+      "race_raw": "White",
+      "suspects": null,
+      "publication": "2024-10-01T06:48:00",
+      "title": "STEFANIE DAMRON",
+      "coordinates": [],
+      "hair_raw": "Brown, Shoulder Length",
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": "<p>The FBI's Boston Field Office and the Maine State Police are requesting the public's assistance in locating Stefanie Damron, of New Sweden, Maine. She was reported missing by her family on September 24, 2024. Stefanie was last seen wearing blue jeans, a long-sleeved blue shirt, and black Harley Davidson hiking boots.\u00a0</p>\r\n<p>\u00a0</p>",
+      "status": "na",
+      "legat_names": null,
+      "eyes": "green",
+      "person_classification": "Main",
+      "description": "September 24, 2024\r\nNew Sweden, Maine",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/kidnap/stefanie-damron/@@images/image/large",
+          "caption": null,
+          "thumb": "https://www.fbi.gov/wanted/kidnap/stefanie-damron/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/kidnap/stefanie-damron/@@images/image"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/kidnap/stefanie-damron/damron3.jpg/@@images/image/large",
+          "caption": "Photograph taken in 2022",
+          "thumb": "https://www.fbi.gov/wanted/kidnap/stefanie-damron/damron3.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/kidnap/stefanie-damron/damron3.jpg"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": 130,
+      "additional_information": null,
+      "remarks": null,
+      "path": "/wanted/kidnap/stefanie-damron",
+      "eyes_raw": "Green",
+      "weight_max": 130,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/kidnap/stefanie-damron",
+      "possible_states": null,
+      "modified": "2026-09-28T21:36:43+00:00",
+      "reward_max": 0,
+      "race": "white",
+      "height_max": 60,
+      "place_of_birth": null,
+      "height_min": 60,
+      "poster_classification": "missing",
+      "warning_message": null,
+      "pathId": "https://api.fbi.gov/@wanted-person/b38a849f5f9644a48e03b4153b85df97"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/seeking-info/armed-jewelry-store-robbery/download.pdf",
+          "name": "English"
+        }
+      ],
+      "age_range": null,
+      "uid": "ee0a85adb7414de487ec6afd941efd74",
+      "weight": null,
+      "occupations": null,
+      "field_offices": [
+        "richmond"
+      ],
+      "locations": null,
+      "reward_text": "The FBI is offering a reward of up to $25,000 for information leading to the identification, arrest, and conviction of these unknown suspects.  Additional reward money may be available.",
+      "sex": null,
+      "hair": null,
+      "ncic": null,
+      "dates_of_birth_used": null,
+      "caution": null,
+      "nationality": null,
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Seeking Information"
+      ],
+      "aliases": null,
+      "race_raw": null,
+      "suspects": null,
+      "publication": "2025-10-29T09:49:00",
+      "title": "ARMED JEWELRY STORE ROBBERY",
+      "coordinates": [],
+      "hair_raw": null,
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": "<p>The Federal Bureau of Investigation's Norfolk Field Office in Virginia, and the United States Postal Inspection Service, are seeking information regarding the armed robbery of the New York Jewelry Store located in the Greenbrier Mall in Chesapeake, Virginia.\u00a0 On October 9, 2025, at approximately 3:30 p.m.,\u00a0two unknown suspects robbed the store of a large amount of gold jewelry.\u00a0 During the robbery, two US Postal Mail Carriers who were in the store delivering mail were also robbed at gunpoint of personal property and their mail scanner.\u00a0 The two suspects fled on foot.</p>\r\n<p>\u00a0</p>\r\n<p>The first suspect is described as a\u00a0Black male wearing white sweatpants, a dark hoodie with a white shirt underneath, and a dark-colored hat.</p>\r\n<p>The second suspect is described as a\u00a0Black male wearing a blue sport coat and pants, a pink dress shirt, a dark-colored top hat, sunglasses, and a medical mask.</p>\r\n<p>\u00a0</p>\r\n<p>The public is encouraged to share any personal videos or photos taken at, or around, the mall near the time of the robbery. These videos and photos can be shared at <a data-urltype=\"/view\" data-val=\"https://tips.fbi.gov/digitalmedia/4267f3c4793b484\" href=\"https://tips.fbi.gov/digitalmedia/4267f3c4793b484\" data-linktype=\"external\">FBI \u2014 Seeking Information on the New York Jewelers Armed Robbery at Greenbrier Mall</a>.</p>",
+      "status": "na",
+      "legat_names": null,
+      "eyes": null,
+      "person_classification": "Main",
+      "description": "Unknown Suspects\r\nChesapeake, Virginia\r\nOctober 9, 2025",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/armed-jewelry-store-robbery/@@images/image/large",
+          "caption": "Unknown Suspect 2",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/armed-jewelry-store-robbery/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/armed-jewelry-store-robbery/@@images/image"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/seeking-info/armed-jewelry-store-robbery/norfolk2.jpg/@@images/image/large",
+          "caption": "Unknown Suspect 1",
+          "thumb": "https://www.fbi.gov/wanted/seeking-info/armed-jewelry-store-robbery/norfolk2.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/seeking-info/armed-jewelry-store-robbery/norfolk2.jpg"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": null,
+      "additional_information": null,
+      "remarks": null,
+      "path": "/wanted/seeking-info/armed-jewelry-store-robbery",
+      "eyes_raw": null,
+      "weight_max": null,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/seeking-info/armed-jewelry-store-robbery",
+      "possible_states": null,
+      "modified": "2026-09-28T15:01:33+00:00",
+      "reward_max": 0,
+      "race": null,
+      "height_max": null,
+      "place_of_birth": null,
+      "height_min": null,
+      "poster_classification": "information",
+      "warning_message": "SHOULD BE CONSIDERED ARMED AND DANGEROUS",
+      "pathId": "https://api.fbi.gov/@wanted-person/ee0a85adb7414de487ec6afd941efd74"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/parental-kidnappings/ahmed-abdallah-taha-kandil/download.pdf",
+          "name": "English"
+        },
+        {
+          "url": "https://www.fbi.gov/wanted/parental-kidnappings/ahmed-abdallah-taha-kandil/kandildadturkish.pdf/@@download/file/KandilDadTurkish.pdf",
+          "name": "TRKE DE"
+        },
+        {
+          "url": "https://www.fbi.gov/wanted/parental-kidnappings/ahmed-abdallah-taha-kandil/kandildadarabic.pdf/@@download/file/KandilDadArabic.pdf",
+          "name": " "
+        }
+      ],
+      "age_range": null,
+      "uid": "4a9ead29d24c4f6fb80a9d28a40c9bde",
+      "weight": "170 to 180 pounds",
+      "occupations": null,
+      "field_offices": [
+        "richmond"
+      ],
+      "locations": null,
+      "reward_text": null,
+      "sex": "Male",
+      "hair": "brown",
+      "ncic": null,
+      "dates_of_birth_used": [
+        "June 1, 1971"
+      ],
+      "caution": null,
+      "nationality": "Egyptian",
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Parental Kidnapping"
+      ],
+      "aliases": [
+        "Abdalla"
+      ],
+      "race_raw": "White",
+      "suspects": null,
+      "publication": "2020-03-24T12:58:00",
+      "title": "AHMED ABDALLAH TAHA KANDIL",
+      "coordinates": [],
+      "hair_raw": "Brown",
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": "<p>Ahmed Abdallah Taha\u00a0Kandil\u00a0is wanted for international parental kidnapping pursuant to an arrest warrant issued on November 21, 2014,\u00a0in\u00a0the United States\u00a0District Court, Eastern District of Virginia.\u00a0</p>\r\n<p>\u00a0</p>\r\n<p>In 2014,\u00a0Kandil\u00a0and his estranged wife each resided in James City County, Virginia,\u00a0and shared joint custody of their two children, <a data-urltype=\"/view\" data-val=\"https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil\" href=\"https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil\" data-linktype=\"external\">Amina and Belel Kandil</a>.\u00a0\u00a0On August 29, 2014,\u00a0Kandil\u00a0picked up the children from his estranged\u00a0wife\u2019s home and advised her that he was taking them to visit his sister out of town and they would return before school started.\u00a0\u00a0Instead, he and the children flew out of JFK airport in New York, to\u00a0Boryspil, Ukraine,\u00a0and then to Ataturk, Turkey,\u00a0and never returned.\u00a0 On September 5, 2014, the Circuit Court of Williamsburg\u00a0and\u00a0James City County granted the children\u2019s mother immediate sole\u00a0and\u00a0legal custody.\u00a0</p>\r\n<p>\u00a0</p>\r\n<p>Kandil\u00a0and his children\u00a0may be living in the Alexandria, Cairo or Giza areas of Egypt, or the Hatay region of Turkey.\u00a0</p>\r\n<p>\u00a0</p>",
+      "status": "na",
+      "legat_names": null,
+      "eyes": "green",
+      "person_classification": "Main",
+      "description": "International Parental Kidnapping",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/parental-kidnappings/ahmed-abdallah-taha-kandil/@@images/image/large",
+          "caption": null,
+          "thumb": "https://www.fbi.gov/wanted/parental-kidnappings/ahmed-abdallah-taha-kandil/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/parental-kidnappings/ahmed-abdallah-taha-kandil/@@images/image"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/parental-kidnappings/ahmed-abdallah-taha-kandil/ahmed-kandil-1.png/@@images/image/large",
+          "caption": "",
+          "thumb": "https://www.fbi.gov/wanted/parental-kidnappings/ahmed-abdallah-taha-kandil/ahmed-kandil-1.png/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/parental-kidnappings/ahmed-abdallah-taha-kandil/ahmed-kandil-1.png"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": 170,
+      "additional_information": null,
+      "remarks": "<p>Kandil has dual United States and Egyptian citizenship.</p>",
+      "path": "/wanted/parental-kidnappings/ahmed-abdallah-taha-kandil",
+      "eyes_raw": "Green",
+      "weight_max": 180,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/parental-kidnappings/ahmed-abdallah-taha-kandil",
+      "possible_states": null,
+      "modified": "2026-09-28T14:59:25+00:00",
+      "reward_max": 0,
+      "race": "white",
+      "height_max": 72,
+      "place_of_birth": "Egypt",
+      "height_min": 72,
+      "poster_classification": "default",
+      "warning_message": null,
+      "pathId": "https://api.fbi.gov/@wanted-person/4a9ead29d24c4f6fb80a9d28a40c9bde"
+    },
+    {
+      "files": [
+        {
+          "url": "https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil/download.pdf",
+          "name": "English"
+        },
+        {
+          "url": "https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil/turkish-amina-and-belel-kandil.pdf/@@download/file/Turkish Amina and Belel Kandil.pdf",
+          "name": "TRKE DE"
+        },
+        {
+          "url": "https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil/arabic-amina-and-belel-kandil.pdf/@@download/file/Arabic Amina and Belel Kandil.pdf",
+          "name": " "
+        }
+      ],
+      "age_range": null,
+      "uid": "402ee4b4f18a429cbb808cfc3b04ba25",
+      "weight": null,
+      "occupations": null,
+      "field_offices": [
+        "richmond"
+      ],
+      "locations": null,
+      "reward_text": null,
+      "sex": null,
+      "hair": null,
+      "ncic": null,
+      "dates_of_birth_used": null,
+      "caution": null,
+      "nationality": null,
+      "age_min": null,
+      "age_max": null,
+      "scars_and_marks": null,
+      "subjects": [
+        "Kidnappings and Missing Persons"
+      ],
+      "aliases": null,
+      "race_raw": null,
+      "suspects": null,
+      "publication": "2018-04-10T07:26:00",
+      "title": "AMINA AND BELEL KANDIL",
+      "coordinates": [],
+      "hair_raw": null,
+      "languages": null,
+      "complexion": null,
+      "build": null,
+      "details": "<p>The FBI Norfolk Field Office is asking for the public\u2019s assistance in locating Amina Kandil and Belel Kandil missing from James City County, Virginia, since August 29, 2014.</p>\r\n<p>\u00a0</p>\r\n<p>At the time of their disappearance, Amina was 10 and Belel was 8 years old. The National Center for Missing and Exploited Children released the age-progressed photos displayed above.</p>\r\n<p>\u00a0</p>\r\n<p>The children were last seen on August 30, 2014, in the company of their father, <a data-urltype=\"/view\" data-val=\"https://www.fbi.gov/wanted/parental-kidnappings/ahmed-abdallah-taha-kandil\" href=\"https://www.fbi.gov/wanted/parental-kidnappings/ahmed-abdallah-taha-kandil\" data-linktype=\"external\">Ahmed Abdallah Taha Kandil</a>, leaving the United States on a flight\u00a0from John F. Kennedy International Airport, in New York,\u00a0bound for Boryspil, Ukraine, and then Ataturk, Turkey.</p>\r\n<p>\u00a0</p>\r\n<p>The children may be living in the Alexandria, Cairo or Giza areas of Egypt. They may also be residing in the Hatay region of Turkey.</p>\r\n<p>\u00a0</p>\r\n<p>Amina is described as a white female, with blue eyes and brown hair.\u00a0 At the time of her disappearance, she was approximately 5\u20192\u201d tall and weighed approximately 82 pounds. Amina was born on September 1, 2003, in Augusta, Georgia.</p>\r\n<p>\u00a0</p>\r\n<p>Belel is described as a white male, with blue eyes and blond hair.\u00a0 At the time of his disappearance, he was approximately 4\u20195\u201d tall and weighed approximately 55 pounds. Belel was born on January 4, 2006, in Augusta, Georgia.</p>\r\n<p>\u00a0</p>\r\n<p>The FBI is working this investigation\u00a0jointly with the James City County Police Department, with assistance from the National Center for Missing and Exploited Children.</p>\r\n<p>\u00a0\u00a0\u00a0</p>",
+      "status": "na",
+      "legat_names": null,
+      "eyes": null,
+      "person_classification": "Victim",
+      "description": "August 29, 2014\r\nJames City County, Virginia",
+      "images": [
+        {
+          "large": "https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil/@@images/image/large",
+          "caption": null,
+          "thumb": "https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil/@@images/image"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil/belel-kandil.jpg/@@images/image/large",
+          "caption": "",
+          "thumb": "https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil/belel-kandil.jpg/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil/belel-kandil.jpg"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil/amina-age-pro-16.png/@@images/image/large",
+          "caption": "Photo age-progressed to 16 years",
+          "thumb": "https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil/amina-age-pro-16.png/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil/amina-age-pro-16.png"
+        },
+        {
+          "large": "https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil/belel-age-pro-14.png/@@images/image/large",
+          "caption": "Age-progressed to 14 years",
+          "thumb": "https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil/belel-age-pro-14.png/@@images/image/thumb",
+          "original": "https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil/belel-age-pro-14.png"
+        }
+      ],
+      "possible_countries": null,
+      "weight_min": null,
+      "additional_information": "<p>Ahmed Kandil is a 46-year-old male, with brown hair and green eyes. He is 6\u20190\u201d tall and weighs approximately 170 to 180 pounds. He is a naturalized United States citizen with dual Egyptian citizenship.</p>\r\n<p><img src=\"http://foo/Plone/image-repository/ahmed_-kandil-1.jpg/@@images/03bc7baa-9f91-4c68-a99d-d88a17eff8e9.jpeg\" data-linktype=\"image\" title=\"Ahmed Kandil\" data-val=\"7247d68098f4424cb377360897a31c30\" data-scale=\"mini\" alt=\"Ahmed Kandil\" class=\"image-inline\" /></p>\r\n<p>\u00a0</p>\r\n<p>\u00a0</p>\r\n<p>\u00a0</p>\r\n<p>\u00a0</p>",
+      "remarks": null,
+      "path": "/wanted/kidnap/amina-and-belel-kandil",
+      "eyes_raw": null,
+      "weight_max": null,
+      "reward_min": 0,
+      "url": "https://www.fbi.gov/wanted/kidnap/amina-and-belel-kandil",
+      "possible_states": null,
+      "modified": "2026-09-28T14:58:38+00:00",
+      "reward_max": 0,
+      "race": null,
+      "height_max": null,
+      "place_of_birth": null,
+      "height_min": null,
+      "poster_classification": "missing",
+      "warning_message": null,
+      "pathId": "https://api.fbi.gov/@wanted-person/402ee4b4f18a429cbb808cfc3b04ba25"
+    }
+  ]
+}

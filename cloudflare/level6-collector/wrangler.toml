@@ -1,0 +1,11 @@
+name = "999-cipher-level6-collector"
+main = "src/index.js"
+compatibility_date = "2026-09-19"
+
+[triggers]
+crons = ["*/5 * * * *"]
+
+[vars]
+CLOUDFLARE_ZONE_ID = "93ebe5318dd38be199230407264c8930"
+SUPABASE_URL = "https://msyisjoserdtubpbfhyo.supabase.co"
+OWNER_USER_ID = "08a4c7e0-bd88-469f-abe7-f490f3482586"

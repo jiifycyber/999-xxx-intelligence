@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "source_id": "state_police",
+  "source_name": "State Police Bulletins",
+  "official_site": "",
+  "connection_method": "public_bulletin_sources",
+  "next_step": "Configure individual state agencies",
+  "status": "pending_verification",
+  "enabled": false,
+  "records_loaded": 0,
+  "last_sync": null,
+  "external_transmission_enabled": false,
+  "case_sharing_enabled": false,
+  "created_at": "2026-10-09T21:37:15.754029+00:00"
+}

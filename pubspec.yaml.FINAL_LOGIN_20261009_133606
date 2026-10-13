@@ -1,0 +1,49 @@
+name: nine99_xxx
+description: 999 Genesis Protocol Level 6 - high-assurance security command center prototype.
+publish_to: none
+version: 0.2.0+2
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  camera: ^0.12.1
+  crypto: ^3.0.7
+  device_info_plus: ^13.2.0
+  flutter:
+    sdk: flutter
+  flutter_secure_storage: ^11.2.0
+  http: ^1.6.0
+  local_auth: ^3.0.2
+  package_info_plus: ^10.2.1
+  supabase_flutter: ^2.17.2
+  uuid: ^4.6.0
+  video_player: ^2.14.0
+  web: ^1.1.1
+  webview_flutter: ^4.14.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.1
+
+flutter:
+  assets:
+    - assets/images/ic391_login_background.png
+    - assets/images/xxx_defense_logo.png
+    - assets/images/xxxdefense_icon.png
+    - assets/maps/world.geojson
+    - assets/images/999_genesis_level6_exact_mockup.png
+  uses-material-design: true
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/branding/app_icon.png"
+  remove_alpha_ios: true
+  web:
+    generate: true
+    image_path: "assets/branding/app_icon.png"
+    background_color: "#06111B"
+    theme_color: "#06111B"

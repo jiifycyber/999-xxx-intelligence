@@ -1,0 +1,1114 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:video_player/video_player.dart';
+
+import '../core/genesis_theme.dart';
+import 'live_camera_feed.dart';
+import 'premium_intelligence_visuals.dart';
+
+class CameraVaultPanel extends StatefulWidget {
+  const CameraVaultPanel({super.key});
+
+  @override
+  State<CameraVaultPanel> createState() => _CameraVaultPanelState();
+}
+
+class _CameraVaultPanelState extends State<CameraVaultPanel> {
+  static const String _apiBase =
+      'https://jontariuss-macbook-pro.tail49e2f2.ts.net:8791';
+
+  bool _loading = true;
+  String? _error;
+  int _selectedTab = 0;
+
+  List<_Recording> _recordings = [];
+  int _retentionHours = 72;
+  int _recordingCount = 0;
+  int _playableCount = 0;
+  int _usedBytes = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _refresh();
+  }
+
+  Future<void> _refresh() async {
+    if (mounted) {
+      setState(() {
+        _loading = true;
+        _error = null;
+      });
+    }
+
+    try {
+      final response = await http
+          .get(Uri.parse('$_apiBase/recordings'))
+          .timeout(const Duration(seconds: 10));
+
+      if (response.statusCode != 200) {
+        throw Exception('HTTP ${response.statusCode}');
+      }
+
+      final json = jsonDecode(response.body) as Map<String, dynamic>;
+      final rows = (json['recordings'] as List<dynamic>? ?? const []);
+
+      final recordings = rows
+          .map(
+            (row) => _Recording.fromJson(
+              row as Map<String, dynamic>,
+            ),
+          )
+          .toList();
+
+      if (!mounted) return;
+
+      setState(() {
+        _recordings = recordings;
+        _retentionHours = (json['retention_hours'] as num?)?.toInt() ?? 72;
+        _recordingCount = (json['recording_count'] as num?)?.toInt() ?? 0;
+        _playableCount = (json['playable_count'] as num?)?.toInt() ?? 0;
+        _usedBytes = (json['used_bytes'] as num?)?.toInt() ?? 0;
+        _loading = false;
+      });
+    } catch (e) {
+      if (!mounted) return;
+
+      setState(() {
+        _error = e.toString();
+        _loading = false;
+      });
+    }
+  }
+
+  Future<void> _play(_Recording recording) async {
+    if (!recording.finalized) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content:
+              Text('This clip is still recording and is not finalized yet.'),
+        ),
+      );
+      return;
+    }
+
+    await showDialog<void>(
+      context: context,
+      barrierColor: Colors.black87,
+      builder: (_) => _VaultPlaybackDialog(
+        recording: recording,
+        url: '$_apiBase${recording.playUrl}',
+      ),
+    );
+  }
+
+  void _jumpTo(Duration ago) {
+    final target = DateTime.now().subtract(ago);
+
+    final playable = _recordings.where((r) => r.finalized).toList();
+
+    if (playable.isEmpty) {
+      _nothingFound();
+      return;
+    }
+
+    playable.sort((a, b) {
+      final aDelta = a.startedAt.difference(target).abs();
+      final bDelta = b.startedAt.difference(target).abs();
+      return aDelta.compareTo(bDelta);
+    });
+
+    _play(playable.first);
+  }
+
+  void _jumpYesterday() {
+    final now = DateTime.now();
+    final target = now.subtract(const Duration(days: 1));
+
+    final matches = _recordings.where((r) {
+      return r.finalized &&
+          r.startedAt.year == target.year &&
+          r.startedAt.month == target.month &&
+          r.startedAt.day == target.day;
+    }).toList();
+
+    if (matches.isEmpty) {
+      _nothingFound(
+          message: 'No finalized recording is available from yesterday yet.');
+      return;
+    }
+
+    _play(matches.first);
+  }
+
+  void _nothingFound({
+    String message = 'No finalized recording is available for that time.',
+  }) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFF0B2857),
+            Color(0xFF071C3F),
+            Color(0xFF07142D),
+            Color(0xFF170D36),
+          ],
+          stops: [0, .34, .69, 1],
+        ),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(
+          color: GenesisColors.cyan.withValues(alpha: .72),
+          width: 1.1,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: GenesisColors.cyan.withValues(alpha: .24),
+            blurRadius: 24,
+          ),
+          BoxShadow(
+            color: GenesisColors.purple.withValues(alpha: .18),
+            blurRadius: 34,
+          ),
+          const BoxShadow(
+            color: Color(0x77000000),
+            blurRadius: 24,
+            offset: Offset(0, 12),
+          ),
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(17),
+        child: Column(
+          children: [
+            _buildTopBar(),
+            Expanded(
+              child: _selectedTab == 0 ? _buildLive() : _buildRecordings(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTopBar() {
+    return Container(
+      height: 58,
+      padding: const EdgeInsets.symmetric(horizontal: 14),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            const Color(0xFF0D346D),
+            const Color(0xFF08244D),
+            const Color(0xFF111538),
+            GenesisColors.purple.withValues(alpha: .20),
+          ],
+        ),
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(17),
+        ),
+        border: Border(
+          bottom: BorderSide(
+            color: GenesisColors.cyan.withValues(alpha: .65),
+            width: 1.1,
+          ),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: GenesisColors.cyan.withValues(alpha: .14),
+            blurRadius: 18,
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          const Icon(
+            Icons.videocam_rounded,
+            color: GenesisColors.cyan,
+            size: 22,
+          ),
+          const SizedBox(width: 10),
+          const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'CAMERA COMMAND',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 1.3,
+                ),
+              ),
+              Text(
+                'LIVE SURVEILLANCE + 72 HOUR VIDEO VAULT',
+                style: TextStyle(
+                  color: GenesisColors.cyan,
+                  fontSize: 8,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+          const Spacer(),
+          _tabButton(
+            label: 'LIVE',
+            icon: Icons.circle,
+            index: 0,
+          ),
+          const SizedBox(width: 8),
+          _tabButton(
+            label: 'RECORDINGS',
+            icon: Icons.video_library_rounded,
+            index: 1,
+          ),
+          const SizedBox(width: 8),
+          IconButton(
+            tooltip: 'Refresh vault',
+            onPressed: _refresh,
+            icon: const Icon(
+              Icons.refresh_rounded,
+              color: GenesisColors.emerald,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _tabButton({
+    required String label,
+    required IconData icon,
+    required int index,
+  }) {
+    final selected = _selectedTab == index;
+
+    return InkWell(
+      onTap: () => setState(() => _selectedTab = index),
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 8,
+        ),
+        decoration: BoxDecoration(
+          gradient: selected
+              ? LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    GenesisColors.cyan.withValues(alpha: .24),
+                    const Color(0xFF0B315E),
+                    GenesisColors.purple.withValues(alpha: .16),
+                  ],
+                )
+              : const LinearGradient(
+                  colors: [
+                    Color(0xFF09182D),
+                    Color(0xFF071326),
+                  ],
+                ),
+          border: Border.all(
+            color: selected
+                ? GenesisColors.cyan
+                : GenesisColors.cyan.withValues(alpha: .28),
+            width: selected ? 1.15 : .8,
+          ),
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: selected
+              ? [
+                  BoxShadow(
+                    color: GenesisColors.cyan.withValues(alpha: .28),
+                    blurRadius: 14,
+                  ),
+                  BoxShadow(
+                    color: GenesisColors.purple.withValues(alpha: .14),
+                    blurRadius: 20,
+                  ),
+                ]
+              : null,
+        ),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              size: 11,
+              color: selected ? GenesisColors.cyan : Colors.white54,
+            ),
+            const SizedBox(width: 6),
+            Text(
+              label,
+              style: TextStyle(
+                color: selected ? GenesisColors.cyan : Colors.white54,
+                fontSize: 9,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 1,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _liveCameraGrid() {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final mobile = constraints.maxWidth < 700;
+
+        final cameras = <Widget>[
+          const LiveCameraFeed(name: "MACBOOK CAMERA"),
+          const SecurityCameraFeed(
+            name: "SERVER ROOM",
+            index: 1,
+          ),
+          const SecurityCameraFeed(
+            name: "OPS FLOOR",
+            index: 2,
+          ),
+          const SecurityCameraFeed(
+            name: "PERIMETER",
+            index: 3,
+          ),
+        ];
+
+        if (!mobile) {
+          return Row(
+            children: [
+              for (var i = 0; i < cameras.length; i++) ...[
+                Expanded(child: cameras[i]),
+                if (i < cameras.length - 1) const SizedBox(width: 6),
+              ],
+            ],
+          );
+        }
+
+        return Column(
+          children: [
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(child: cameras[0]),
+                  const SizedBox(width: 6),
+                  Expanded(child: cameras[1]),
+                ],
+              ),
+            ),
+            const SizedBox(height: 6),
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(child: cameras[2]),
+                  const SizedBox(width: 6),
+                  Expanded(child: cameras[3]),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget _buildLive() {
+    return Padding(
+      padding: const EdgeInsets.all(12),
+      child: Column(
+        children: [
+          Expanded(
+            child: _liveCameraGrid(),
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            height: 94,
+            child: Row(
+              children: [
+                Expanded(
+                  child: _statusCard(
+                    Icons.fiber_manual_record_rounded,
+                    'RECORDER',
+                    _error == null ? 'ONLINE' : 'CHECK',
+                    _error == null ? GenesisColors.emerald : Colors.orange,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _statusCard(
+                    Icons.history_rounded,
+                    'RETENTION',
+                    '$_retentionHours HOURS',
+                    GenesisColors.cyan,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _statusCard(
+                    Icons.video_library_rounded,
+                    'PLAYABLE',
+                    '$_playableCount CLIPS',
+                    GenesisColors.cyan,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: _statusCard(
+                    Icons.storage_rounded,
+                    'VAULT USED',
+                    _formatBytes(_usedBytes),
+                    GenesisColors.cyan,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildRecordings() {
+    if (_loading) {
+      return const Center(
+        child: CircularProgressIndicator(
+          color: GenesisColors.cyan,
+        ),
+      );
+    }
+
+    if (_error != null) {
+      return Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.cloud_off_rounded,
+              color: Colors.orange,
+              size: 38,
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'CAMERA VAULT UNAVAILABLE',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              _error!,
+              style: const TextStyle(
+                color: Colors.white54,
+                fontSize: 10,
+              ),
+            ),
+            const SizedBox(height: 12),
+            OutlinedButton.icon(
+              onPressed: _refresh,
+              icon: const Icon(Icons.refresh),
+              label: const Text('RETRY'),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return Column(
+      children: [
+        _vaultSummary(),
+        _quickAccess(),
+        Expanded(
+          child: _recordings.isEmpty
+              ? const Center(
+                  child: Text(
+                    'NO RECORDINGS',
+                    style: TextStyle(color: Colors.white54),
+                  ),
+                )
+              : ListView.separated(
+                  padding: const EdgeInsets.fromLTRB(12, 4, 12, 12),
+                  itemCount: _recordings.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 7),
+                  itemBuilder: (_, index) {
+                    return _recordingTile(_recordings[index]);
+                  },
+                ),
+        ),
+      ],
+    );
+  }
+
+  Widget _vaultSummary() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 8),
+      child: Row(
+        children: [
+          Expanded(
+            child: _statusCard(
+              Icons.shield_rounded,
+              'VAULT STATUS',
+              'ONLINE',
+              GenesisColors.emerald,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: _statusCard(
+              Icons.video_file_rounded,
+              'TOTAL CLIPS',
+              '$_recordingCount',
+              GenesisColors.cyan,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: _statusCard(
+              Icons.play_circle_rounded,
+              'FINALIZED',
+              '$_playableCount',
+              GenesisColors.cyan,
+            ),
+          ),
+          const SizedBox(width: 8),
+          Expanded(
+            child: _statusCard(
+              Icons.storage_rounded,
+              'STORAGE',
+              _formatBytes(_usedBytes),
+              GenesisColors.cyan,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _quickAccess() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 0, 12, 10),
+      child: Row(
+        children: [
+          const Text(
+            'QUICK ACCESS',
+            style: TextStyle(
+              color: Colors.white54,
+              fontSize: 9,
+              fontWeight: FontWeight.w900,
+              letterSpacing: 1.1,
+            ),
+          ),
+          const SizedBox(width: 12),
+          _quickButton(
+            '15 MIN AGO',
+            () => _jumpTo(const Duration(minutes: 15)),
+          ),
+          const SizedBox(width: 6),
+          _quickButton(
+            '1 HOUR AGO',
+            () => _jumpTo(const Duration(hours: 1)),
+          ),
+          const SizedBox(width: 6),
+          _quickButton(
+            'YESTERDAY',
+            _jumpYesterday,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _quickButton(
+    String label,
+    VoidCallback onTap,
+  ) {
+    return OutlinedButton(
+      onPressed: onTap,
+      style: OutlinedButton.styleFrom(
+        foregroundColor: GenesisColors.cyan,
+        side: BorderSide(
+          color: GenesisColors.cyan.withValues(alpha: .45),
+        ),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 7,
+        ),
+      ),
+      child: Text(
+        label,
+        style: const TextStyle(
+          fontSize: 8,
+          fontWeight: FontWeight.w900,
+        ),
+      ),
+    );
+  }
+
+  Widget _recordingTile(_Recording recording) {
+    final active = !recording.finalized;
+
+    return Container(
+      padding: const EdgeInsets.all(11),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: active
+              ? [
+                  const Color(0xFF173047),
+                  const Color(0xFF101B2D),
+                  Colors.orange.withValues(alpha: .10),
+                ]
+              : [
+                  const Color(0xFF0C3158),
+                  const Color(0xFF081E39),
+                  const Color(0xFF0C1730),
+                  GenesisColors.purple.withValues(alpha: .09),
+                ],
+        ),
+        border: Border.all(
+          color: active
+              ? Colors.orange.withValues(alpha: .75)
+              : GenesisColors.cyan.withValues(alpha: .48),
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: (active ? Colors.orange : GenesisColors.cyan)
+                .withValues(alpha: .15),
+            blurRadius: 14,
+          ),
+          const BoxShadow(
+            color: Color(0x55000000),
+            blurRadius: 12,
+            offset: Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 42,
+            height: 42,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: active
+                  ? Colors.orange.withValues(alpha: .10)
+                  : GenesisColors.cyan.withValues(alpha: .08),
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Icon(
+              active ? Icons.fiber_manual_record_rounded : Icons.movie_rounded,
+              color: active ? Colors.orange : GenesisColors.cyan,
+              size: 20,
+            ),
+          ),
+          const SizedBox(width: 11),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  _formatDateTime(recording.startedAt),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 11,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  active
+                      ? 'RECORDING NOW • ${_formatBytes(recording.sizeBytes)}'
+                      : '${_formatDuration(recording.durationSeconds)} • ${_formatBytes(recording.sizeBytes)}',
+                  style: TextStyle(
+                    color: active ? Colors.orange : Colors.white54,
+                    fontSize: 9,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 7,
+              vertical: 4,
+            ),
+            decoration: BoxDecoration(
+              color: active
+                  ? Colors.orange.withValues(alpha: .12)
+                  : GenesisColors.emerald.withValues(alpha: .10),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Text(
+              active ? '● RECORDING' : 'FINALIZED',
+              style: TextStyle(
+                color: active ? Colors.orange : GenesisColors.emerald,
+                fontSize: 7,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          IconButton(
+            tooltip: active ? 'Still recording' : 'Play recording',
+            onPressed: active ? null : () => _play(recording),
+            icon: Icon(
+              Icons.play_circle_fill_rounded,
+              color: active ? Colors.white24 : GenesisColors.cyan,
+              size: 30,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _statusCard(
+    IconData icon,
+    String label,
+    String value,
+    Color color,
+  ) {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            color.withValues(alpha: .15),
+            const Color(0xFF0A2547),
+            const Color(0xFF07182E),
+          ],
+          stops: const [0, .38, 1],
+        ),
+        border: Border.all(
+          color: color.withValues(alpha: .58),
+          width: 1,
+        ),
+        borderRadius: BorderRadius.circular(9),
+        boxShadow: [
+          BoxShadow(
+            color: color.withValues(alpha: .14),
+            blurRadius: 12,
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Icon(icon, color: color, size: 20),
+          const SizedBox(width: 9),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    label,
+                    maxLines: 1,
+                    softWrap: false,
+                    style: const TextStyle(
+                      color: Colors.white54,
+                      fontSize: 7,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: .4,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  value,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: color,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w900,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _formatBytes(int bytes) {
+    if (bytes >= 1024 * 1024 * 1024) {
+      return '${(bytes / (1024 * 1024 * 1024)).toStringAsFixed(1)} GB';
+    }
+
+    if (bytes >= 1024 * 1024) {
+      return '${(bytes / (1024 * 1024)).toStringAsFixed(0)} MB';
+    }
+
+    return '${(bytes / 1024).toStringAsFixed(0)} KB';
+  }
+
+  String _formatDuration(double? seconds) {
+    if (seconds == null) return '--';
+
+    final total = seconds.round();
+    final minutes = total ~/ 60;
+    final secs = total % 60;
+
+    return '${minutes}m ${secs.toString().padLeft(2, '0')}s';
+  }
+
+  String _formatDateTime(DateTime date) {
+    final hour = date.hour == 0
+        ? 12
+        : date.hour > 12
+            ? date.hour - 12
+            : date.hour;
+
+    final minute = date.minute.toString().padLeft(2, '0');
+    final second = date.second.toString().padLeft(2, '0');
+    final period = date.hour >= 12 ? 'PM' : 'AM';
+
+    return '${date.month}/${date.day}/${date.year}  $hour:$minute:$second $period';
+  }
+}
+
+class _Recording {
+  const _Recording({
+    required this.name,
+    required this.startedAt,
+    required this.sizeBytes,
+    required this.durationSeconds,
+    required this.finalized,
+    required this.playUrl,
+  });
+
+  final String name;
+  final DateTime startedAt;
+  final int sizeBytes;
+  final double? durationSeconds;
+  final bool finalized;
+  final String playUrl;
+
+  factory _Recording.fromJson(Map<String, dynamic> json) {
+    return _Recording(
+      name: json['name'] as String? ?? 'recording.mp4',
+      startedAt: DateTime.tryParse(
+            json['started_at'] as String? ?? '',
+          ) ??
+          DateTime.now(),
+      sizeBytes: (json['size_bytes'] as num?)?.toInt() ?? 0,
+      durationSeconds: (json['duration_seconds'] as num?)?.toDouble(),
+      finalized: json['finalized'] == true,
+      playUrl: json['play_url'] as String? ?? '',
+    );
+  }
+}
+
+class _VaultPlaybackDialog extends StatefulWidget {
+  const _VaultPlaybackDialog({
+    required this.recording,
+    required this.url,
+  });
+
+  final _Recording recording;
+  final String url;
+
+  @override
+  State<_VaultPlaybackDialog> createState() => _VaultPlaybackDialogState();
+}
+
+class _VaultPlaybackDialogState extends State<_VaultPlaybackDialog> {
+  late final VideoPlayerController _controller;
+  late final Future<void> _initialize;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = VideoPlayerController.networkUrl(
+      Uri.parse(widget.url),
+    );
+
+    _initialize = _controller.initialize().then((_) {
+      if (mounted) {
+        setState(() {});
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      backgroundColor: const Color(0xFF030A13),
+      insetPadding: const EdgeInsets.all(18),
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(
+          maxWidth: 1000,
+          maxHeight: 720,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              height: 52,
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              decoration: const BoxDecoration(
+                color: Color(0xFF071322),
+                border: Border(
+                  bottom: BorderSide(
+                    color: GenesisColors.border,
+                  ),
+                ),
+              ),
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.movie_rounded,
+                    color: GenesisColors.cyan,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      widget.recording.name,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    icon: const Icon(
+                      Icons.close_rounded,
+                      color: Colors.white70,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Flexible(
+              child: FutureBuilder<void>(
+                future: _initialize,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState != ConnectionState.done) {
+                    return const AspectRatio(
+                      aspectRatio: 16 / 9,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          color: GenesisColors.cyan,
+                        ),
+                      ),
+                    );
+                  }
+
+                  return AspectRatio(
+                    aspectRatio: _controller.value.aspectRatio == 0
+                        ? 16 / 9
+                        : _controller.value.aspectRatio,
+                    child: VideoPlayer(_controller),
+                  );
+                },
+              ),
+            ),
+            VideoProgressIndicator(
+              _controller,
+              allowScrubbing: true,
+              colors: const VideoProgressColors(
+                playedColor: GenesisColors.cyan,
+                bufferedColor: Colors.white24,
+                backgroundColor: Colors.white10,
+              ),
+            ),
+            Container(
+              height: 58,
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () async {
+                      final position = await _controller.position;
+                      final current = position ?? Duration.zero;
+                      final target = current - const Duration(seconds: 10);
+
+                      await _controller.seekTo(
+                        target.isNegative ? Duration.zero : target,
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.replay_10_rounded,
+                      color: Colors.white70,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        if (_controller.value.isPlaying) {
+                          _controller.pause();
+                        } else {
+                          _controller.play();
+                        }
+                      });
+                    },
+                    icon: Icon(
+                      _controller.value.isPlaying
+                          ? Icons.pause_circle_filled_rounded
+                          : Icons.play_circle_fill_rounded,
+                      color: GenesisColors.cyan,
+                      size: 34,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () async {
+                      final position = await _controller.position;
+                      final current = position ?? Duration.zero;
+
+                      await _controller.seekTo(
+                        current + const Duration(seconds: 10),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.forward_10_rounded,
+                      color: Colors.white70,
+                    ),
+                  ),
+                  const Spacer(),
+                  const Text(
+                    'PRIVATE 999 CIPHER VAULT',
+                    style: TextStyle(
+                      color: GenesisColors.emerald,
+                      fontSize: 8,
+                      fontWeight: FontWeight.w900,
+                      letterSpacing: 1,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -1,0 +1,239 @@
+import 'package:camera/camera.dart';
+import 'package:flutter/material.dart';
+
+import '../core/genesis_theme.dart';
+
+class LiveCameraFeed extends StatefulWidget {
+  const LiveCameraFeed({
+    this.name = 'MACBOOK CAMERA',
+    super.key,
+  });
+
+  final String name;
+
+  @override
+  State<LiveCameraFeed> createState() => _LiveCameraFeedState();
+}
+
+class _LiveCameraFeedState extends State<LiveCameraFeed>
+    with WidgetsBindingObserver {
+  CameraController? _controller;
+  String _status = 'SELECT ACTIVATE CAMERA';
+  bool _loading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  Future<void> _activate() async {
+    if (_loading) return;
+
+    setState(() {
+      _loading = true;
+      _status = 'REQUESTING PERMISSION';
+    });
+
+    try {
+      final cameras = await availableCameras();
+
+      if (cameras.isEmpty) {
+        throw Exception('No camera detected');
+      }
+
+      final selected = cameras.firstWhere(
+        (camera) => camera.lensDirection == CameraLensDirection.front,
+        orElse: () => cameras.first,
+      );
+
+      final previous = _controller;
+      final controller = CameraController(
+        selected,
+        ResolutionPreset.medium,
+        enableAudio: false,
+      );
+
+      await previous?.dispose();
+      await controller.initialize();
+
+      if (!mounted) {
+        await controller.dispose();
+        return;
+      }
+
+      setState(() {
+        _controller = controller;
+        _loading = false;
+        _status = 'LIVE • AUTHORIZED';
+      });
+    } on CameraException catch (error) {
+      if (!mounted) return;
+
+      setState(() {
+        _loading = false;
+        _status = error.code == 'CameraAccessDenied'
+            ? 'CAMERA PERMISSION DENIED'
+            : 'CAMERA ERROR • ${error.code}';
+      });
+    } catch (_) {
+      if (!mounted) return;
+
+      setState(() {
+        _loading = false;
+        _status = 'CAMERA UNAVAILABLE';
+      });
+    }
+  }
+
+  Future<void> _stop() async {
+    final controller = _controller;
+    _controller = null;
+    await controller?.dispose();
+
+    if (mounted) {
+      setState(() {
+        _status = 'CAMERA OFFLINE';
+      });
+    }
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.paused ||
+        state == AppLifecycleState.detached) {
+      _stop();
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = _controller;
+    final live = controller != null && controller.value.isInitialized;
+
+    return Container(
+      margin: const EdgeInsets.only(right: 5),
+      decoration: BoxDecoration(
+        color: const Color(0xFF07131D),
+        border: Border.all(
+          color: live ? GenesisColors.emerald : GenesisColors.border,
+        ),
+      ),
+      child: Column(
+        children: [
+          Expanded(
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                if (live)
+                  ClipRect(
+                    child: FittedBox(
+                      fit: BoxFit.cover,
+                      child: SizedBox(
+                        width: controller.value.previewSize?.height ?? 640,
+                        height: controller.value.previewSize?.width ?? 480,
+                        child: CameraPreview(controller),
+                      ),
+                    ),
+                  )
+                else
+                  Container(
+                    color: const Color(0xFF02070B),
+                    alignment: Alignment.center,
+                    child: _loading
+                        ? const CircularProgressIndicator(
+                            color: GenesisColors.cyan,
+                            strokeWidth: 2,
+                          )
+                        : IconButton(
+                            tooltip: 'Activate MacBook camera',
+                            onPressed: _activate,
+                            icon: const Icon(
+                              Icons.videocam_rounded,
+                              color: GenesisColors.cyan,
+                            ),
+                          ),
+                  ),
+                Positioned(
+                  right: 4,
+                  top: 4,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                    color: const Color(0xCC02070B),
+                    child: Text(
+                      live ? '● LIVE' : '○ OFFLINE',
+                      style: TextStyle(
+                        color:
+                            live ? GenesisColors.emerald : GenesisColors.muted,
+                        fontSize: 6,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
+            color: const Color(0xDD06111B),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: GenesisColors.text,
+                          fontSize: 6,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      Text(
+                        _status,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: live
+                              ? GenesisColors.emerald
+                              : GenesisColors.muted,
+                          fontSize: 5.5,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                IconButton(
+                  constraints:
+                      const BoxConstraints.tightFor(width: 24, height: 24),
+                  padding: EdgeInsets.zero,
+                  tooltip: live ? 'Stop camera' : 'Activate camera',
+                  onPressed: live ? _stop : _activate,
+                  icon: Icon(
+                    live ? Icons.stop_circle_outlined : Icons.play_circle_fill,
+                    size: 15,
+                    color: live ? GenesisColors.danger : GenesisColors.emerald,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

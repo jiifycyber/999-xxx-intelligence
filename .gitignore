@@ -1,0 +1,50 @@
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+/coverage/
+**/Pods/
+**/.symlinks/
+*.iml
+.idea/
+.vscode/
+.DS_Store
+
+# Agent X secrets and local state
+agent_x/mobile/.access_token
+agent_x/mobile/.agent_x_sessions.sqlite3
+agent_x/memory/agent_x_memory.sqlite3
+agent_x/mobile/server.log
+*.key
+*.crt
+.env
+.env.*
+logs/
+backups/
+macos_backup_*/
+
+# Generated/runtime files
+agent_x/voice/models/
+endpoint_sensor/zeek/live/
+endpoint_sensor/state/*.yarc
+ios/Flutter/ephemeral/
+*.backup
+*.backup.*
+*.before_*
+*.before-*
+*_backup_*
+
+# Python/runtime caches
+**/__pycache__/
+*.pyc
+# Cloudflare local state
+**/.wrangler/
+# Endpoint local machine state
+endpoint_sensor/state/
+endpoint_sensor/quarantine/
+# Development snapshots
+agent_x/mobile/server_before_*
+agent_x/mobile/server.py.backup*

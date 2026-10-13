@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-09T21:31:44.114022+00:00",
+  "purpose": "Public-source connection verification",
+  "external_case_data_transmitted": false,
+  "website_checks_are_not_feed_verification": true,
+  "sources": [
+    {
+      "source_id": "fbi",
+      "name": "FBI Wanted API",
+      "registered_status": "local_snapshot",
+      "records_loaded": 1262,
+      "official_site": "https://www.fbi.gov/wanted/api",
+      "website_reachable": true,
+      "feed_verified": false,
+      "connection_enabled": true,
+      "checked_at": "2026-10-09T21:31:42.281980+00:00"
+    },
+    {
+      "source_id": "ncmec",
+      "name": "NCMEC Missing Children",
+      "registered_status": "authorization_required",
+      "records_loaded": 0,
+      "official_site": "https://www.missingkids.org",
+      "website_reachable": true,
+      "feed_verified": false,
+      "connection_enabled": false,
+      "checked_at": "2026-10-09T21:31:42.645875+00:00"
+    },
+    {
+      "source_id": "namus",
+      "name": "NamUs",
+      "registered_status": "feed_verification_required",
+      "records_loaded": 0,
+      "official_site": "https://namus.nij.ojp.gov",
+      "website_reachable": true,
+      "feed_verified": false,
+      "connection_enabled": false,
+      "checked_at": "2026-10-09T21:31:42.883768+00:00"
+    },
+    {
+      "source_id": "amber",
+      "name": "AMBER Alerts",
+      "registered_status": "feed_verification_required",
+      "records_loaded": 0,
+      "official_site": "https://www.missingkids.org",
+      "website_reachable": true,
+      "feed_verified": false,
+      "connection_enabled": false,
+      "checked_at": "2026-10-09T21:31:43.282204+00:00"
+    },
+    {
+      "source_id": "state_police",
+      "name": "State Police Bulletins",
+      "registered_status": "source_configuration_required",
+      "records_loaded": 0,
+      "official_site": "",
+      "website_reachable": null,
+      "feed_verified": false,
+      "connection_enabled": false,
+      "checked_at": "2026-10-09T21:31:43.389421+00:00"
+    },
+    {
+      "source_id": "local_police",
+      "name": "Local Police Bulletins",
+      "registered_status": "source_configuration_required",
+      "records_loaded": 0,
+      "official_site": "",
+      "website_reachable": null,
+      "feed_verified": false,
+      "connection_enabled": false,
+      "checked_at": "2026-10-09T21:31:43.389455+00:00"
+    },
+    {
+      "source_id": "us_marshals",
+      "name": "U.S. Marshals Service",
+      "registered_status": "feed_verification_required",
+      "records_loaded": 0,
+      "official_site": "https://www.usmarshals.gov",
+      "website_reachable": false,
+      "feed_verified": false,
+      "connection_enabled": false,
+      "checked_at": "2026-10-09T21:31:43.389477+00:00"
+    },
+    {
+      "source_id": "dhs",
+      "name": "DHS Public Intelligence",
+      "registered_status": "feed_verification_required",
+      "records_loaded": 0,
+      "official_site": "https://www.dhs.gov",
+      "website_reachable": true,
+      "feed_verified": false,
+      "connection_enabled": false,
+      "checked_at": "2026-10-09T21:31:43.534395+00:00"
+    },
+    {
+      "source_id": "interpol",
+      "name": "INTERPOL Public Notices",
+      "registered_status": "feed_verification_required",
+      "records_loaded": 0,
+      "official_site": "https://www.interpol.int",
+      "website_reachable": true,
+      "feed_verified": false,
+      "connection_enabled": false,
+      "checked_at": "2026-10-09T21:31:43.805898+00:00"
+    },
+    {
+      "source_id": "community",
+      "name": "Community Tips",
+      "registered_status": "secure_backend_required",
+      "records_loaded": 0,
+      "official_site": "",
+      "website_reachable": null,
+      "feed_verified": false,
+      "connection_enabled": false,
+      "checked_at": "2026-10-09T21:31:44.113993+00:00"
+    }
+  ]
+}

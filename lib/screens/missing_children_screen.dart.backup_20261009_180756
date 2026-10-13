@@ -1,0 +1,240 @@
+import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import '../services/fbi_intelligence_service.dart';
+
+class MissingChildrenScreen extends StatefulWidget {
+  const MissingChildrenScreen({super.key});
+
+  @override
+  State<MissingChildrenScreen> createState() => _MissingChildrenScreenState();
+}
+
+class _MissingChildrenScreenState extends State<MissingChildrenScreen> {
+  final service = FbiIntelligenceService();
+  final searchController = TextEditingController();
+
+  bool loading = true;
+  String? error;
+  String category = 'ALL';
+  String query = '';
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
+  Future<void> loadData() async {
+    try {
+      await service.load();
+      if (!mounted) return;
+      setState(() {
+        loading = false;
+        error = null;
+      });
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        loading = false;
+        error = e.toString();
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    searchController.dispose();
+    super.dispose();
+  }
+
+  String value(dynamic input) {
+    if (input == null) return 'Not provided';
+    if (input is List) return input.join(', ');
+    if (input is Map) {
+      return input.values.map((v) => v.toString()).join(', ');
+    }
+    final text = input.toString().trim();
+    return text.isEmpty ? 'Not provided' : text;
+  }
+
+  Future<void> openFbi(Map<String, dynamic> record) async {
+    final raw = record['url']?.toString() ?? '';
+    final uri = Uri.tryParse(raw);
+    if (uri == null ||
+        uri.scheme != 'https' ||
+        uri.host != 'fbi.gov' && !uri.host.endsWith('.fbi.gov')) {
+      return;
+    }
+    await launchUrl(uri, mode: LaunchMode.externalApplication);
+  }
+
+  void showDetails(Map<String, dynamic> record) {
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => SafeArea(
+        child: FractionallySizedBox(
+          heightFactor: 0.85,
+          child: ListView(
+            padding: const EdgeInsets.all(20),
+            children: [
+              Text(
+                value(record['title']),
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              const SizedBox(height: 12),
+              const Text(
+                'OFFICIAL FBI PUBLIC RECORD - REVIEW REQUIRED',
+              ),
+              const SizedBox(height: 18),
+              for (final field in [
+                'uid',
+                'subjects',
+                'description',
+                'details',
+                'field_offices',
+                'publication',
+                'modified',
+              ]) ...[
+                Text(
+                  field.toUpperCase(),
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.tealAccent,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Text(value(record[field])),
+                const SizedBox(height: 15),
+              ],
+              FilledButton.icon(
+                onPressed: () => openFbi(record),
+                icon: const Icon(Icons.open_in_new),
+                label: const Text('OPEN OFFICIAL FBI RECORD'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (loading) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    if (error != null) {
+      return Center(child: Text('FBI DATA ERROR: $error'));
+    }
+
+    final categories = service.categories;
+    final selectedCategory = category == 'ALL' ? null : category;
+
+    final results = service.search(
+      query: query,
+      category: selectedCategory,
+      reviewOnly: true,
+    );
+
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'IC391DEA | MISSING CHILDREN INTELLIGENCE',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.tealAccent,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                '${service.totalRecords} FBI records | '
+                '${service.reviewCandidateCount} review candidates',
+              ),
+              const SizedBox(height: 6),
+              const Text(
+                'Public FBI snapshot. Candidates are not '
+                'confirmed missing children. No live synchronization.',
+                style: TextStyle(fontSize: 11),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: searchController,
+                onChanged: (text) => setState(() => query = text),
+                decoration: const InputDecoration(
+                  hintText: 'Search FBI cases',
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 10),
+              DropdownButtonFormField<String>(
+                initialValue: category,
+                isExpanded: true,
+                decoration: const InputDecoration(
+                  labelText: 'FBI SUBJECT CATEGORY',
+                  border: OutlineInputBorder(),
+                ),
+                items: [
+                  'ALL',
+                  ...categories,
+                ]
+                    .map((item) => DropdownMenuItem(
+                          value: item,
+                          child: Text(
+                            item,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ))
+                    .toList(),
+                onChanged: (next) {
+                  if (next != null) {
+                    setState(() => category = next);
+                  }
+                },
+              ),
+              const SizedBox(height: 8),
+              Text('${results.length} matching review candidates'),
+            ],
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            itemCount: results.length,
+            itemBuilder: (context, index) {
+              final record = results[index];
+              return Card(
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 5,
+                ),
+                child: ListTile(
+                  leading: const Icon(
+                    Icons.folder_shared_outlined,
+                    color: Colors.tealAccent,
+                  ),
+                  title: Text(value(record['title'])),
+                  subtitle: Text(
+                    'FBI | ${value(record['subjects'])}\n'
+                    'REVIEW REQUIRED',
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  isThreeLine: true,
+                  trailing: const Icon(Icons.chevron_right),
+                  onTap: () => showDetails(record),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
