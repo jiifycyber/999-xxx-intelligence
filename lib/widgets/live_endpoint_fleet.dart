@@ -29,7 +29,7 @@ class _LiveEndpointFleetState extends State<LiveEndpointFleet> {
     try {
       final response = await http
           .get(Uri.parse(
-              'https://jontariuss-macbook-pro.tail49e2f2.ts.net:8788/telemetry'))
+              'https://ic391-defense-command.tail49e2f2.ts.net:8788/telemetry'))
           .timeout(const Duration(seconds: 4));
       if (response.statusCode != 200)
         throw Exception('HTTP ${response.statusCode}');

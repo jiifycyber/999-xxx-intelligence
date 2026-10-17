@@ -7,7 +7,7 @@ class LiveCameraFeed extends StatefulWidget {
   const LiveCameraFeed({
     this.name = 'MACBOOK CAMERA',
     this.streamUrl =
-        'https://jontariuss-macbook-pro.tail49e2f2.ts.net:8443/macbook',
+        'https://ic391-defense-command.tail49e2f2.ts.net:8443/macbook',
     super.key,
   });
 

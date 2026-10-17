@@ -17,7 +17,7 @@ class CameraVaultPanel extends StatefulWidget {
 
 class _CameraVaultPanelState extends State<CameraVaultPanel> {
   static const String _apiBase =
-      'https://jontariuss-macbook-pro.tail49e2f2.ts.net:8791';
+      'https://ic391-defense-command.tail49e2f2.ts.net:8791';
 
   bool _loading = true;
   String? _error;
